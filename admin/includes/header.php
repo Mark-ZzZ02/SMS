@@ -28,7 +28,7 @@ session_start(); ?>
       background: #0D47A1;
       }
     .btn{
-      background: #2196f3;
+      background: #2196f2;
       }
     .container{
       align-items: center;
