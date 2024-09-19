@@ -29,7 +29,7 @@ session_start(); ?>
       }
     .btn{
       background: #2196f2;
-      box-shadow: 100px 100px;
+      box-shadow: 100px 100px 100px;
       }
     .container{
       align-items: center;
