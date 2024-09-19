@@ -24,7 +24,16 @@ session_start(); ?>
         border: 1px solid #b3a1a1 !important;
         padding: 8px 10px;
       }
-
+    .sidenav{
+      background: #0D47A1;
+      }
+    .btn{
+      background: #2196f2;
+      }
+    .container{
+      align-items: center;
+      justify-content: center;
+      }
   </style>\
   <script>  
       document.addEventListener("DOMContentLoaded", function(){
