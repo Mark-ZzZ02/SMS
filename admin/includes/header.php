@@ -53,16 +53,14 @@ session_start(); ?>
                     mycollapse.hide();
                   } else {
                       mycollapse.show();
-                      // find other submenus with class=show
                       var opened_submenu = parentEl.parentElement.querySelector('.submenu.show');
-                      // if it exists, then close all of them
                       if(opened_submenu){
                         new bootstrap.Collapse(opened_submenu);
                       }
                   }
               }
-          }); // addEventListener
-        }) // forEach
+          });
+        })
       }); 
   </script>
 
