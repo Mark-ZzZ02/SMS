@@ -29,12 +29,13 @@ session_start(); ?>
       }
     .btn{
       background: #2196f2;
+      box-shadow: 100px 100px;
       }
     .container{
       align-items: center;
       justify-content: center;
       }
-  </style>\
+  </style>
   <script>  
       document.addEventListener("DOMContentLoaded", function(){
         document.querySelectorAll('.sidenav-header .nav-link').forEach(function(element){
