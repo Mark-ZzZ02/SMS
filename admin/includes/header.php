@@ -25,10 +25,10 @@ session_start(); ?>
         padding: 8px 10px;
       }
     .sidenav{
-      background: #0D47A1;
+      background: #ea3d18;
       }
     .btn{
-      background: #2196f2;
+      background: #2196f3;
       }
     .container{
       align-items: center;
