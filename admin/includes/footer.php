@@ -4,7 +4,7 @@
   <script src="../assets/js/perfect-scrollbar.min.js"></script>
   <script src="../assets/js/smooth-scrollbar.min.js"></script>
 
-  <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.14.0/build/alertify.min.js"></script>
+
   <script>
 
     <?php 
