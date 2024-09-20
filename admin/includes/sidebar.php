@@ -43,6 +43,11 @@
             <i class="material-icons opacity-10"></i>
             <span class="nav-link-text ms-1">FACULTY</span>
           </a>
+          <div class="sub-menu collapse" id="submenu">
+          <a class="nav-link text-white" href="#">
+            <i class="material-icons opacity-10"></i>
+            <span class="nav-link-text ms-1">CLINIC</span>
+          </a>
         </li>
         <li class="nav-item">
           <a class="nav-link text-white " href="`#`">
