@@ -33,30 +33,30 @@
         </li>
         <li class="nav-item">
           <a class="nav-link text-white" href="#" data-bs-toggle="collapse"
-          data-bs-target="#submenu" arial-expanded="false" arial-controls="submenu"> 
+          data-bs-target="#submenu1" arial-expanded="false" arial-controls="submenu1"> 
           <i class="material-icons opacity-10">table_view</i>
             <span class="nav-link-text ms-1">APPROVAL <i class="bi bi-caret-down-fill"></i>
             </span>
           </a>
-          <div class="sub-menu collapse" id="submenu">
+          <div class="sub-menu collapse" id="submenu1">
           <a class="nav-link text-white" href="#">
             <i class="material-icons opacity-10"></i>
             <span class="nav-link-text ms-1">FACULTY</span>
           </a>
-          <div class="sub-menu collapse" id="submenu">
+          <div class="sub-menu collapse" id="submenu1">
           <a class="nav-link text-white" href="#">
             <i class="material-icons opacity-10"></i>
             <span class="nav-link-text ms-1">CLINIC</span>
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link text-white " href="`#`">
+          <a class="nav-link text-white " href="#">
             <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
               <i class="material-icons opacity-10">table_view</i>
             </div>
             <span class="nav-link-text ms-1">REPORTS</span>
           </a>
-        </li>   
+        </li>
       </ul>
     </div>
       <div class="sidenav-footer position-absolute w-100 bottom-0 ">
