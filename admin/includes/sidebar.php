@@ -13,32 +13,22 @@
             <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
               <i class="material-icons opacity-10">dashboard</i>
             </div>
-            <span class="nav-link-text ms-1">DASHBOARD</span>
+            <span class="nav-link-text ms-1">SITE HOME</span>
           </a>
+          <li class="nav-item">
+          <a class="nav-link text-white " href="category.php">
+            <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+              <i class="material-icons opacity-10">table_view</i>
+            </div>
+            <span class="nav-link-text ms-1">STUDENT TRACKING</span>
+          </a>
+        </li>
         <li class="nav-item">
-          <a class="nav-link text-white" href="#" data-bs-toggle="collapse"
-          data-bs-target="#submenu" arial-expanded="false" arial-controls="submenu">
-          <i class="material-icons opacity-10">table_view</i>
-            <span class="nav-link-text ms-1">STUDENT RECORD <i class="bi bi-caret-down-fill"></i>
-            </span>
-            </a>
-          <div class="sub-menu collapse" id="submenu">
-          <a class="nav-link text-white" href="category.php">
-          <i class="material-icons opacity-10"></i>
-            <span class="nav-link-text ms-1">STUDENT LIST</span>
-          </a>
-          <div class="sub-menu collapse" id="submenu">
-          <a class="nav-link text-white" href="add_category.php">
-          <i class="material-icons opacity-10"></i>
-            <span class="nav-link-text ms-1">CASE STUDY</span>
-          </a>
-          <a class="nav-link text-white" href="#">
-          <i class="material-icons opacity-10"></i>
+          <a class="nav-link text-white " href="add_category.php">
+            <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+              <i class="material-icons opacity-10">table_view</i>
+            </div>
             <span class="nav-link-text ms-1">INVESTIGATIONS</span>
-          </a>
-          <a class="nav-link text-white" href="#">
-          <i class="material-icons opacity-10"></i>
-            <span class="nav-link-text ms-1">SANCTION</span>
           </a>
         </li>
         <li class="nav-item">
@@ -55,12 +45,13 @@
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link text-white" href="index.php">
+          <a class="nav-link text-white " href="`#`">
             <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-            <i class="material-icons opacity-10">table_view</i>
+              <i class="material-icons opacity-10">table_view</i>
             </div>
             <span class="nav-link-text ms-1">REPORTS</span>
           </a>
+        </li>   
       </ul>
     </div>
       <div class="sidenav-footer position-absolute w-100 bottom-0 ">
