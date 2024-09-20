@@ -16,9 +16,7 @@ session_start(); ?>
   <link id="pagestyle" href="assets/css/material-dashboard.css" rel="stylesheet" />
   <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.14.0/build/css/alertify.min.css"/>
   <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.14.0/build/css/themes/bootstrap.min.css"/>
-  <script src="../assets/js/bootstrap.bundle.min.js"></script>
-  <script src="../assets/js/perfect-scrollbar.min.js"></script>
-  <script src="../assets/js/smooth-scrollbar.min.js"></script>
+
   <style>
     .form-control {
         border: 1px solid #b3a1a1 !important;
