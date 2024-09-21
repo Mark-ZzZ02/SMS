@@ -31,12 +31,12 @@ if(isset($_POST['add_category_btn']))
     {
         move_uploaded_file($_FILES['image']['tmp_name'], $path.'/'.$filename);
 
-        redirect("add_category.php", "Category Added Successfully");
+        redirect("category.php", "Category Added Successfully");
 
     }
     else
     {
-        redirect("add_category.php", "Something Went Wrong");
+        redirect("category.php", "Something Went Wrong");
 
     }
 }

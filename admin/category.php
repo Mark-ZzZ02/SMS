@@ -5,13 +5,59 @@ include('../middleware/adminMiddleware.php');
 
 ?>
 
-<div class="container">
+<div class="modal fade" id="insetdata" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="insetdataLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="insetdataLabel">Modal title</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+                    <form action="code.php" method="POST" enctype="multipart/form-data">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label for="">STUDENT NUMBER</label>
+                                <input type="text" name="slug" placeholder="Enter Student number" class="form-control">
+                            </div>
+                            <div class="col-md-6">
+                                <label for="">NAME</label>
+                                <input type="text" name="name" placeholder="Enter Name" class="form-control">
+                            </div>
+                            <div class="col-md-12">
+                                <label for="">POSITION</label>
+                                <textarea rows="3" name="description" placeholder="Enter Position" class="form-control"> </textarea>
+                            </div>
+                            <div class="col-md-12">
+                                <label for="">CASE</label>
+                                <input type="text" name="meta_tittle" placeholder="Enter Case" class="form-control">
+                            </div>
+                            <div class="col-md-6">
+                                <label for="">RESOLVED</label>
+                                <input type="checkbox" name="status">
+                            </div>
+                            <div class="col-md-6">
+                                <label for="">DECIDED</label>
+                                <input type="checkbox" name="popular">
+                            </div>
+                            <div class="col-md-12">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                <button type="submit" class="btn btn-primary" name="add_category_btn">Save</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container mt-5">
       <div class="row">
           <div class="col-md-12">
-            <div class="card row mt-7">
+            <div class="card">
                 <div class="card-header">
                     <h4>STUDENT LIST</h4>
-                </div>
+                    <button type="button" class="btn btn-primary float-end" data-bs-toggle="modal" data-bs-target="#insetdata">ADD STUDENT</button>
                 <div class="card-body">
                     <table class="table table-bordered table-striped">
                         <thead>
@@ -43,9 +89,9 @@ include('../middleware/adminMiddleware.php');
                                              <?= $item['status'] == '0'? "RESOLVED":"DECIDED" ?>
                                         </td>
                                         <td>
-                                            <a href="edit-category.php?id=<?= $item['id']; ?>" class="btn btn-primary">EDIT</a>
                                             <form action="code.php" method="POST">
                                                 <input type="hidden" name="category_id" value="<?= $item['id']; ?>">
+                                                <a href="edit-category.php?id=<?= $item['id']; ?>" class="btn btn-primary">EDIT</a>
                                                 <button type="sumbit" class="btn btn-danger" name="delete_category_btn">Delete</button>
                                             </form>
                                         </td>
