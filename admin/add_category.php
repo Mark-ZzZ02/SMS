@@ -8,7 +8,7 @@ include('../middleware/adminMiddleware.php');
 <div class="container-lg m-5">
     <div class="row">
         <div class="col-md-12">
-            <div class="card">
+            <div class="card mt-3">
                 <div class="card-header">
                     <h4>Add Case</h4>
                 </div>
