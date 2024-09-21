@@ -79,7 +79,7 @@ else if(isset($_POST['login_btn']))
         else
         {
             $_SESSION['message'] = "welcome To Dasboard";
-            header('Location: ../user/index.php');
+            header('Location: ../staff/index.php');
         }
 
     }
