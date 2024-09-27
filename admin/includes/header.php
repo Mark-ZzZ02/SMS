@@ -1,80 +1,15 @@
-<?php 
-session_start(); ?>
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-  <title>
-    PREFECT
-  </title>
-  <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900|Roboto+Slab:400,700" />
-  <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
-  <link id="pagestyle" href="assets/css/material-dashboard.css" rel="stylesheet" />
-  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.14.0/build/css/alertify.min.css"/>
-  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.14.0/build/css/themes/bootstrap.min.css"/>
-  <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
-  <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
-  <script src="https://cdn.datatables.net/1.13.4/js/dataTables.bootstrap5.min.js"></script>
-
-  <script>
-  $(document).ready( function () {
-    $('#example').DataTable();
-  });
-  </script>
-
-  <style>
-    .form-control {
-        border: 1px solid #b3a1a1 !important;
-        padding: 8px 10px;
-        
-      }
-    .sidenav{
-      background: #0D47A1;
-      }
-    .btn{
-      background: #2196f2;
-      box-shadow: 100px 100px 100px;
-      }
-    .container{
-      align-items: center;
-      justify-content: center;
-      }
-  </style>
-  <script>  
-      document.addEventListener("DOMContentLoaded", function(){
-        document.querySelectorAll('.sidenav-header .nav-link').forEach(function(element){
-          
-          element.addEventListener('click', function (e) {
-
-            let nextEl = element.nextElementSibling;
-            let parentEl  = element.parentElement;	
-
-              if(nextEl) {
-                  e.preventDefault();	
-                  let mycollapse = new bootstrap.Collapse(nextEl);
-                  
-                  if(nextEl.classList.contains('show')){
-                    mycollapse.hide();
-                  } else {
-                      mycollapse.show();
-                      var opened_submenu = parentEl.parentElement.querySelector('.submenu.show');
-                      if(opened_submenu){
-                        new bootstrap.Collapse(opened_submenu);
-                      }
-                  }
-              }
-          });
-        })
-      }); 
-  </script>
-
-</head>
-
-<body class="g-sidenav-show  bg-gray-200">
+	<head>
+	<title>School Management System</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link href="./css/bootstrap.min.css" rel="stylesheet">
+	<link href="./css/image.css" rel="stylesheet">
+	<link href="./css/logo_login.css" rel="stylesheet">
+	<link href="./css/login_font.css" rel="stylesheet">
+	<script src="./js/bootstrap.bundle.min.js"></script>
+	<script src="./js/jquery/jquery.min.js"></script>
+		<link rel="stylesheet" href="mystyle.css">
+	</head>
+    <main>
     <?php include('sidebar.php'); ?>
-    <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
     <?php include('navbar.php'); ?>

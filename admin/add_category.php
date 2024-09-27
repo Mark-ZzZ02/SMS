@@ -1,11 +1,13 @@
 <?php 
 
 include('includes/header.php');
-include('../middleware/adminMiddleware.php');
 
 ?>
 
-<div class="container-lg m-5">
+<div class="container-fluid p-4 bg-white text-black text-center" class="navbar-brand" >
+</div>
+
+<div class="container mt-5 ">
     <div class="row">
         <div class="col-md-12">
             <div class="card">
@@ -44,9 +46,8 @@ include('../middleware/adminMiddleware.php');
                             </div>
                         </div>
                     </form>
-                </div>
-        </div>
-    </div>
+                    <div id="responseMessage" class="mt-3"></div>
 </div>
+      </div>
 
 <?php include('includes/footer.php');?>

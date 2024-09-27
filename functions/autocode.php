@@ -71,17 +71,11 @@ else if(isset($_POST['login_btn']))
 
         $_SESSION['role_as'] = $role_as;
 
-        if($role_as ==1)
+        if($role_as ==0)
         {
             $_SESSION['message'] = "welcome To Dasboard";
             header('Location: ../admin/index.php');
         }
-        else
-        {
-            $_SESSION['message'] = "welcome To Dasboard";
-            header('Location: ../staff/index.php');
-        }
-
     }
     else
     {

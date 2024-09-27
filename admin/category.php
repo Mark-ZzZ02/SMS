@@ -5,63 +5,21 @@ include('../middleware/adminMiddleware.php');
 
 ?>
 
-<div class="modal fade" id="insetdata" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="insetdataLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="insetdataLabel">STUDENT LIST</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-                    <form action="code.php" method="POST" enctype="multipart/form-data">
-                        <div class="row">
-                            <div class="col-md-6">
-                                <label for="">STUDENT NUMBER</label>
-                                <input type="text" name="slug" placeholder="Enter Student number" class="form-control">
-                            </div>
-                            <div class="col-md-6">
-                                <label for="">NAME</label>
-                                <input type="text" name="name" placeholder="Enter Name" class="form-control">
-                            </div>
-                            <div class="col-md-12">
-                                <label for="">POSITION</label>
-                                <textarea rows="3" name="description" placeholder="Enter Position" class="form-control"> </textarea>
-                            </div>
-                            <div class="col-md-12">
-                                <label for="">CASE</label>
-                                <input type="text" name="meta_tittle" placeholder="Enter Case" class="form-control">
-                            </div>
-                            <div class="col-md-6">
-                                <label for="">RESOLVED</label>
-                                <input type="checkbox" name="status">
-                            </div>
-                            <div class="col-md-6">
-                                <label for="">DECIDED</label>
-                                <input type="checkbox" name="popular">
-                            </div>
-                            <div class="col-md-12">
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                <button type="submit" class="btn btn-primary" name="add_category_btn">Save</button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-      </div>
-    </div>
-  </div>
+<div class="container-fluid p-4 bg-white text-black text-center" class="navbar-brand" >
 </div>
 
-<div class="container">
-      <div class="row">
-          <div class="col-md-12">
-            <div class="card">
-                <div class="card-header">
-                    <h4>STUDENT LIST
-                    <button type="button" class="btn btn-primary float-end" data-bs-toggle="modal" data-bs-target="#insetdata">ADD STUDENT</button>
-                    </h4>
-                    <div class="card-body" >
-                    <table id="example" class="table table-bordered table-striped">
-                        <thead>
+<div class="container mt-5 ">
+
+
+
+  <div class="row">
+    <div class="col-md-12  p-4 shadow">
+
+    
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myModal">Add Student</button>
+
+    <table class="table table-striped">
+    <thead>
                             <tr>
                                 <th>Student number</th>
                                 <th>Name</th>
@@ -71,7 +29,7 @@ include('../middleware/adminMiddleware.php');
                                 <th>Action</th>
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody id="tbl_tbody">
                             <?php
                                 $category = getAll("categories");
 
@@ -105,12 +63,60 @@ include('../middleware/adminMiddleware.php');
                                     echo"No records found";
                                 }
                             ?>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
+ </tbody>
+  </table>
     </div>
+  </div>
+  <!-- INSERT -->
+
+  <div class="modal" id="myModal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title">Add Student</h4>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body">
+      <div class="container mt-5">
+    <h2>Insert New Item</h2>
+    <form action="code.php" method="POST" enctype="multipart/form-data">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label for="">STUDENT NUMBER</label>
+                                <input type="text" name="slug" placeholder="Enter Student number" class="form-control">
+                            </div>
+                            <div class="col-md-6">
+                                <label for="">NAME</label>
+                                <input type="text" name="name" placeholder="Enter Name" class="form-control">
+                            </div>
+                            <div class="col-md-12">
+                                <label for="">POSITION</label>
+                                <textarea rows="3" name="description" placeholder="Enter Position" class="form-control"> </textarea>
+                            </div>
+                            <div class="col-md-12">
+                                <label for="">CASE</label>
+                                <input type="text" name="meta_tittle" placeholder="Enter Case" class="form-control">
+                            </div>
+                            <div class="col-md-6">
+                                <label for="">RESOLVED</label>
+                                <input type="checkbox" name="status">
+                            </div>
+                            <div class="col-md-6">
+                                <label for="">DECIDED</label>
+                                <input type="checkbox" name="popular">
+                            </div>
+                            <div class="col-md-12">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                <button type="submit" class="btn btn-primary" name="add_category_btn">Save</button>
+                            </div>
+                        </div>
+                    </form>
+    <div id="responseMessage" class="mt-3"></div>
 </div>
+ </div>
 
 <?php include('includes/footer.php');?>
