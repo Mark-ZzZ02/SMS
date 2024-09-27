@@ -16,21 +16,11 @@ session_start(); ?>
   <link id="pagestyle" href="assets/css/material-dashboard.css" rel="stylesheet" />
   <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.14.0/build/css/alertify.min.css"/>
   <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.14.0/build/css/themes/bootstrap.min.css"/>
-  <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
-  <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
-  <script src="https://cdn.datatables.net/1.13.4/js/dataTables.bootstrap5.min.js"></script>
-
-  <script>
-  $(document).ready( function () {
-    $('#example').DataTable();
-  });
-  </script>
 
   <style>
     .form-control {
         border: 1px solid #b3a1a1 !important;
         padding: 8px 10px;
-        
       }
     .sidenav{
       background: #0D47A1;

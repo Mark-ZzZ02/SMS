@@ -31,12 +31,12 @@ if(isset($_POST['add_category_btn']))
     {
         move_uploaded_file($_FILES['image']['tmp_name'], $path.'/'.$filename);
 
-        redirect("category.php", "Category Added Successfully");
+        redirect("add_category.php", "Category Added Successfully");
 
     }
     else
     {
-        redirect("category.php", "Something Went Wrong");
+        redirect("add_category.php", "Something Went Wrong");
 
     }
 }
@@ -82,12 +82,12 @@ else if(isset($_POST['update_category_btn']))
                 unlink("../uploads/".$old_image);
             }
         }
-        redirect("category.php?id=$category_id", "Category Upadated Successfully");
+        redirect("edit-category.php?id=$category_id", "Category Upadated Successfully");
 
     }
     else
     {
-        redirect("category.php", "Something Went Wrong");
+        redirect("edit-category.php", "Something Went Wrong");
 
     }
 

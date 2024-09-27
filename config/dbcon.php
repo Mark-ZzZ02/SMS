@@ -1,11 +1,11 @@
 <?php
 
-     $host = "localhost:3308";
-     $user = "root";
+     $host = "localhost";
+     $username = "root";
      $password = "";
      $database = "phpecom"; 
 
-     $con = mysqli_connect($host, $user, $password, $database);
+     $con = mysqli_connect($host, $username, $password, $database);
 
      if(!$con)
      {

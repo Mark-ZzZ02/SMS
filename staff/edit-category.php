@@ -51,7 +51,6 @@ include('../middleware/adminMiddleware.php');
                                 </div>
                                 <div class="col-md-12">
                                 <button type="submit" class="btn btn-primary" name="update_category_btn">Update</button>
-                                <a href="category.php" class="btn btn-primary">close</a>
                                 </div>
                                 </div>
                             </form>
