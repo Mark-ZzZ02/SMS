@@ -3,28 +3,32 @@ session_start();
 include('includes/header.php');
 ?>
 
-<div class="py-5">
-  <div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-5">
-        <?php 
-          if(isset($_SESSION['message'])) 
-          {
-            ?> 
-            <div class="alert alert-warning alert-dismissible fade show" role="alert">
-                    <strong>Hey!</strong> <?= $_SESSION['message']; ?>.
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                  </div>
-                  <?php
-                  unset($_SESSION['message']);
-          }
-              ?>
-            <div class="card">
-                <div class="card-header">
-                    <h4>Registration Form</h4>
-                </div>
-                <div class="card-body">
-                <form action="functions/autocode.php" method="POST">
+<div class="container-fluid p-5 text-white text-center">
+  <!--<h1 class="text-shadow">School Management System</h1>-->
+</div>
+
+<div class="container mt-3 p-4 shadow rounded-4 w-25 bg-white text-black">
+    <div class="container d-flex justify-content-center align-items-center full-height">
+        <img src="admin/css/bcp_logo.png" alt="Logo" class="logo">
+    </div>
+    <div class="container text-black text-center">
+    <h4>Registration Form</h4> 
+    </div>
+
+    <?php 
+     if(isset($_SESSION['message'])) 
+     {
+       ?> 
+       <div class="alert alert-warning alert-dismissible fade show" role="alert">
+               <strong>Hey!</strong> <?= $_SESSION['message']; ?>.
+               <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+             </div>
+             <?php
+             unset($_SESSION['message']);
+     }
+    ?>
+
+    <form action="functions/autocode.php" method="POST">
                 <div class="mb-3">
                     <label class="form-label">Name</label>
                     <input type="text" name="name" class="form-control" placeholder="Enter your name">
@@ -43,12 +47,7 @@ include('includes/header.php');
                   </div>
                   <button type="submit" name="register_btn" class="btn btn-primary">Submit</button>
                 </form>
-            </div>
-          </div>
-                      </div>
-                  </div>
-              </div>
-        </div>
+</div>
 
 
 <?php include('includes/footer.php') ?>

@@ -1,45 +1,43 @@
-<aside class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3   bg-gradient-dark" id="sidenav-main">
-    <div class="sidenav-header">
-      <i class="fas fa-times p-3 cursor-pointer text-white opacity-5 position-absolute end-0 top-0 d-none d-xl-none" aria-hidden="true" id="iconSidenav"></i>
-      <a class="navbar-brand m-0" >
-        <span class="ms-1 font-weight-bold text-white">PREFECT SYSTEM</span>
-      </a>
+
+
+<body>
+    <!-- Sidebar -->
+    <!-- sidebar.php -->
+<div id="sidebar" class="bg-light text-center shadow">
+    <div class="p-3">
+        <img src="./css/bcp_logo.png" alt="Logo" class="logo">
+        <h4 class="mb-4">Dashboard</h4>
+        <ul class="nav flex-column">
+            <li class="nav-item mb-1">
+                <a class="nav-link active rounded" href="index.php">SITE HOME</a>
+            </li>
+            <li class="nav-item mb-1">
+                <a class="nav-link rounded" href="category.php">STUDENT TRACKING</a>
+            </li>
+            <li class="nav-item mb-1">
+                <a class="nav-link rounded" href="add_category.php">ADD TRACKING</a>
+            </li>
+            <li class="nav-item mb-1">
+                <a class="nav-link rounded" href="#">APPROVAL</a>
+            </li>
+            <li class="nav-item mb-1">
+                <a class="nav-link rounded" href="#">REPORTS</a>
+            <li class="nav-item">
+                <a class="nav-link rounded text-danger" href="../logout.php" id="logout">Logout</a>
+            </li>
+        </ul>
     </div>
-    <hr class="horizontal light mt-0 mb-2">
-    <div class="collapse navbar-collapse  w-auto  max-height-vh-100" id="sidenav-collapse-main">
-      <ul class="navbar-nav">
-        <li class="nav-item">
-          <a class="nav-link text-white" href="index.php">
-            <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-              <i class="material-icons opacity-10">dashboard</i>
-            </div>
-            <span class="nav-link-text ms-1">SITE HOME</span>
-          </a>
-          <li class="nav-item">
-          <a class="nav-link text-white " href="category.php">
-            <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-              <i class="material-icons opacity-10">table_view</i>
-            </div>
-            <span class="nav-link-text ms-1">STUDENT CASES</span>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link text-white " href="add_category.php">
-            <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-              <i class="material-icons opacity-10">table_view</i>
-            </div>
-            <span class="nav-link-text ms-1">REPORTS</span>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link text-white " href="add_category.php">
-            <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-              <i class="material-icons opacity-10">table_view</i>
-            </div>
-            <span class="nav-link-text ms-1">USER ACCOUNTS</span>
-          </a>
-        </li>
-      </ul>
-    </div>
-    </div>
-  </aside>
+</div>
+
+<script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var sidebar = document.getElementById('sidebar');
+            var content = document.getElementById('page-content');
+            var toggleButton = document.getElementById('toggle-sidebar');
+
+            toggleButton.addEventListener('click', function () {
+                sidebar.classList.toggle('collapsed');
+                content.classList.toggle('collapsed');
+            });
+        });
+    </script>

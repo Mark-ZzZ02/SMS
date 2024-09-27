@@ -1,0 +1,49 @@
+
+.sidebar {
+    height: 100vh; /* Full height */
+    width: 250px; /* Fixed width */
+    position: fixed; /* Fixed position */
+    top: 0;
+    left: 0;
+    background-color: #f8f9fa; /* Light background */
+    transition: transform 0.3s ease; /* Smooth slide effect */
+}
+
+.sidebar.collapsed {
+    transform: translateX(-100%); /* Hide sidebar */
+}
+
+#page-content {
+    margin-left: 250px; /* Space for sidebar */
+    transition: margin-left 0.3s ease; /* Smooth transition */
+}
+
+.page-content.collapsed {
+    margin-left: 0; /* No margin when sidebar is hidden */
+}
+#logo{
+    
+    width: 200px;
+    height: 300px;
+    object-fit: cover;
+
+}
+.body{
+    background:  url("bcp1.jpg") no-repeat, center fixed;
+    background-size: cover;
+    }
+    .container{
+        background-color: #123779;
+    }
+    
+    .text-shadow {
+        text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.6);
+    }
+    
+    .logo{
+                
+        width: 200px;
+        height: 300px;
+        object-fit: contain;
+    
+    }
