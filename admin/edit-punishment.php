@@ -44,7 +44,7 @@ include('../middleware/adminMiddleware.php');
                                     <input type="checkbox" <?=$data['popular'] ? "checked":"" ?> name="popular">
                                 </div>
                                 <div class="col-md-12">
-                                <button type="submit" class="btn btn-primary" name="update_category_btn">Update</button>
+                                <button type="submit" class="btn btn-primary" name="update_punishment_btn">Update</button>
                                 <a href="category.php" class="btn btn-primary">close</a>
                                 </div>
                                 </div>

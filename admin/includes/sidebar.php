@@ -15,13 +15,16 @@
                 <a class="nav-link rounded" href="category.php">STUDENT TRACKING</a>
             </li>
             <li class="nav-item mb-1">
-                <a class="nav-link rounded" href="add_category.php">ADD TRACKING</a>
+                <a class="nav-link rounded" href="punishment.php">SANCTIONS AND PUNISHMENT</a>
             </li>
             <li class="nav-item mb-1">
                 <a class="nav-link rounded" href="#">APPROVAL</a>
             </li>
             <li class="nav-item mb-1">
                 <a class="nav-link rounded" href="#">REPORTS</a>
+            <li class="nav-item">
+            <li class="nav-item mb-1">
+                <a class="nav-link rounded" href="#">USER ACCOUNTS</a>
             <li class="nav-item">
                 <a class="nav-link rounded text-danger" href="../logout.php" id="logout">Logout</a>
             </li>
