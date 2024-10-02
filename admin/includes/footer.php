@@ -92,6 +92,9 @@
           .nav-item { 
               text-align: left;
           }
+          .container {
+            max-width: none;          /* Remove maximum width constraint */
+        }       
   </style>
 
 </footer>

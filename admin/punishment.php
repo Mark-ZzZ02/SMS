@@ -10,21 +10,20 @@ include('../middleware/adminMiddleware.php');
 <div class="container mt-5 ">
   <div class="row">
     <div class="col-md-12  p-4 shadow">
-    <h4>OFFENSE LIST
-    <button type="button" class="btn btn-primary float-end" data-bs-toggle="modal" data-bs-target="#myModal">Add Student</button>
+    <h4>PUNISHMENT LIST
     </h4>
     <table class="table table-striped">
     <thead>
                             <tr>
                                 <th>STUDENT NUMBER</th>
                                 <th>NAME</th>
-                                <th>PUNISHMENT</th>
                                 <th>CASE</th>
-                                <th>TYPE</th>
-                                <th>DETAILS</th>
+                                <th>PUNISHMENT TYPE</th>
+                                <th>PUNISHMENT DETAILS</th>
+                                <th>INVESTIGATION</th>
                                 <th>DATE ASSIGNÉD</th>
-                                <th>ASSIGNED BY</th>
-                                <th>COMPLECTION STATUS</th>
+                                <th>STAFF</th>
+                                <th>COMPLETION STATUS</th>
                                 <th>COMPLECTION DATE</th>
                                 <th>ACTION</th>
                             </tr>
@@ -41,12 +40,12 @@ include('../middleware/adminMiddleware.php');
                                         <tr>
                                         <td> <?= $item['student_id']; ?></td>
                                         <td> <?= $item['name']; ?></td>
-                                        <td> <?= $item['punishment_id']; ?></td>
                                         <td> <?= $item['case_id']; ?></td>
                                         <td> <?= $item['punishment_type']; ?></td>
                                         <td> <?= $item['punishment_details']; ?></td>
+                                        <td> <?= $item['investigation_notes']; ?></td>
                                         <td> <?= $item['date_assigned']; ?></td>
-                                        <td> <?= $item['assigned_by']; ?></td>
+                                        <td> <?= $item['assigned_staff']; ?></td>
                                         <td> <?= $item['completion_status']; ?></td>
                                         <td> <?= $item['completion_date']; ?></td>
                                         
@@ -54,8 +53,8 @@ include('../middleware/adminMiddleware.php');
                                         <td>
                                             <form action="code.php" method="POST">
                                                 <input type="hidden" name="category_id" value="<?= $item['id']; ?>">
-                                                <a href="edit-punishment.php?id=<?= $item['id']; ?>" class="btn btn-primary float" >EDIT</a>
-                                                <button type="sumbit" class="btn btn-danger" name="delete_punishment_btn">Delete</button>
+                                                <a href="edit-punishment.php?id=<?= $item['id']; ?>" class="btn btn-primary float" >UPDATE</a>
+                                                <a href="edit-punishment.php?id=<?= $item['id']; ?>" class="btn btn-primary float" >INVESTIGATION</a>
                                             </form>
                                         </td>
                                         </tr>

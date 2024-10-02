@@ -20,7 +20,7 @@ include('../middleware/adminMiddleware.php');
                                 <th>NAME</th>
                                 <th>OFFENSE</th>
                                 <th>CASE</th>
-                                <th>DATE</th>
+                                <th>DATE OF OFFENSE</th>
                                 <th>INVESTIGATION</th>
                                 <th>LAST UPDATED</th>
                                 <th>NEXT ACTION</th>
@@ -42,11 +42,11 @@ include('../middleware/adminMiddleware.php');
                                         <td> <?= $item['student_id']; ?></td>
                                         <td> <?= $item['name']; ?></td>
                                         <td> <?= $item['offense_id']; ?></td>
-                                        <td> <?= $item['case_status']; ?></td>
+                                        <td> <?= $item['case_id']; ?></td>
                                         <td> <?= $item['date_added']; ?></td>
                                         <td> <?= $item['investigation_notes']; ?></td>
                                         <td> <?= $item['last_updated']; ?></td>
-                                        <td> <?= $item['next_action']; ?></td>
+                                        <td> <?= $item['completion_status']; ?></td>
                                         <td> <?= $item['assigned_staff']; ?></td>
                                         <td> <?= $item['punishment_id']; ?></td>
                                     
@@ -54,8 +54,8 @@ include('../middleware/adminMiddleware.php');
                                         <td>
                                             <form action="code.php" method="POST">
                                                 <input type="hidden" name="category_id" value="<?= $item['id']; ?>">
-                                                <a href="edit-category.php?id=<?= $item['id']; ?>" class="btn btn-primary float" >EDIT</a>
-                                                <button type="sumbit" class="btn btn-danger" name="delete_category_btn">Delete</button>
+                                                <a href="edit-category.php?id=<?= $item['id']; ?>" class="btn btn-primary float" >UPDATE</a>
+                                                <button type="sumbit" class="btn btn-danger mt-2" name="delete_category_btn">DELETE</button>
                                             </form>
                                         </td>
                                         </tr>
@@ -94,16 +94,28 @@ include('../middleware/adminMiddleware.php');
                             </div>
                             <div class="col-md-6">
                                 <label for="">NAME</label>
-                                <input type="text" name="name" placeholder="Enter Name" class="form-control">
+                                <input type="text" name="name" placeholder="Enter Case" class="form-control">
                             </div>
                             <div class="col-md-6">
-                                <label for="">RESOLVED</label>
-                                <input type="checkbox" name="status">
+                                <label for="">OFFENSE</label>
+                                <input type="text" name="offense_id" placeholder="Enter Offense date" class="form-control">
                             </div>
                             <div class="col-md-6">
-                                <label for="">DECIDED</label>
-                                <input type="checkbox" name="popular">
+                                <label for="">DATE OFFENSE</label>
+                                <input type="text" name="date_of_offense" placeholder="Enter Offense date" class="form-control">
                             </div>
+                            <div class="col-md-6">
+                                <label for="">DESCRIPTION</label>
+                                <input type="text" name="description" placeholder="Enter Description" class="form-control">
+                            </div>
+                            <div class="col-md-6">
+                                <label for="">CASE STATUS</label>
+                                <input type="text" name="case_id" placeholder="Enter Status" class="form-control">
+                            </div>
+                            <div class="col-md-6">
+                                <label for="">DATE ADDED</label>
+                                <input type="text" name="date_added" placeholder="Enter DATE" class="form-control">
+                            </div>                        
                             <div class="col-md-12 mt-2">
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                                 <button type="submit" class="btn btn-primary" name="add_category_btn">Save</button>

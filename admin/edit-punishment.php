@@ -33,19 +33,43 @@ include('../middleware/adminMiddleware.php');
                                     <input type="text" name="student_id" value="<?= $data['student_id']?>" placeholder="Enter Student number" class="form-control">
                                 </div>
                                 <div class="col-md-6">
-                                    <label for="">NAME</label>
-                                    <input type="text" name="name" value="<?= $data['name']?>" placeholder="Enter Name" class="form-control">
-                                <div class="col-md-6">
-                                    <label for="">RESOLVED</label>
-                                    <input type="checkbox" <?=$data['status'] ? "checked":"" ?> name="status">
+                                <label for="">NAME</label>
+                                <input type="text" name="name" value="<?= $data['name']?>" placeholder="Enter Name" class="form-control">
                                 </div>
                                 <div class="col-md-6">
-                                    <label for="">DECIDED</label>
-                                    <input type="checkbox" <?=$data['popular'] ? "checked":"" ?> name="popular">
+                                <label for="">PUNISHMENT</label>
+                                <input type="text" name="punishment_id" value="<?= $data['punishment_id']?>" placeholder="Enter Name" class="form-control">
                                 </div>
+                                <div class="col-md-6">
+                                <label for="">TYPE</label>
+                                <input type="text" name="punishment_type" value="<?= $data['punishment_type']?>" placeholder="Enter Name" class="form-control">
+                                </div>
+                                <div class="col-md-6">
+                                <label for="">DETAILS</label>
+                                <input type="text" name="punishment_details" value="<?= $data['punishment_details']?>" placeholder="Enter Name" class="form-control">
+                                </div>
+                                <div class="col-md-6">
+                                <label for="">INVESTIGATION</label>
+                                <input type="text" name="investigation_notes" value="<?= $data['investigation_notes']?>" placeholder="Enter Name" class="form-control">
+                                </div>
+                                <div class="col-md-6">
+                                <label for="">DATE ASSIGNED</label>
+                                <input type="text" name="date_assigned" value="<?= $data['date_assigned']?>" placeholder="Enter Name" class="form-control">
+                                </div>
+                                <div class="col-md-6">
+                                <label for="">ASSIGNED BY</label>
+                                <input type="text" name="assigned_staff" value="<?= $data['assigned_staff']?>" placeholder="Enter Name" class="form-control">
+                                </div>
+                                <div class="col-md-6">
+                                <label for="">COMPLECTION STATUS</label>
+                                <input type="text" name="completion_status" value="<?= $data['completion_status']?>" placeholder="Enter Name" class="form-control">
+                                </div>
+                                <div class="col-md-6">
+                                <label for="">COMPLECTION DATE</label>
+                                <input type="text" name="completion_date" value="<?= $data['completion_date']?>" placeholder="Enter Name" class="form-control">
                                 <div class="col-md-12">
                                 <button type="submit" class="btn btn-primary" name="update_punishment_btn">Update</button>
-                                <a href="category.php" class="btn btn-primary">close</a>
+                                <a href="punishment.php" class="btn btn-primary">close</a>
                                 </div>
                                 </div>
                             </form>

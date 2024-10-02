@@ -35,14 +35,23 @@ include('../middleware/adminMiddleware.php');
                                 <div class="col-md-6">
                                     <label for="">NAME</label>
                                     <input type="text" name="name" value="<?= $data['name']?>" placeholder="Enter Name" class="form-control">
-                                <div class="col-md-6">
-                                    <label for="">RESOLVED</label>
-                                    <input type="checkbox" <?=$data['status'] ? "checked":"" ?> name="status">
                                 </div>
                                 <div class="col-md-6">
-                                    <label for="">DECIDED</label>
-                                    <input type="checkbox" <?=$data['popular'] ? "checked":"" ?> name="popular">
+                                <label for="">OFFENSE</label>
+                                <input type="text" name="offense_id" value="<?= $data['offense_id']?>" placeholder="Enter Name" class="form-control">                                
                                 </div>
+                                <div class="col-md-6">
+                                    <label for="">DESCRIPTION</label>
+                                    <input type="text" name="description" value="<?= $data['description']?>" placeholder="Enter Name" class="form-control">                                
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="">CASE STATUS</label>
+                                    <input type="text" name="case_id" value="<?= $data['case_id']?>" placeholder="Enter Name" class="form-control">                                
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="">DATE ADDED</label>
+                                    <input type="text" name="date_added" value="<?= $data['date_added']?>" placeholder="Enter Name" class="form-control">                                
+                                </div> 
                                 <div class="col-md-12">
                                 <button type="submit" class="btn btn-primary" name="update_category_btn">Update</button>
                                 <a href="category.php" class="btn btn-primary">close</a>
