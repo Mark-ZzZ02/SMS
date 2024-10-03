@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 01, 2024 at 06:21 PM
+-- Generation Time: Oct 03, 2024 at 08:50 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -39,21 +39,21 @@ CREATE TABLE `categories` (
   `assigned_staff` varchar(50) NOT NULL,
   `offense_id` varchar(50) NOT NULL,
   `case_status` varchar(50) NOT NULL,
-  `date_reported` datetime DEFAULT NULL,
+  `date_reported` date NOT NULL,
   `investigation_notes` varchar(50) NOT NULL,
-  `last_updated` datetime DEFAULT NULL,
+  `last_updated` varchar(50) NOT NULL,
   `next_action` varchar(50) NOT NULL,
   `case_priority` varchar(50) NOT NULL,
   `punishment_id` varchar(50) NOT NULL,
   `reported_by` varchar(50) NOT NULL,
-  `date_of_offense` datetime DEFAULT NULL,
+  `date_of_offense` varchar(50) NOT NULL,
   `punishment_type` varchar(50) NOT NULL,
   `punishment_details` varchar(50) NOT NULL,
   `date_assigned` varchar(50) NOT NULL,
   `assigned_by` varchar(50) NOT NULL,
   `completion_status` varchar(50) NOT NULL,
-  `completion_date` datetime DEFAULT NULL,
-  `date_added` datetime NOT NULL
+  `completion_date` varchar(50) NOT NULL,
+  `date_added` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -61,7 +61,7 @@ CREATE TABLE `categories` (
 --
 
 INSERT INTO `categories` (`id`, `student_id`, `name`, `description`, `status`, `popular`, `image`, `case_id`, `assigned_staff`, `offense_id`, `case_status`, `date_reported`, `investigation_notes`, `last_updated`, `next_action`, `case_priority`, `punishment_id`, `reported_by`, `date_of_offense`, `punishment_type`, `punishment_details`, `date_assigned`, `assigned_by`, `completion_status`, `completion_date`, `date_added`) VALUES
-(82, 332423423, 'ROSAS, DILAN R.', 'LALALALA', 0, 0, '', '123312', 'NORLAN', 'BULLY', 'In Progress', '2024-10-01 23:23:38', 'LALALA', '2024-09-12 23:23:38', 'N/A', 'N/A', 'PUSHUP', 'JASS', '2024-10-23 23:23:38', 'BAHALA NA', 'LALAL', '2024-09-03', 'JASS', 'GAVYHVBA', '2024-10-16 23:23:38', '2024-10-01 17:23:38');
+(82, 332423423, 'ROSAS, DILAN R.', 'LALALALA', 0, 0, '', '123312', 'NORLAN', 'BULLY', '', '0000-00-00', 'LALALA', '0000-00-00', '', '', 'PUSHUP', '', '0000-00-00', 'BAHALA NA', 'LALAL', '2024-09-03', '', 'GAVYHVBA', '2024-10-16', '2024-10-01');
 
 -- --------------------------------------------------------
 
@@ -161,7 +161,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `categories`
 --
 ALTER TABLE `categories`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=92;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=204;
 
 --
 -- AUTO_INCREMENT for table `tracking`
