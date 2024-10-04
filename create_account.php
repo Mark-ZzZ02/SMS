@@ -3,16 +3,31 @@ session_start();
 include('includes/header.php');
 ?>
 
-<div class="container-fluid p-5 text-white text-center">
-  <!--<h1 class="text-shadow">School Management System</h1>-->
-</div>
+<!DOCTYPE html>
+<html lang="en">
+<?php include './layout/head_login.php'; ?>
 
+<style>
+.btn-success {
+    background-color: #28a745;
+    border-color: #28a745;
+}
+
+.btn-success:hover {
+    background-color: #218838;
+    border-color: #1e7e34;
+}
+</style>
+
+<body>
+<div class="container-fluid p-3 text-white text-center"></div>
+  
 <div class="container mt-3 p-4 shadow rounded-4 w-25 bg-white text-black">
     <div class="container d-flex justify-content-center align-items-center full-height">
-        <img src="admin/css/bcp_logo.png" alt="Logo" class="logo">
+        <img src="./css/bcp_logo.png" alt="Logo" class="logo">
     </div>
     <div class="container text-black text-center">
-    <h4>Registration Form</h4> 
+        <h2>Create Account</h2>      
     </div>
 
     <?php 
@@ -45,9 +60,13 @@ include('includes/header.php');
                     <label class="form-label">Confirm Password</label>
                     <input type="password" name="cpassword" class="form-control" placeholder="Confirm password">
                   </div>
-                  <button type="submit" name="register_btn" class="btn btn-primary">Submit</button>
-                </form>
-</div>
+                  <button type="submit" name="register_btn" class="btn btn-primary w-100">Submit</button> <br> <br>
+                  <span class="text-danger fw-bold pt-0 d-none" id="span_error">Please fill out all fields.</span>
+        <button type="submit" class="btn btn-success w-100">Create Account</button>
+        <div class="container text-center">
+            <span class="fs-6">Already have an account?</span>
+            <a class="nav-link d-inline active rounded text-primary fs-6 text-center" href="login.php">Login</a>
+    </form>
 
 
 <?php include('includes/footer.php') ?>

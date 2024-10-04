@@ -1,5 +1,5 @@
 
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow">
+<nav class="navbar navbar-expand-sm navbar-dark bg-primary ">
   
   <div class="container">
     <a class="navbar-brand"href="index.php">PREFECT</a>
@@ -14,14 +14,8 @@
           <li class="nav-item">
             <a class="nav-link" href="#">FEATURES</a>
         </li>
-              <li class="nav-item">
-                <a class="nav-link" href="register.php">REGISTER</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="login.php">LOGIN</a>
-              </li>
+             
               
-      </ul>
     </div>
   </div>
 </nav>
