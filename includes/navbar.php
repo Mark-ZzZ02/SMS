@@ -1,8 +1,8 @@
 
 <nav class="navbar navbar-expand-sm navbar-dark bg-primary ">
-  
+<img src="./css/pf.png" height ="70" class="logo"
   <div class="container">
-    <a class="navbar-brand"href="index.php">PREFECT</a>
+    <a class="navbar-brand"href="index.php">PREFECT MANAGEMENT SYSTEM</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
