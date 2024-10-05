@@ -73,7 +73,7 @@ footer {
 
 <div class="hero-image">
   <div class="hero-text">
-  <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br>
+  <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br>  <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br>
     <h1 style="font-size:50px">WELCOME TO PREFECT</h1>
     
     <a href="login.php "><button>PREFECT ADMISSION CLICK HERE</button></a> <br> 
