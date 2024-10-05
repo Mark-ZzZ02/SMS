@@ -46,7 +46,7 @@ body {
 }
 
 footer {
-    background:#273be2;
+    background:#024bde;
     color: white;
     text-align: center;
     padding: 1rem 0;
