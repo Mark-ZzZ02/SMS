@@ -59,6 +59,31 @@ if(isset($_POST['add_category_btn']))
 
     }
 }
+else if(isset($_POST['add_categoryy_btn']))
+{  
+    $name = mysqli_real_escape_string($con,$_POST['name']);
+    $case_id = mysqli_real_escape_string($con,$_POST['case_id']);
+    $student_id = mysqli_real_escape_string($con,$_POST['student_id']);
+    $offense_id = mysqli_real_escape_string($con,$_POST['offense_id']);
+  
+    $insert_query = "INSERT INTO categories (name,case_id,student_id,offense_id) VALUES ('$name','$case_id','$student_id','$offense_id')";
+    $insert_query_run = mysqli_query($con, $insert_query);
+  
+    if($insert_query_run)
+    {
+        move_uploaded_file($_FILES['image']['tmp_name'], $path.'/'.$filename);
+
+        redirect("category.php", "Category Added Successfully");
+
+    }
+    else
+    {
+        redirect("category.php", "Something Went Wrong");
+
+    }
+  
+  
+  }
 else if(isset($_POST['update_category_btn']))
 {
     $category_id = $_POST['category_id'];
@@ -66,17 +91,10 @@ else if(isset($_POST['update_category_btn']))
     $case_id = $_POST['case_id'];
     $offense_id = $_POST['offense_id'];
     $student_id = $_POST['student_id'];
-    $case_status = $_POST['case_status'];
-    $date_reported = $_POST['date_reported'];
     $last_updated = $_POST['last_updated'];
-    $next_action = $_POST['next_action'];
     $reported_by = $_POST['reported_by'];
     $date_of_offense = $_POST['date_of_offense'];
-    $description = $_POST['description'];
-    $case_priority = $_POST['case_priority'];
-    $punishment_type = $_POST['punishment_type'];
     $assigned_by = $_POST['assigned_by'];
-    $date_added = $_POST['date_added'];
     $status = isset($_POST['status']) ? '1':'0' ;
     $popular = isset($_POST['popular']) ? '1':'0' ;
     
@@ -95,11 +113,11 @@ else if(isset($_POST['update_category_btn']))
     $path = "../uploads";
 
     $update_query = "UPDATE categories SET name='$name', case_id='$case_id', offense_id='$offense_id', 
-    student_id='$student_id', case_status='$case_status', date_reported='$date_reported', 
-    last_updated='$last_updated', next_action='$next_action',
-    reported_by='$reported_by', date_of_offense='$date_of_offense', description='$description', case_priority='$case_priority', 
-    punishment_type='$punishment_type', assigned_by='$assigned_by', 
-    date_added='$date_added', status='$status', popular='$popular', image='$update_filename' WHERE id='$category_id' ";
+    student_id='$student_id',
+    last_updated='$last_updated',
+    reported_by='$reported_by', date_of_offense='$date_of_offense', 
+     assigned_by='$assigned_by', 
+    status='$status', popular='$popular', image='$update_filename' WHERE id='$category_id' ";
 
     $update_query_run = mysqli_query($con, $update_query);
 
@@ -129,15 +147,11 @@ else if(isset($_POST['update_punishment_btn']))
     $category_id = $_POST['category_id'];
     $name = $_POST['name'];
     $student_id = $_POST['student_id'];
-    $case_status = $_POST['case_status'];
-    $date_reported = $_POST['date_reported'];
     $investigation_notes = $_POST['investigation_notes'];
     $last_updated = $_POST['last_updated'];
-    $next_action = $_POST['next_action'];
     $assigned_staff = $_POST['assigned_staff'];
     $punishment_id = $_POST['punishment_id'];
     $reported_by = $_POST['reported_by'];
-    $case_priority = $_POST['case_priority'];
     $punishment_type = $_POST['punishment_type'];
     $punishment_details = $_POST['punishment_details'];
     $date_assigned = $_POST['date_assigned'];
@@ -161,9 +175,9 @@ else if(isset($_POST['update_punishment_btn']))
     }
     $path = "../uploads";
 
-    $update_query = "UPDATE categories SET name='$name', student_id='$student_id', case_status='$case_status', date_reported='$date_reported', investigation_notes='$investigation_notes', 
-    last_updated='$last_updated', next_action='$next_action', assigned_staff='$assigned_staff', punishment_id='$punishment_id', 
-    reported_by='$reported_by', date_of_offense='$date_of_offense', case_priority='$case_priority', 
+    $update_query = "UPDATE categories SET name='$name', student_id='$student_id', investigation_notes='$investigation_notes', 
+    last_updated='$last_updated', assigned_staff='$assigned_staff', punishment_id='$punishment_id', 
+    reported_by='$reported_by', date_of_offense='$date_of_offense', 
     punishment_type='$punishment_type', punishment_details='$punishment_details', date_assigned='$date_assigned', assigned_by='$assigned_by', 
     completion_status='$completion_status', completion_date='$completion_date', status='$status', popular='$popular', image='$update_filename' WHERE id='$category_id' ";
 
@@ -185,6 +199,61 @@ else if(isset($_POST['update_punishment_btn']))
     else
     {
         redirect("punishment.php", "Something Went Wrong");
+
+    }
+
+
+}
+else if(isset($_POST['update_parent_btn']))
+{
+    $category_id = $_POST['category_id'];
+    $name = $_POST['name'];
+    $student_id = $_POST['student_id'];
+    $case_status = $_POST['case_status'];
+    $date_reported = $_POST['date_reported'];
+    $case_priority = $_POST['case_priority'];
+    $next_action = $_POST['next_action'];
+    $assigned_staff = $_POST['assigned_staff'];
+
+    $status = isset($_POST['status']) ? '1':'0' ;
+    $popular = isset($_POST['popular']) ? '1':'0' ;
+    
+    $new_image = $_FILES['image']['name'];
+    $old_image = $_POST['old_image'];
+
+    if($new_image != "")
+    {
+        $image_ext = pathinfo($new_image, PATHINFO_EXTENSION);
+        $update_filename = time().'.'.$image_ext;
+    }
+    else
+    {
+        $update_filename = $old_image;
+    }
+    $path = "../uploads";
+
+    $update_query = "UPDATE categories SET name='$name', student_id='$student_id', case_status='$case_status', date_reported='$date_reported', 
+    next_action='$next_action', assigned_staff='$assigned_staff', case_priority='$case_priority',
+    status='$status', popular='$popular', image='$update_filename' WHERE id='$category_id' ";
+
+    $update_query_run = mysqli_query($con, $update_query);
+
+    if($update_query_run)
+    {
+        if($_FILES['image']['name'] != "")
+        {
+            move_uploaded_file($_FILES['image']['tmp_name'], $path.'/'.$update_filename);
+            if(file_exists("../uploads/".$old_image))
+            {
+                unlink("../uploads/".$old_image);
+            }
+        }
+        redirect("parent.php?id=$category_id", "Category Upadated Successfully");
+
+    }
+    else
+    {
+        redirect("parent.php", "Something Went Wrong");
 
     }
 

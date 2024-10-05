@@ -10,8 +10,8 @@ include('../middleware/adminMiddleware.php');
 <div class="container mt-5 ">
   <div class="row">
     <div class="col-md-12 p-4 shadow">
-    <h4>STUDENT LIST
-    <button type="button" class="btn btn-primary float-end" data-bs-toggle="modal" data-bs-target="#myModal">Add Student</button>
+    <h4>STUDENT CASE LIST
+    <button type="button" class="btn btn-primary float-end" data-bs-toggle="modal" data-bs-target="#myModal">Add Case</button>
     </h4>
     <table id=table  class="table table-striped">
     <thead>
@@ -20,10 +20,9 @@ include('../middleware/adminMiddleware.php');
                                 <th>NAME</th>
                                 <th>OFFENSE</th>
                                 <th>CASE</th>
-                                <th>DATE OF OFFENSE</th>
+                                <th>DATE ADDED</th>
                                 <th>INVESTIGATION</th>
-                                <th>LAST UPDATED</th>
-                                <th>NEXT ACTION</th>
+                                <th>STATUS</th>
                                 <th>STAFF</th>
                                 <th>PUNISHMENT</th>
                                 <th>ACTION</th>
@@ -45,17 +44,16 @@ include('../middleware/adminMiddleware.php');
                                         <td> <?= $item['case_id']; ?></td>
                                         <td> <?= $item['date_added']; ?></td>
                                         <td> <?= $item['investigation_notes']; ?></td>
-                                        <td> <?= $item['last_updated']; ?></td>
                                         <td> <?= $item['completion_status']; ?></td>
                                         <td> <?= $item['assigned_staff']; ?></td>
-                                        <td> <?= $item['punishment_id']; ?></td>
+                                        <td> <?= $item['punishment_type']; ?></td>
                                     
                                         
                                         <td>
-                                            <form action="code.php" method="POST">
+                                        <form action="code.php" method="POST">
                                                 <input type="hidden" name="category_id" value="<?= $item['id']; ?>">
-                                                <a href="edit-category.php?id=<?= $item['id']; ?>" class="btn btn-primary float" >UPDATE</a>
-                                                <button type="sumbit" class="btn btn-danger mt-2" name="delete_category_btn">DELETE</button>
+                                                <a href="edit-category.php?id=<?= $item['id']; ?>" class="btn btn-primary" >UPDATE</a>
+                                                <button type="sumbit" class="btn btn-danger" name="delete_category_btn">DELETE</button>
                                             </form>
                                         </td>
                                         </tr>
@@ -79,7 +77,7 @@ include('../middleware/adminMiddleware.php');
 
       <!-- Modal Header -->
       <div class="modal-header">
-        <h4 class="modal-title">Add Student</h4>
+        <h4 class="modal-title">ADD CASE</h4>
         <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
       </div>
 
@@ -97,28 +95,33 @@ include('../middleware/adminMiddleware.php');
                                 <input type="text" name="name" placeholder="Enter Case" class="form-control">
                             </div>
                             <div class="col-md-6">
-                                <label for="">OFFENSE</label>
-                                <input type="text" name="offense_id" placeholder="Enter Offense date" class="form-control">
+                                <label for="offenseType">OFFENSE</label>
+                                <select name="offense_id" class="form-control" id="offenseType" onchange="toggleCustomOffense()">
+                                    <option value="" disabled selected>Select Offense</option>
+                                    <option value="theft">Theft</option>
+                                    <option value="assault">Assault</option>
+                                    <option value="burglary">Burglary</option>
+                                    <option value="fraud">Fraud</option>
+                                    <option value="vandalism">Vandalism</option>
+                                    <option value="drug_offense">Drug Offense</option>
+                                    <option value="other">Other</option>
+                                </select>
+                                <input type="text" name="custom_offense" id="customOffense" placeholder="Enter Custom Offense" class="form-control mt-2" style="display: none;" oninput="updateOffenseValue()">
                             </div>
                             <div class="col-md-6">
-                                <label for="">DATE OFFENSE</label>
-                                <input type="text" name="date_of_offense" placeholder="Enter Offense date" class="form-control">
-                            </div>
-                            <div class="col-md-6">
-                                <label for="">DESCRIPTION</label>
-                                <input type="text" name="description" placeholder="Enter Description" class="form-control">
-                            </div>
-                            <div class="col-md-6">
-                                <label for="">CASE STATUS</label>
-                                <input type="text" name="case_id" placeholder="Enter Status" class="form-control">
-                            </div>
-                            <div class="col-md-6">
-                                <label for="">DATE ADDED</label>
-                                <input type="text" name="date_added" placeholder="Enter DATE" class="form-control">
-                            </div>                        
+                                <label for="caseStatus">CASE STATUS</label>
+                                <select name="case_id" class="form-control" id="caseStatus">
+                                    <option value="" disabled selected>Select Status</option>
+                                    <option value="open">Open</option>
+                                    <option value="under_investigation">Under Investigation</option>
+                                    <option value="closed">Closed</option>
+                                    <option value="on_hold">On Hold</option>
+                                    <option value="resolved">Resolved</option>
+                                </select>
+                            </div>                
                             <div class="col-md-12 mt-2">
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                <button type="submit" class="btn btn-primary" name="add_category_btn">Save</button>
+                                <button type="submit" class="btn btn-primary" name="add_categoryy_btn">Save</button>
                             </div>
                         </div>
                     </form>

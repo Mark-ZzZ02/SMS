@@ -10,26 +10,24 @@ include('../middleware/adminMiddleware.php');
 <div class="container mt-5 ">
   <div class="row">
     <div class="col-md-12  p-4 shadow">
-    <h4>PUNISHMENT LIST
+    <h4>USER LIST 
+    <a href="add-user.php?id=<?= $item['id']; ?>" class="btn btn-primary float" >EDIT</a>
+
     </h4>
-    <table class="table table-striped">
+    <table  class="table table-striped">
     <thead>
                             <tr>
-                                <th>STUDENT NUMBER</th>
                                 <th>NAME</th>
-                                <th>CASE</th>
-                                <th>PUNISHMENT TYPE</th>
-                                <th>PUNISHMENT DETAILS</th>
-                                <th>INVESTIGATION</th>
-                                <th>STAFF</th>
-                                <th>COMPLETION STATUS</th>
-                                <th>COMPLECTION DATE</th>
+                                <th>EMAIL</th>
+                                <th>PASSWORD</th>
+                                <th>DATE CREATED</th>
+                                <th>VERIFY</th>
                                 <th>ACTION</th>
                             </tr>
                         </thead>
                         <tbody id="tbl_tbody">
                             <?php
-                                $category = getAll("categories");
+                                $category = getAll("users");
 
                                 if(mysqli_num_rows($category) > 0)
                                 {
@@ -37,21 +35,25 @@ include('../middleware/adminMiddleware.php');
                                     {
                                         ?>
                                         <tr>
-                                        <td> <?= $item['student_id']; ?></td>
                                         <td> <?= $item['name']; ?></td>
-                                        <td> <?= $item['case_id']; ?></td>
-                                        <td> <?= $item['punishment_type']; ?></td>
-                                        <td> <?= $item['punishment_details']; ?></td>
-                                        <td> <?= $item['investigation_notes']; ?></td>
-                                        <td> <?= $item['assigned_staff']; ?></td>
-                                        <td> <?= $item['completion_status']; ?></td>
-                                        <td> <?= $item['completion_date']; ?></td>
-                                        
-                                        
+                                        <td> <?= $item['email']; ?></td>
+                                        <td> <?= $item['password']; ?></td>
+                                        <td> <?= $item['create_at']; ?></td>
+                                        <td> 
+                                            <?php
+                                            if($item['role_as'] == '1'){
+                                                echo 'Approved';
+                                            }
+                                            elseif($item['role_as'] == '0'){
+                                                echo 'Denied';
+                                            }
+                                            ?>
+
                                         <td>
-                                            <form action="code.php" method="POST">
+                                            <form action="codeuser.php" method="POST">
                                                 <input type="hidden" name="category_id" value="<?= $item['id']; ?>">
-                                                <a href="edit-punishment.php?id=<?= $item['id']; ?>" class="btn btn-primary float" >UPDATE</a>
+                                                <a href="add-user.php?id=<?= $item['id']; ?>" class="btn btn-primary float" >EDIT</a>
+                                                <button type="sumbit" class="btn btn-danger" name="delete_user_btn">DELETE</button>
                                             </form>
                                         </td>
                                         </tr>

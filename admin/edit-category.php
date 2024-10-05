@@ -35,23 +35,37 @@ include('../middleware/adminMiddleware.php');
                                 <div class="col-md-6">
                                     <label for="">NAME</label>
                                     <input type="text" name="name" value="<?= $data['name']?>" placeholder="Enter Name" class="form-control">
-                                </div>
-                                <div class="col-md-6">
-                                <label for="">OFFENSE</label>
-                                <input type="text" name="offense_id" value="<?= $data['offense_id']?>" placeholder="Enter Name" class="form-control">                                
-                                </div>
-                                <div class="col-md-6">
-                                    <label for="">DESCRIPTION</label>
-                                    <input type="text" name="description" value="<?= $data['description']?>" placeholder="Enter Name" class="form-control">                                
-                                </div>
-                                <div class="col-md-6">
-                                    <label for="">CASE STATUS</label>
-                                    <input type="text" name="case_id" value="<?= $data['case_id']?>" placeholder="Enter Name" class="form-control">                                
-                                </div>
-                                <div class="col-md-6">
-                                    <label for="">DATE ADDED</label>
-                                    <input type="text" name="date_added" value="<?= $data['date_added']?>" placeholder="Enter Name" class="form-control">                                
                                 </div> 
+                                
+                                <div class="col-md-3">
+                                <label for="">DATE ASSIGNED</label>
+                                <input type="datetime" name="date_added" value="<?= $data['date_added']?>" placeholder="Enter Name" class="form-control">
+                                </div>
+                                <div class="col-md-6">
+                                <label for="offenseType">OFFENSE</label>
+                                <select name="offense_id" class="form-control" id="offenseType" onchange="toggleCustomOffense()"> 
+                                    <option value="" disabled <?= empty($data['offense_id']) ? 'selected' : '' ?>>Select Offense</option>
+                                    <option value="theft" <?= $data['offense_id'] === 'theft' ? 'selected' : '' ?>>Theft</option>
+                                    <option value="assault" <?= $data['offense_id'] === 'assault' ? 'selected' : '' ?>>Assault</option>
+                                    <option value="burglary" <?= $data['offense_id'] === 'burglary' ? 'selected' : '' ?>>Burglary</option>
+                                    <option value="fraud" <?= $data['offense_id'] === 'fraud' ? 'selected' : '' ?>>Fraud</option>
+                                    <option value="vandalism" <?= $data['offense_id'] === 'vandalism' ? 'selected' : '' ?>>Vandalism</option>
+                                    <option value="drug_offense" <?= $data['offense_id'] === 'drug_offense' ? 'selected' : '' ?>>Drug Offense</option>
+                                    <option value="other" <?= $data['offense_id'] === 'other' ? 'selected' : '' ?>>Other</option>
+                                </select>
+                                <input type="text" name="custom_offense" id="customOffense" placeholder="Enter Custom Offense" class="form-control mt-2" style="display: none;" oninput="updateOffenseValue()">
+                            </div>
+                            <div class="col-md-6">
+                                    <label for="caseStatus">CASE STATUS</label>
+                                    <select name="case_id" class="form-control" id="caseStatus">
+                                        <option value="" disabled <?= empty($data['case_id']) ? 'selected' : '' ?>>Select Status</option>
+                                        <option value="open" <?= $data['case_id'] === 'open' ? 'selected' : '' ?>>Open</option>
+                                        <option value="under_investigation" <?= $data['case_id'] === 'under_investigation' ? 'selected' : '' ?>>Under Investigation</option>
+                                        <option value="closed" <?= $data['case_id'] === 'closed' ? 'selected' : '' ?>>Closed</option>
+                                        <option value="on_hold" <?= $data['case_id'] === 'on_hold' ? 'selected' : '' ?>>On Hold</option>
+                                        <option value="resolved" <?= $data['case_id'] === 'resolved' ? 'selected' : '' ?>>Resolved</option>
+                                    </select>
+                                </div>
                                 <div class="col-md-12">
                                 <button type="submit" class="btn btn-primary" name="update_category_btn">Update</button>
                                 <a href="category.php" class="btn btn-primary">close</a>

@@ -18,13 +18,16 @@
                 <a class="nav-link rounded" href="punishment.php">SANCTIONS AND PUNISHMENT</a>
             </li>
             <li class="nav-item mb-1">
+                <a class="nav-link rounded" href="parent.php">PARENT MEETING</a>
+            </li>
+            <li class="nav-item mb-1">
                 <a class="nav-link rounded" href="#">APPROVAL</a>
             </li>
             <li class="nav-item mb-1">
                 <a class="nav-link rounded" href="#">REPORTS</a>
             <li class="nav-item">
             <li class="nav-item mb-1">
-                <a class="nav-link rounded" href="#">USER ACCOUNTS</a>
+                <a class="nav-link rounded" href="users.php">USER ACCOUNTS</a>
             <li class="nav-item">
                 <a class="nav-link rounded text-danger" href="../logout.php" id="logout">Logout</a>
             </li>

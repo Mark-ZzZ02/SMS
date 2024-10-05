@@ -10,21 +10,21 @@ include('../middleware/adminMiddleware.php');
 <div class="container mt-5 ">
   <div class="row">
     <div class="col-md-12  p-4 shadow">
-    <h4>PUNISHMENT LIST
+    <h4>PARENT MEETING RECORD
     </h4>
     <table class="table table-striped">
     <thead>
                             <tr>
                                 <th>STUDENT NUMBER</th>
-                                <th>NAME</th>
+                                <th>STUDENT NAME</th>
                                 <th>CASE</th>
-                                <th>PUNISHMENT TYPE</th>
-                                <th>PUNISHMENT DETAILS</th>
-                                <th>INVESTIGATION</th>
                                 <th>STAFF</th>
-                                <th>COMPLETION STATUS</th>
-                                <th>COMPLECTION DATE</th>
+                                <th>MEETING DATE</th>
+                                <th>PARENT CONTACT</th>
+                                <th>MEETING STATUS</th>
+                                <th>NOTE</th>
                                 <th>ACTION</th>
+
                             </tr>
                         </thead>
                         <tbody id="tbl_tbody">
@@ -40,18 +40,17 @@ include('../middleware/adminMiddleware.php');
                                         <td> <?= $item['student_id']; ?></td>
                                         <td> <?= $item['name']; ?></td>
                                         <td> <?= $item['case_id']; ?></td>
-                                        <td> <?= $item['punishment_type']; ?></td>
-                                        <td> <?= $item['punishment_details']; ?></td>
-                                        <td> <?= $item['investigation_notes']; ?></td>
                                         <td> <?= $item['assigned_staff']; ?></td>
-                                        <td> <?= $item['completion_status']; ?></td>
-                                        <td> <?= $item['completion_date']; ?></td>
+                                        <td> <?= $item['date_reported']; ?></td>
+                                        <td> <?= $item['next_action']; ?></td>
+                                        <td> <?= $item['case_status']; ?></td>
+                                        <td> <?= $item['case_priority']; ?></td>
                                         
                                         
                                         <td>
                                             <form action="code.php" method="POST">
                                                 <input type="hidden" name="category_id" value="<?= $item['id']; ?>">
-                                                <a href="edit-punishment.php?id=<?= $item['id']; ?>" class="btn btn-primary float" >UPDATE</a>
+                                                <a href="edit-parent.php?id=<?= $item['id']; ?>" class="btn btn-primary float" >UPDATE</a>
                                             </form>
                                         </td>
                                         </tr>
@@ -66,6 +65,5 @@ include('../middleware/adminMiddleware.php');
  </tbody>
   </table>
     </div>
-  </div>
 
 <?php include('includes/footer.php');?>
