@@ -23,7 +23,7 @@ include('includes/header.php');
 </style>
 
 <body>
-<div class="container-fluid p-5 text-white text-center" ></div>
+<div class="container-fluid p-6 text-white text-center" ></div>
   
 <div class="container mt-3 p-4 shadow rounded-4 w-25 bg-white text-black">
     <div class="container d-flex justify-content-center align-items-center full-height">

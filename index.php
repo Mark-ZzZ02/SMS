@@ -84,7 +84,7 @@ footer {
 
 <footer>
         
-            <p>&copy;  2024 BCP.com</p>
+            <p>&copy;  2024 Prefect.com</p>
         </div>
     </footer>
 
