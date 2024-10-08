@@ -11,7 +11,7 @@ include('../middleware/adminMiddleware.php');
   <div class="row">
     <div class="col-md-12  p-4 shadow">
     <h4>USER LIST 
-    <a href="add-user.php?id=<?= $item['id']; ?>" class="btn btn-primary float" >EDIT</a>
+    <a href="add-user.php" class="btn btn-primary float-end">Add User</a>
 
     </h4>
     <table  class="table table-striped">
@@ -19,7 +19,6 @@ include('../middleware/adminMiddleware.php');
                             <tr>
                                 <th>NAME</th>
                                 <th>EMAIL</th>
-                                <th>PASSWORD</th>
                                 <th>DATE CREATED</th>
                                 <th>VERIFY</th>
                                 <th>ACTION</th>
@@ -37,7 +36,6 @@ include('../middleware/adminMiddleware.php');
                                         <tr>
                                         <td> <?= $item['name']; ?></td>
                                         <td> <?= $item['email']; ?></td>
-                                        <td> <?= $item['password']; ?></td>
                                         <td> <?= $item['create_at']; ?></td>
                                         <td> 
                                             <?php
@@ -52,7 +50,7 @@ include('../middleware/adminMiddleware.php');
                                         <td>
                                             <form action="codeuser.php" method="POST">
                                                 <input type="hidden" name="category_id" value="<?= $item['id']; ?>">
-                                                <a href="add-user.php?id=<?= $item['id']; ?>" class="btn btn-primary float" >EDIT</a>
+                                                <a href="edit-user.php?id=<?= $item['id']; ?>" class="btn btn-primary float" >EDIT</a>
                                                 <button type="sumbit" class="btn btn-danger" name="delete_user_btn">DELETE</button>
                                             </form>
                                         </td>

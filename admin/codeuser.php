@@ -46,14 +46,12 @@ if(isset($_POST['add_user_btn']))
   
   
   }
-else if(isset($_POST['update_user_btn']))
-{
+  else if(isset($_POST['update_user_btn'])){
+    $category_id = $_POST['category_id'];
     $name = $_POST['name'];
     $email = $_POST['email'];
     $password = $_POST['password'];
-    $create_at = $_POST['create_at'];
     $role_as = $_POST['role_as'];
-    
     $new_image = $_FILES['image']['name'];
     $old_image = $_POST['old_image'];
 
@@ -68,9 +66,8 @@ else if(isset($_POST['update_user_btn']))
     }
     $path = "../uploads";
 
-    $update_query = "UPDATE categories SET name='$name', email='$email', password='$password', 
-    create_at='$create_at', role_as='$role_as'  WHERE id='$category_id' ";
-
+    $update_query = "UPDATE users SET name='$name', email='$email', password='$password', 
+    role_as='$role_as', image='$update_filename'  WHERE id='$category_id'";
     $update_query_run = mysqli_query($con, $update_query);
 
     if($update_query_run)
@@ -83,7 +80,7 @@ else if(isset($_POST['update_user_btn']))
                 unlink("../uploads/".$old_image);
             }
         }
-        redirect("users.php?id=$category_id", "Category Upadated Successfully");
+        redirect("users.php?id=$category_id", "users Updated Successfully");
 
     }
     else
@@ -94,6 +91,7 @@ else if(isset($_POST['update_user_btn']))
 
 
 }
+
 else if(isset($_POST['delete_user_btn']))
 {
     $category_id = mysqli_real_escape_string($con, $_POST['category_id']);
