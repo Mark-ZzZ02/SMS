@@ -21,10 +21,18 @@
                 <a class="nav-link rounded" href="parent.php">PARENT MEETING</a>
             </li>
             <li class="nav-item mb-1">
-                <a class="nav-link rounded" href="#">APPROVAL</a>
-            </li>
+          <a data-bs-toggle="collapse"
+          data-bs-target="#submenu" arial-expanded="false" arial-controls="submenu"> 
+            <span class="nav-link rounded">APPROVAL
+            </span>
+          </a>
+          <div class="sub-menu collapse" id="submenu">
+          <a class="nav-link text-white" href="parent.php">
+            <span class="nav-link rounded">FACULTY</span>
+          </a>
+        </li>
             <li class="nav-item mb-1">
-                <a class="nav-link rounded" href="#">REPORTS</a>
+                <a class="nav-link rounded" href="">REPORTS</a>
             <li class="nav-item">
             <li class="nav-item mb-1">
                 <a class="nav-link rounded" href="users.php">USER ACCOUNTS</a>
