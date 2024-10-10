@@ -11,6 +11,8 @@
     <div class="collapse navbar-collapse" id="navbarNavDropdown">
       <ul class="navbar-nav ms-auto">
         <li class="nav-item">
+            <a class="nav-link " aria-current="page" href="page.php">PAGE</a>
+        </li>
           <a class="nav-link" aria-current="page" href="index.php">HOME</a>
         </li>
           <li class="nav-item">

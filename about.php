@@ -10,7 +10,7 @@ include('includes/header.php');
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <style>
 body {
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: "Times New Roman", Times, serif;
   margin: 0;
 }
 
@@ -35,10 +35,11 @@ html {
 }
 
 .about-section {
-  padding: 50px;
+  padding: 0px;
   text-align: center;
   background-color:#024bde;
   color: white;
+  font-family: "Times New Roman", Times, serif;
 }
 
 footer {
@@ -88,18 +89,11 @@ footer {
 </style>
 </head>
 <body>
-
-<div class="about-section">
-  <h1>PREFECT ADMINISTRATOR</h1>
-  <p><center><b>VISION</b> </center>Bestlink College of the Philippines, Office of the Prefect of Discipline is committed to provide a highly confidential atmosphere that constitute rules on the aspect of the student behavior inside the campuS as well as inside the classroom. </p>
-  <p><center><b>MISSION</b></center> To provide discipline among individual and ensure fair, impartial and just implementation of strict rules, regulation and policies of the school..</p>
-</div>
-
-<h2 style="text-align:center">ADMIN</h2>
+  <h1 style="text-align:center">PREFECT ADMINISTRATOR</h1>
 <div class="row">
   <div class="column">
     <div class="card">
-      <img src="./css/p.png" alt="Benildo" style="width:50%">
+     <center> <img src="./css/dp.jpg" alt="Benildo" style="width:50%"> </center>
       <div class="container">
         <h2>Benildo E. Concepcion</h2>
         <p class="title">HEAD</p>
@@ -123,7 +117,7 @@ footer {
   
   <div class="column">
     <div class="card">
-      <img src="./css/p.png" alt="Benildo" style="width:50%">
+    <center>  <img src="./css/p.png" alt="Benildo" style="width:50%"> </center>
       <div class="container">
         <h2>Benildo E. Concepcion</h2>
         <p class="title">HEAD</p>
@@ -133,9 +127,17 @@ footer {
       </div>
     </div>
   </div>
+
+<div class="about-section">
+  
+  <p><center><b>VISION</b> </center>Bestlink College of the Philippines <br> Office of the Prefect of Discipline is committed to provide a highly confidential atmosphere that constitute rules on <br> the aspect of the student behavior inside the campus as well as inside the classroom. </p>
+  <p><center><b>MISSION</b></center> To provide discipline among individual and ensure fair, impartial and just <br> implementation of strict rules, regulation and policies of the school..</p>
+</div>
+
+
   <footer>
         
-            <p>&copy;  2024 Prefect.com</p>
+            <p>prefect.schoolmanagementsystem2.com</p>
         </div>
     </footer>
 
