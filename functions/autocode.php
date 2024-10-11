@@ -17,7 +17,7 @@ if(isset($_POST['register_btn']))
         if(mysqli_num_rows($check_email_query_run) > 0)
         {
             $_SESSION['message'] = "Email already registered";
-            header('Location: ../register.php');
+            header('Location: ../create_account.php');
         }
         else
         {
@@ -34,14 +34,14 @@ if(isset($_POST['register_btn']))
                 else
                 {
                     $_SESSION['message'] = "Something went wrong";
-                    header('Location: ../register.php');
+                    header('Location: ../create_account.php');
                 }
                 
             }
             else
             {
                 $_SESSION['message'] = "Password do not match";
-                header('Location: ../register.php');
+                header('Location: ../create_account.php');
             }
         }
 
