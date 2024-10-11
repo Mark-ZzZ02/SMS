@@ -4,71 +4,85 @@ include('includes/header.php');
 include('../middleware/adminMiddleware.php');
 
 ?>
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-12 p-4 shadow rounded bg-light">
+            <h4 class="d-flex justify-content-between align-items-center">
+                STUDENT CASE LIST
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myModal">Add Case</button>
+            </h4>
+            <div class="table-responsive">
+                <table id="example" class="table table-striped table-hover mt-3">
+                    <thead class="table-light-blue">
+                        <tr>
+                            <th class="text-center">STUDENT NUMBER</th>
+                            <th class="text-center">NAME</th>
+                            <th class="text-center">OFFENSE</th>
+                            <th class="text-center">CASE</th>
+                            <th class="text-center">DATE ADDED</th>
+                            <th class="text-center">INVESTIGATION</th>
+                            <th class="text-center">STATUS</th>
+                            <th class="text-center">STAFF</th>
+                            <th class="text-center">PUNISHMENT</th>
+                            <th class="text-center">ACTION</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tbl_tbody">
+                        <?php
+                            $category = getAll("categories");
 
-<div class="container-fluid p-4 bg-white text-black text-center" class="navbar-brand" >
-</div>
-<div class="container mt-5 ">
-  <div class="row">
-    <div class="col-md-12 p-4 shadow">
-    <h4>STUDENT CASE LIST
-    <button type="button" class="btn btn-primary float-end" data-bs-toggle="modal" data-bs-target="#myModal">Add Case</button>
-    </h4>
-    <table id=table  class="table table-striped">
-    <thead>
-                            <tr>
-                                <th>STUDENT NUMBER</th>
-                                <th>NAME</th>
-                                <th>OFFENSE</th>
-                                <th>CASE</th>
-                                <th>DATE ADDED</th>
-                                <th>INVESTIGATION</th>
-                                <th>STATUS</th>
-                                <th>STAFF</th>
-                                <th>PUNISHMENT</th>
-                                <th>ACTION</th>
-                            </tr>
-                        </thead>
-                        <tbody id="tbl_tbody">
-                            <?php
-                                $category = getAll("categories");
-
-                                if(mysqli_num_rows($category) > 0)
-                                {
-                                    foreach($category as $item)
-                                    {
-                                        ?>
-                                        <tr>
-                                        <td> <?= $item['student_id']; ?></td>
-                                        <td> <?= $item['name']; ?></td>
-                                        <td> <?= $item['offense_id']; ?></td>
-                                        <td> <?= $item['case_id']; ?></td>
-                                        <td> <?= $item['date_added']; ?></td>
-                                        <td> <?= $item['investigation_notes']; ?></td>
-                                        <td> <?= $item['completion_status']; ?></td>
-                                        <td> <?= $item['assigned_staff']; ?></td>
-                                        <td> <?= $item['punishment_type']; ?></td>
-                                    
-                                        
-                                        <td>
-                                        <form action="code.php" method="POST">
-                                                <input type="hidden" name="category_id" value="<?= $item['id']; ?>">
-                                                <a href="edit-category.php?id=<?= $item['id']; ?>" class="btn btn-primary" >UPDATE</a>
-                                                <button type="sumbit" class="btn btn-danger" name="delete_category_btn">DELETE</button>
-                                            </form>
+                            if (mysqli_num_rows($category) > 0) {
+                                foreach ($category as $item) {
+                                    ?>
+                                    <tr>
+                                        <td class="text-center"><?= $item['student_id']; ?></td>
+                                        <td class="text-center"><?= $item['name']; ?></td>
+                                        <td class="text-center"><?= $item['offense_id']; ?></td>
+                                        <td class="text-center"><?= $item['case_id']; ?></td>
+                                        <td class="text-center"><?= $item['date_added']; ?></td>
+                                        <td class="text-center"><?= $item['investigation_notes']; ?></td>
+                                        <td class="text-center"><?= $item['completion_status']; ?></td>
+                                        <td class="text-center"><?= $item['assigned_staff']; ?></td>
+                                        <td class="text-center"><?= $item['punishment_type']; ?></td>
+                                        <td class="text-center">
+                                            <div class="dropdown">
+                                                <button class="btn btn-primary dropdown-toggle btn-sm" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                                                    Actions
+                                                </button>
+                                                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                                    <li>
+                                                        <a class="dropdown-item text-primary" href="edit-category.php?id=<?= $item['id']; ?>">Update</a>
+                                                    </li>
+                                                    <li>
+                                                        <form action="code.php" method="POST" class="d-inline">
+                                                            <input type="hidden" name="category_id" value="<?= $item['id']; ?>">
+                                                            <button type="submit" class="dropdown-item text-danger" name="delete_category_btn" onclick="return confirm('Are you sure you want to delete this case?');">Delete</button>
+                                                        </form>
+                                                    </li>
+                                                </ul>
+                                            </div>
                                         </td>
-                                        </tr>
-                                        <?php
-                                    }
+                                    </tr>
+                                    <?php
                                 }
-                                else
-                                {
-                                    echo"No records found";
-                                }
-                            ?>
- </tbody>
-  </table>
+                            } else {
+                                echo "<tr><td colspan='10' class='text-center'>No records found</td></tr>";
+                            }
+                        ?>
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
-  </div>
+</div>
+
+
+
+
+
+
+
+
   <!-- INSERT -->
 
   <div class="modal" id="myModal">
@@ -128,5 +142,87 @@ include('../middleware/adminMiddleware.php');
     <div id="responseMessage" class="mt-3"></div>
 </div>
  </div>
+
+ <div class="modal" id="modaledit">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title">Add Student</h4>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body">
+      <div class="container mt-5">
+      <?php
+            if(isset($_GET['id']))
+            {
+                $id = $_GET['id'];
+                $category = getByID("categories", $id);
+                if(mysqli_num_rows($category) > 0)
+                {
+                    $data = mysqli_fetch_array($category);
+                ?>
+                        <div class="card-body">
+                                <form action="code.php" method="POST" enctype="multipart/form-data">
+                                    <div class="row">
+                                    <div class="col-md-6">
+                                    <input type="hidden" name="category_id" value="<?= $data['id'] ?>">
+                                    <label for="">STUDENT NUMBER</label>
+                                    <input type="text" name="slug" value="<?= $data['slug']?>" placeholder="Enter Student number" class="form-control">
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="">NAME</label>
+                                    <input type="text" name="name" value="<?= $data['name']?>" placeholder="Enter Name" class="form-control">
+                                </div>
+                                <div class="col-md-12">
+                                    <label for="">POSITION</label>
+                                    <textarea rows="3" name="description" placeholder="Enter Position" class="form-control"><?= $data['description'] ?> </textarea>
+                                </div>
+                                <div class="col-md-12">
+                                    <label for="">CASE</label>
+                                    <input type="text" name="meta_tittle" value="<?= $data['meta_tittle']?>" placeholder="Enter Case" class="form-control">
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="">RESOLVED</label>
+                                    <input type="checkbox" <?=$data['status'] ? "checked":"" ?> name="status">
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="">DECIDED</label>
+                                    <input type="checkbox" <?=$data['popular'] ? "checked":"" ?> name="popular">
+                                </div>
+                                <div class="col-md-12">
+                                <button type="submit" class="btn btn-primary" name="update_categoryy_btn">Update</button>
+                                <a href="category.php" class="btn btn-primary">close</a>
+                                </div>
+                                </div>
+                            </form>
+                    </div>    
+                <?php
+                }
+                else
+                {
+                    echo "CATEGORY NOT FOUND";
+                }
+            }
+            else
+            {
+                echo "ID missing from url";
+            }
+                ?>
+        <div id="responseMessage" class="mt-3"></div>
+        </div>
+            </div>
+
+            <!-- Modal footer -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+            </div>
+
+            </div>
+        </div>
+        </div>
 
 <?php include('includes/footer.php');?>

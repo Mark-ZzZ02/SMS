@@ -1,15 +1,14 @@
 
 
 <body>
-    <!-- Sidebar -->
-    <!-- sidebar.php -->
-<div id="sidebar" class="bg-light text-center shadow">
+<!-- Sidebar -->
+<div id="sidebar" class="text-center shadow">
     <div class="p-3">
-        <img src="./css/bcp_logo.png" alt="Logo" class="logo">
+        <img src="./css/bcp_logo.png" alt="Logo" class="logo img-fluid mb-4">
         <h4 class="mb-4">Dashboard</h4>
         <ul class="nav flex-column">
             <li class="nav-item mb-1">
-                <a class="nav-link active rounded" href="index.php">SITE HOME</a>
+                <a class="nav-link rounded" href="index.php">SITE HOME</a>
             </li>
             <li class="nav-item mb-1">
                 <a class="nav-link rounded" href="category.php">STUDENT TRACKING</a>
@@ -21,27 +20,23 @@
                 <a class="nav-link rounded" href="parent.php">PARENT MEETING</a>
             </li>
             <li class="nav-item mb-1">
-          <a data-bs-toggle="collapse"
-          data-bs-target="#submenu" arial-expanded="false" arial-controls="submenu"> 
-            <span class="nav-link rounded">APPROVAL
-            </span>
-          </a>
-          <div class="sub-menu collapse" id="submenu">
-          <a class="nav-link text-white" href="parent.php">
-            <span class="nav-link rounded">FACULTY</span>
-          </a>
-        </li>
+                <a class="nav-link rounded" href="#">APPROVAL</a>
+            </li>
             <li class="nav-item mb-1">
-                <a class="nav-link rounded" href="">REPORTS</a>
-            <li class="nav-item">
+                <a class="nav-link rounded" href="#">REPORTS</a>
+            </li>
             <li class="nav-item mb-1">
                 <a class="nav-link rounded" href="users.php">USER ACCOUNTS</a>
+            </li>
             <li class="nav-item">
                 <a class="nav-link rounded text-danger" href="../logout.php" id="logout">Logout</a>
             </li>
         </ul>
     </div>
 </div>
+
+
+
 
 <script>
         document.addEventListener('DOMContentLoaded', function () {

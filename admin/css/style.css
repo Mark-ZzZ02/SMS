@@ -94,3 +94,33 @@ body {
   align-items: center;
   justify-content: center;
 }       
+    body {
+        font-family: 'Arial', sans-serif; /* Change to your preferred font */
+    }
+
+    #sidebar {
+        background-color: #2337C6; /* Blue background */
+        color: white; /* White text */
+        min-height: 100vh;
+    }
+
+    .nav-link {
+        color: white; /* White link text */
+        transition: background-color 0.3s; /* Smooth transition */
+    }
+
+    .nav-link:hover {
+        background-color: rgba(255, 255, 255, 0.2); /* Light hover effect */
+    }
+
+    .nav-link.active {
+        background-color: rgba(255, 255, 255, 0.3); /* Active link effect */
+    }
+
+    .logo {
+        max-width: 100%;
+        height: auto;
+    }
+    .table-light-blue {
+        background-color: #add8e6; /* Light blue color */
+    }
