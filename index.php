@@ -2,11 +2,8 @@
 session_start();
 include('includes/header.php') ?>
 <!DOCTYPE html>
-<html>
-<head>
-  
-  
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<html lang="en">
+<?php include './layout/head_login.php' ?>
 <style>
   
 body {
@@ -82,7 +79,6 @@ footer {
         margin-bottom: 50px;
     }
 </style>
-</head>
 <body>
 
 <div class="hero-image">

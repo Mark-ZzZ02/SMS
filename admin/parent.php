@@ -9,7 +9,6 @@ include('../middleware/adminMiddleware.php');
         <div class="col-md-12 p-4 shadow rounded bg-light">
             <h4 class="d-flex justify-content-between align-items-center">
                 PARENT MEETING RECORD
-                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myModal">Add Meeting</button>
             </h4>
             <div class="table-responsive">
                 <table id="example" class="table table-striped table-hover mt-3">

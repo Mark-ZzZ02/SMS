@@ -18,7 +18,7 @@ include('../middleware/adminMiddleware.php');
                             <th class="text-center">STUDENT NUMBER</th>
                             <th class="text-center">NAME</th>
                             <th class="text-center">OFFENSE</th>
-                            <th class="text-center">CASE</th>
+                            <th class="text-center">CASE ID</th>
                             <th class="text-center">DATE ADDED</th>
                             <th class="text-center">INVESTIGATION</th>
                             <th class="text-center">STATUS</th>
@@ -106,7 +106,7 @@ include('../middleware/adminMiddleware.php');
                             </div>
                             <div class="col-md-6">
                                 <label for="">NAME</label>
-                                <input type="text" name="name" placeholder="Enter Case" class="form-control">
+                                <input type="text" name="name" placeholder="Enter Name" class="form-control">
                             </div>
                             <div class="col-md-6">
                                 <label for="offenseType">OFFENSE</label>
@@ -123,16 +123,9 @@ include('../middleware/adminMiddleware.php');
                                 <input type="text" name="custom_offense" id="customOffense" placeholder="Enter Custom Offense" class="form-control mt-2" style="display: none;" oninput="updateOffenseValue()">
                             </div>
                             <div class="col-md-6">
-                                <label for="caseStatus">CASE STATUS</label>
-                                <select name="case_id" class="form-control" id="caseStatus">
-                                    <option value="" disabled selected>Select Status</option>
-                                    <option value="open">Open</option>
-                                    <option value="under_investigation">Under Investigation</option>
-                                    <option value="closed">Closed</option>
-                                    <option value="on_hold">On Hold</option>
-                                    <option value="resolved">Resolved</option>
-                                </select>
-                            </div>                
+                                <label for="">CASE ID</label>
+                                <input type="text" name="case_id" placeholder="Enter Case" class="form-control">
+                            </div>               
                             <div class="col-md-12 mt-2">
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                                 <button type="submit" class="btn btn-primary" name="add_categoryy_btn">Save</button>
@@ -182,7 +175,7 @@ include('../middleware/adminMiddleware.php');
                                     <textarea rows="3" name="description" placeholder="Enter Position" class="form-control"><?= $data['description'] ?> </textarea>
                                 </div>
                                 <div class="col-md-12">
-                                    <label for="">CASE</label>
+                                    <label for="">CASE ID</label>
                                     <input type="text" name="meta_tittle" value="<?= $data['meta_tittle']?>" placeholder="Enter Case" class="form-control">
                                 </div>
                                 <div class="col-md-6">

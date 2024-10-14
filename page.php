@@ -2,10 +2,8 @@
 session_start();
 include('includes/header.php') ?>
 <!DOCTYPE html>
-<html>
-<head>
-  
-  
+<html lang="en">
+<?php include './layout/head_login.php' ?>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <style>
   

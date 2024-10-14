@@ -5,7 +5,7 @@ include('includes/header.php');
 
 <!DOCTYPE html>
 <html lang="en">
-<?php include './layout/head_login.php'; ?>
+<?php include './layout/head_login.php' ?>
 
 <style>
 .btn-success {
@@ -17,30 +17,44 @@ include('includes/header.php');
     background-color: #218838;
     border-color: #1e7e34;
 }
+
+.logo {
+    max-width: 100%;
+    height: auto;
+}
+
+.container {
+    max-width: 400px; /* Limit the max width */
+}
+
+@media (max-width: 576px) {
+    .container {
+        width: 90%;
+    }
+}
 </style>
 
 <body>
-<div class="container-fluid p-3 text-white text-center"></div>
-  
-<div class="container mt-3 p-4 shadow rounded-4 w-25 bg-white text-black">
-    <div class="container d-flex justify-content-center align-items-center full-height">
+<div class="container-fluid p-6 text-white text-center"></div>
+
+<div class="container mt-3 p-4 shadow rounded-4 bg-white text-black">
+    <div class="d-flex justify-content-center align-items-center mb-3">
         <img src="./css/bcp_logo.png" alt="Logo" class="logo">
     </div>
-    <div class="container text-black text-center">
-        <h2>Create Account</h2>      
+    <div class="text-center mb-3">
+        <h2>Sign in</h2>
     </div>
 
     <?php 
-     if(isset($_SESSION['message'])) 
-     {
-       ?> 
-       <div class="alert alert-warning alert-dismissible fade show" role="alert">
-               <strong>Hey!</strong> <?= $_SESSION['message']; ?>.
-               <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-             </div>
-             <?php
-             unset($_SESSION['message']);
-     }
+    if (isset($_SESSION['message'])) {
+        ?> 
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            <strong>Hey!</strong> <?= $_SESSION['message']; ?>.
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        <?php
+        unset($_SESSION['message']);
+    }
     ?>
 
     <form action="functions/autocode.php" method="POST">
