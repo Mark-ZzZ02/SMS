@@ -4,11 +4,13 @@ session_start(); ?>
 	<title>School Management System</title>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="icon" href="./css/bcp_logo.png" type="image/png">
 	<link href="./css/bootstrap.min.css" rel="stylesheet">
 	<link href="./css/image.css" rel="stylesheet">
 	<link href="./css/logo_login.css" rel="stylesheet">
 	<link href="./css/login_font.css" rel="stylesheet">
 	<link href="./css/style.css" rel="stylesheet">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 	<link href="https://cdn.datatables.net/2.1.8/css/dataTables.dataTables.css" rel="stylesheet">
 	<link rel="stylesheet" href="mystyle.css">
 	<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.14.0/build/css/alertify.min.css"/>

@@ -40,13 +40,13 @@ if(isset($_POST['add_user_btn']))
               else
               {
                   $_SESSION['message'] = "Password do not match";
-                  header('Location: ../register.php');
+                  header('Location: ../create_account.php');
               }
           }
   
   
   }
-  else if(isset($_POST['update_user_btn'])){
+else if (isset($_POST['update_user_btn'])) {
     $category_id = $_POST['category_id'];
     $name = $_POST['name'];
     $email = $_POST['email'];
@@ -55,42 +55,41 @@ if(isset($_POST['add_user_btn']))
     $new_image = $_FILES['image']['name'];
     $old_image = $_POST['old_image'];
 
-    if($new_image != "")
-    {
-        $image_ext = pathinfo($new_image, PATHINFO_EXTENSION);
-        $update_filename = time().'.'.$image_ext;
+    // Hash the password if it is provided
+    if (!empty($password)) {
+        $hashed_password = password_hash($password, PASSWORD_DEFAULT);
+    } else {
+        // Keep the old password if a new one is not provided
+        $hashed_password = $old_password; // You need to fetch the old password from the database if you want to keep it.
     }
-    else
-    {
+
+    if ($new_image != "") {
+        $image_ext = pathinfo($new_image, PATHINFO_EXTENSION);
+        $update_filename = time() . '.' . $image_ext;
+    } else {
         $update_filename = $old_image;
     }
     $path = "../uploads";
 
-    $update_query = "UPDATE users SET name='$name', email='$email', password='$password', 
-    role_as='$role_as', image='$update_filename'  WHERE id='$category_id'";
+    $update_query = "UPDATE users SET name='$name', email='$email', password='$hashed_password', 
+    role_as='$role_as', image='$update_filename' WHERE id='$category_id'";
+    
     $update_query_run = mysqli_query($con, $update_query);
 
-    if($update_query_run)
-    {
-        if($_FILES['image']['name'] != "")
-        {
-            move_uploaded_file($_FILES['image']['tmp_name'], $path.'/'.$update_filename);
-            if(file_exists("../uploads/".$old_image))
-            {
-                unlink("../uploads/".$old_image);
+    if ($update_query_run) {
+        if ($_FILES['image']['name'] != "") {
+            move_uploaded_file($_FILES['image']['tmp_name'], $path . '/' . $update_filename);
+            if (file_exists("../uploads/" . $old_image)) {
+                unlink("../uploads/" . $old_image);
             }
         }
-        redirect("users.php?id=$category_id", "users Updated Successfully");
-
-    }
-    else
-    {
+        redirect("users.php?id=$category_id", "Users Updated Successfully");
+    } else {
         redirect("users.php", "Something Went Wrong");
-
     }
-
-
 }
+
+
 
 else if(isset($_POST['delete_user_btn']))
 {
