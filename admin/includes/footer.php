@@ -1,5 +1,10 @@
 
 <footer>
+<style>
+        thead {
+        background-color: #5DADE2;
+    }
+	</style>
 </footer>
 <link href="./css/style.css" rel="stylesheet">
 <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.14.0/build/alertify.min.js"></script>

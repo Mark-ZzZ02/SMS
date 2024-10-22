@@ -12,7 +12,7 @@ include('../middleware/adminMiddleware.php');
             </h4>
             <div class="table-responsive">
                 <table id="example" class="table table-striped table-hover mt-3">
-                    <thead class="table-light-blue">
+                    <thead c>
                         <tr>
                             <th class="text-center">STUDENT NUMBER</th>
                             <th class="text-center">NAME</th>

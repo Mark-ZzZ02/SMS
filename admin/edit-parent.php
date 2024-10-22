@@ -46,10 +46,17 @@ include('../middleware/adminMiddleware.php');
                                         <input type="text" name="next_action" value="<?= $data['next_action'] ?>" placeholder="Enter Contact" class="form-control" required>
                                     </div>
                                     <div class="col-md-3 mb-3">
-                                        <label for="case_status">MEETING STATUS</label>
-                                        <input type="text" name="case_status" value="<?= $data['case_status'] ?>" placeholder="Enter Status" class="form-control" required>
+                                       <label for="case_status">MEETING STATUS</label>
+                                        <select name="case_status" class="form-control" required>
+                                            <option value="">Select Status</option>
+                                            <option value="Scheduled" <?= $data['case_status'] === 'Scheduled' ? 'selected' : '' ?>>Scheduled</option>
+                                            <option value="Completed" <?= $data['case_status'] === 'Completed' ? 'selected' : '' ?>>Completed</option>
+                                            <option value="Cancelled" <?= $data['case_status'] === 'Cancelled' ? 'selected' : '' ?>>Cancelled</option>
+                                            <option value="Pending" <?= $data['case_status'] === 'Pending' ? 'selected' : '' ?>>Pending</option>
+                                            <option value="Rescheduled" <?= $data['case_status'] === 'Rescheduled' ? 'selected' : '' ?>>Rescheduled</option>
+                                        </select>
                                     </div>
-                                    <div class="col-md-3 mb-3">
+                                       <div class="col-md-3 mb-3">
                                         <label for="case_priority">NOTE</label>
                                         <input type="text" name="case_priority" value="<?= $data['case_priority'] ?>" placeholder="Enter Note" class="form-control" required>
                                     </div>

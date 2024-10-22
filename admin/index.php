@@ -4,67 +4,108 @@ include('includes/header.php');
 include('../middleware/adminMiddleware.php');
 
 ?>
-	<link href="./css/style1.css" rel="stylesheet">
+	<link href="./css/stylesec.css" rel="stylesheet">
+    <div class="home-content p-3">
+      <div class="overview-boxes">
+        <div class="box">
+          <div class="right-side">
+            <div class="box-topic">Total Student</div>
+            <?php
+                $dash_category_query = "SELECT * from categories";
+                $dash_category_query_run = mysqli_query($con, $dash_category_query);
 
-          <div class="users">
-            <div class="card">
-              <img src="./css/profile-icon.png">
-              <h4>REYMONDO</h4>
-              <p>Ui designer</p>
-              <div class="per">
-                <table>
-                  <tr>
-                    <td><span>85%</span></td>
-                    <td><span>87%</span></td>
-                  </tr>
-                  <tr>
-                    <td>Month</td>
-                    <td>Year</td>
-                  </tr>
-                </table>
-              </div>
-              <button>Profile</button>
+                if($category_total = mysqli_num_rows($dash_category_query_run))
+                {
+                  echo '<h4 class="number"> '.$category_total.'</h4>';
+                }
+                else
+                {
+                  echo '<h4 class="number"> 0 </h4>';
+                }
+
+            ?>
+            <div class="indicator">
+              <i class='bx bx-up-arrow-alt'></i>
+              <span class="text">Update</span>
             </div>
-            <div class="card">
-              <img src="./css/profile-icon.png">
-              <h4>ARJAY</h4>
-              <p>Progammer</p>
-              <div class="per">
-                <table>
-                  <tr>
-                    <td><span>82%</span></td>
-                    <td><span>85%</span></td>
-                  </tr>
-                  <tr>
-                    <td>Month</td>
-                    <td>Year</td>
-                  </tr>
-                </table>
-              </div>
-              <button>Profile</button>
-            </div>
-             <div class="card">
-              <img src="./css/profile-icon.png">
-              <h4>MARK EDWIN</h4>
-              <p>tester</p>
-              <div class="per">
-                <table>
-                  <tr>
-                    <td><span>94%</span></td>
-                    <td><span>92%</span></td>
-                  </tr>
-                  <tr>
-                    <td>Month</td>
-                    <td>Year</td>
-                  </tr>
-                </table>
-            </div>
-            <button>Profile</button>
+          </div>
+          <i class='bx bx-cart-alt cart'></i>
         </div>
-        <!-- Additional user cards can go here -->
-    </div>
+        <div class="box">
+          <div class="right-side">
+            <div class="box-topic">Active case</div>
+            <?php
+                $dash_category_active_query = "SELECT * from categories WHERE completion_status='open' ";
+                $dash_category_active_query_run = mysqli_query($con, $dash_category_active_query);
 
-    <div class="attendance">
+                if($categoryActive_total = mysqli_num_rows($dash_category_active_query_run))
+                {
+                  echo '<h4 class="number"> '.$categoryActive_total.'</h4>';
+                }
+                else
+                {
+                  echo '<h4 class="number"> 0 </h4>';
+                }
+
+            ?>
+            <div class="indicator">
+              <i class='bx bx-up-arrow-alt'></i>
+              <span class="text">Update</span>
+            </div>
+          </div>
+          <i class='bx bxs-cart-add cart two' ></i>
+        </div>
+        <div class="box">
+          <div class="right-side">
+            <div class="box-topic">UnderInvestigation</div>
+            <?php
+                $dash_category_investigation_query = "SELECT * from categories WHERE completion_status='Under_Investigation' ";
+                $dash_category_investigation_query_run = mysqli_query($con, $dash_category_investigation_query);
+
+                if($categoryinvestigation_total = mysqli_num_rows($dash_category_investigation_query_run))
+                {
+                  echo '<h4 class="number"> '.$categoryinvestigation_total.'</h4>';
+                }
+                else
+                {
+                  echo '<h4 class="number"> 0 </h4>';
+                }
+
+            ?>
+            <div class="indicator">
+              <i class='bx bx-up-arrow-alt'></i>
+              <span class="text">Update</span>
+            </div>
+          </div>
+          <i class='bx bx-cart cart three' ></i>
+        </div>
+        <div class="box">
+          <div class="right-side">
+            <div class="box-topic">closed Case</div>
+            <?php
+                $dash_category_closed_query = "SELECT * from categories WHERE completion_status='closed' ";
+                $dash_category_closed_query_run = mysqli_query($con, $dash_category_closed_query);
+
+                if($categoryclosed_total = mysqli_num_rows($dash_category_closed_query_run))
+                {
+                  echo '<h4 class="number"> '.$categoryclosed_total.'</h4>';
+                }
+                else
+                {
+                  echo '<h4 class="number"> 0 </h4>';
+                }
+
+            ?>
+            <div class="indicator">
+              <i class='bx bx-down-arrow-alt down'></i>
+              <span class="text">Update</span>
+            </div>
+          </div>
+          <i class='bx bxs-cart-download cart four' ></i>
+        </div>
+      </div>
+
+      <div class="attendance">
         <div class="attendance-list">
             <h4 class="d-flex justify-content-between align-items-center">
                 USER LIST             </h4>
@@ -74,7 +115,6 @@ include('../middleware/adminMiddleware.php');
                         <tr>
                             <th class="text-center">NAME</th>
                             <th class="text-center">EMAIL</th>
-                            <th class="text-center">DATE CREATED</th>
                         </tr>
                     </thead>
                     <tbody id="tbl_tbody">
@@ -87,7 +127,6 @@ include('../middleware/adminMiddleware.php');
                                     <tr>
                                         <td class="text-center"><?= $item['name']; ?></td>
                                         <td class="text-center"><?= $item['email']; ?></td>
-                                        <td class="text-center"><?= $item['create_at']; ?></td>
                                                         </form>
                                                     </li>
                                                 </ul>
@@ -105,7 +144,8 @@ include('../middleware/adminMiddleware.php');
             </div>
         </div>
     </div>
-</section>
+
+    
 
 
-<?php include('includes/footer.php');?>
+<?php include('includes/footer.php');?><?php 

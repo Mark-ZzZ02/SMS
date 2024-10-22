@@ -30,6 +30,7 @@ session_start(); ?>
 		}
 	}
 	</script>
+	
 	</head>
     <main>
     <?php include('sidebar.php'); ?>

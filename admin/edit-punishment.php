@@ -64,8 +64,6 @@ include('../middleware/adminMiddleware.php');
                                         <option value="open" <?= $data['completion_status'] === 'open' ? 'selected' : '' ?>>Open</option>
                                         <option value="under_investigation" <?= $data['completion_status'] === 'under_investigation' ? 'selected' : '' ?>>Under Investigation</option>
                                         <option value="closed" <?= $data['completion_status'] === 'closed' ? 'selected' : '' ?>>Closed</option>
-                                        <option value="on_hold" <?= $data['completion_status'] === 'on_hold' ? 'selected' : '' ?>>On Hold</option>
-                                        <option value="resolved" <?= $data['completion_status'] === 'resolved' ? 'selected' : '' ?>>Resolved</option>
                                     </select>
                                     </div>
                                     <div class="col-md-4 mb-3">

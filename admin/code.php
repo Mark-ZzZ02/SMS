@@ -131,7 +131,7 @@ else if(isset($_POST['update_category_btn']))
                 unlink("../uploads/".$old_image);
             }
         }
-        redirect("category.php?id=$category_id", "Student Updated Successfully");
+        redirect("category.php?id=$category_id", "Student Upadated Successfully");
 
     }
     else

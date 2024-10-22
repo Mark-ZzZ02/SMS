@@ -14,7 +14,7 @@ include('../middleware/adminMiddleware.php');
             </h4>
             <div class="table-responsive">
                 <table id="example" class="table table-striped table-hover mt-3">
-                    <thead class="table-light-blue">
+                    <thead>
                         <tr>
                             <th class="text-center">NAME</th>
                             <th class="text-center">EMAIL</th>
