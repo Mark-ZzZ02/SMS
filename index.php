@@ -1,115 +1,76 @@
 <?php 
 session_start();
-include('includes/header.php') ?>
+include('includes/header.php');
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <?php include './layout/head_login.php' ?>
+
 <style>
-  
-body {
-  
-  
-  font-family: "Times New Roman", Times, serif;
-    line-height: 1.6;
+.btn-success {
+    background-color: #28a745;
+    border-color: #28a745;
 }
 
-.hero-image {
-  background: url('11.jpg') no-repeat center center/cover;
-  
-
-    color: white;
-    height: 110vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-}
-.hero-image1 {
-  background:no-repeat center center/cover;
-  
-   
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-}
-
-.hero-text {
-  text-align: center;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  text-shadow: 0 0 30px;
-  
-  color: #FFF9E3;
-}
-
-.hero-text button {
-  border: none;
-  outline: 0;
-  display: inline-block;
-  padding: 10px 25px;
-  color: black;
-  background-color: #ddd;
-  text-align: center;
-  cursor: pointer;
-}
-
-footer {
-  
-    background:#024bde;
-    color: white;
-    text-align:right;
-    padding: 1rem 0;
-    margin-top: 0px;
+.btn-success:hover {
+    background-color: #218838;
+    border-color: #1e7e34;
 }
 
 
-.hero-text button:hover {
-  background-color: #273be2;
-  color: white;
+.container {
+    max-width: 400px; /* Limit the max width */
 }
 
-    hr {
-        position: relative;
-        top: 20px;
-        border: none;
-        height: 12px;
-        background: black;
-        margin-bottom: 50px;
-    }
+
 </style>
+
 <body>
+<div class="container-fluid p-6 text-white text-center"></div>
 
-<div class="hero-image">
-  <div class="hero-text">
-   <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br>
-    <h1 style="font-size:50px">WELCOME TO PREFECT</h1>
-    
-    <a href="login.php "><button>LOGIN</button></a> <br> 
-   <th colspan="4"><marquee> BESLINK COLLEGE OF THE PHILIPPINES </marquee></th>
-  </div>
-</div>
+<div class="container mt-3 p-4 shadow rounded-4 bg-white text-black">
+    <div class="d-flex justify-content-center align-items-center mb-3">
+        <img src="./css/bcp_logo.png" alt="Logo" class="logo">
+    </div>
+    <div class="text-center mb-3">
+        <h2>Sign in</h2>
+    </div>
 
-
-
-<footer>
-<div class="hero-image1">
-<img src="bc1.jpg"  width="350" height="250">
-<img src="bc2.jpg"  width="350" height="250">
-<img src="bc3.jpg"  width="350" height="250">
-<img src="bc4.jpg"  width="350" height="250">
-
-
-          <center>  <p>prefect.schoolmanagementsystem2.com</p> </center>
+    <?php 
+    if (isset($_SESSION['message'])) {
+        ?> 
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            <strong>Hey!</strong> <?= $_SESSION['message']; ?>.
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
-    </footer>
-    
+        <?php
+        unset($_SESSION['message']);
+    }
+    ?>
 
+    <form action="functions/autocode.php" method="POST" class="py-2">
+        <div class="mb-3">
+            <label for="email">Email:</label>
+            <input type="email" class="form-control" placeholder="Enter email" id="txt_username" name="email" required aria-label="Email">
+        </div>
+        <div class="mb-3">
+            <label for="pwd">Password:</label>
+            <input type="password" class="form-control" placeholder="Enter password" id="txt_password" name="password" required aria-label="Password">
+        </div>
+
+        <span class="text-danger fw-bold d-none" id="span_error">Error: Username and Password</span>
+
+        <button type="submit" name="login_btn" class="btn btn-primary w-100">Login</button>
+        
+        <div class="text-center mt-3">
+            <a class="btn btn-success w-100" href="create_account.php">Create Account</a>
+        </div>
+    </form>
+</div>
 </body>
 </html>
-    
+
 
 
 <?php include('includes/footer.php') ?>
-

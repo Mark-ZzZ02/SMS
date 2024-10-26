@@ -8,11 +8,46 @@ include('../middleware/adminMiddleware.php');
     <div class="row">
         <div class="col-md-12 p-4 shadow rounded bg-light">
             <div class="d-flex justify-content-between align-items-center mb-3">
-                <h4>STUDENT CASE LIST</h4>
-                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myModal">Add Case</button>
+                <h4>MONTHLY REPORTS</h4>
+            </div>
+            <div class="d-flex align-items-center mb-3">
+                <form action="" method="GET" class="d-flex">
+                    <select name="month" class="form-select me-2" style="min-width: 120px;">
+                        <option value="">Select Month</option>
+                        <?php
+                        // Generate month options
+                        for ($m = 1; $m <= 12; $m++) {
+                            $selected = (isset($_GET['month']) && $_GET['month'] == $m) ? 'selected' : '';
+                            echo "<option value='$m' $selected>" . date('F', mktime(0, 0, 0, $m, 1)) . "</option>";
+                        }
+                        ?>
+                    </select>
+                    <select name="year" class="form-select me-2" style="min-width: 120px;">
+                        <option value="">Select Year</option>
+                        <?php
+                        // Generate year options (you can adjust the range as needed)
+                        for ($y = date('Y'); $y >= 2000; $y--) {
+                            $selected = (isset($_GET['year']) && $_GET['year'] == $y) ? 'selected' : '';
+                            echo "<option value='$y' $selected>$y</option>";
+                        }
+                        ?>
+                    </select>
+                    <select name="completion_status" class="form-select me-2" style="min-width: 200px;">
+                        <option value="">Select Status</option>
+                        <option value="Open" <?= isset($_GET['completion_status']) && $_GET['completion_status'] == 'Open' ? 'selected' : '' ?>>Open</option>
+                        <option value="Under_investigation" <?= isset($_GET['completion_status']) && $_GET['completion_status'] == 'Under_investigation' ? 'selected' : '' ?>>Under Investigation</option>
+                        <option value="Closed" <?= isset($_GET['completion_status']) && $_GET['completion_status'] == 'Closed' ? 'selected' : '' ?>>Closed</option>
+                    </select>
+                    <select name="offense_type" class="form-select me-2" style="min-width: 200px;">
+                        <option value="">Select Offense Type</option>
+                        <option value="Minor" <?= isset($_GET['offense_type']) && $_GET['offense_type'] == 'Minor' ? 'selected' : '' ?>>Minor</option>
+                        <option value="Major" <?= isset($_GET['offense_type']) && $_GET['offense_type'] == 'Major' ? 'selected' : '' ?>>Major</option>
+                    </select>
+                    <button type="submit" class="btn btn-primary">Filter</button>
+                </form>
             </div>
             <div class="table-responsive">
-                <table id="example" class="table table-striped table-hover mt-3">
+                <table class="table table-striped table-hover mt-3">
                     <thead>
                         <tr>
                             <th class="text-center">STUDENT NUMBER</th>
@@ -31,7 +66,26 @@ include('../middleware/adminMiddleware.php');
                     <tbody id="offenseTableBody">
                         <?php
                         // Ensure you have a valid database connection $con
-                        $category = mysqli_query($con, "SELECT * FROM categories ORDER BY id DESC");
+                        $whereClauses = [];
+                        if (isset($_GET['month']) && $_GET['month'] != '') {
+                            $month = validate($_GET['month']);
+                            $whereClauses[] = "MONTH(date_added) = '$month'";
+                        }
+                        if (isset($_GET['year']) && $_GET['year'] != '') {
+                            $year = validate($_GET['year']);
+                            $whereClauses[] = "YEAR(date_added) = '$year'";
+                        }
+                        if (isset($_GET['completion_status']) && $_GET['completion_status'] != '') {
+                            $completion_status = validate($_GET['completion_status']);
+                            $whereClauses[] = "completion_status='$completion_status'";
+                        }
+                        if (isset($_GET['offense_type']) && $_GET['offense_type'] != '') {
+                            $offense_type = validate($_GET['offense_type']);
+                            $whereClauses[] = "offense_type='$offense_type'";
+                        }
+
+                        $whereSQL = count($whereClauses) > 0 ? 'WHERE ' . implode(' AND ', $whereClauses) : '';
+                        $category = mysqli_query($con, "SELECT * FROM categories $whereSQL ORDER BY id DESC");
 
                         if (mysqli_num_rows($category) > 0) {
                             foreach ($category as $item) {
@@ -40,7 +94,7 @@ include('../middleware/adminMiddleware.php');
                                     <td class="text-center"><?= htmlspecialchars($item['student_id']); ?></td>
                                     <td class="text-center"><?= htmlspecialchars($item['name']); ?></td>
                                     <td class="text-center"><?= htmlspecialchars($item['offense_id']); ?></td>
-                                    <td class="text-center"><?= htmlspecialchars($item['offense_type']); ?></td> <!-- New cell for offense type -->
+                                    <td class="text-center"><?= htmlspecialchars($item['offense_type']); ?></td>
                                     <td class="text-center"><?= htmlspecialchars($item['case_id']); ?></td>
                                     <td class="text-center"><?= htmlspecialchars($item['date_added']); ?></td>
                                     <td class="text-center"><?= htmlspecialchars($item['investigation_notes']); ?></td>
@@ -69,7 +123,7 @@ include('../middleware/adminMiddleware.php');
                                 <?php
                             }
                         } else {
-                            echo "<tr><td colspan='11' class='text-center'>No records found</td></tr>"; // Updated colspan to 11
+                            echo "<tr><td colspan='10' class='text-center'>No records found</td></tr>";
                         }
                         ?>
                     </tbody>
@@ -78,71 +132,5 @@ include('../middleware/adminMiddleware.php');
         </div>
     </div>
 </div>
-
-
-<!-- INSERT -->
-
-<div class="modal" id="myModal">
-  <div class="modal-dialog">
-    <div class="modal-content">
-
-      <!-- Modal Header -->
-      <div class="modal-header">
-        <h4 class="modal-title">ADD CASE</h4>
-        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-      </div>
-
-      <!-- Modal body -->
-      <div class="modal-body">
-        <div class="container mt-2">
-          <form action="code.php" method="POST" enctype="multipart/form-data">
-            <div class="row">
-              <div class="col-md-6">
-                <label for="">STUDENT NUMBER</label>
-                <input type="number" name="student_id" placeholder="Enter Student number" class="form-control" required>
-              </div>
-              <div class="col-md-6">
-                <label for="">NAME</label>
-                <input type="text" name="name" placeholder="Enter Name" class="form-control" required>
-              </div>
-              <div class="col-md-6">
-                <label for="offenseType">OFFENSE</label>
-                <select name="offense_id" class="form-control" id="offenseType" onchange="toggleCustomOffense()" required>
-                  <option value="" disabled selected>Select Offense</option>
-                  <option value="theft">Theft</option>
-                  <option value="assault">Assault</option>
-                  <option value="burglary">Burglary</option>
-                  <option value="fraud">Fraud</option>
-                  <option value="vandalism">Vandalism</option>
-                  <option value="drug_offense">Drug Offense</option>
-                  <option value="other">Other</option>
-                </select>
-                <input type="text" name="custom_offense" id="customOffense" placeholder="Enter Custom Offense" class="form-control mt-2" style="display: none;" oninput="updateOffenseValue()">
-              </div>
-              <div class="col-md-6">
-                <label for="offenseType">OFFENSE TYPE</label>
-                <select name="offense_type" class="form-control" required>
-                  <option value="" disabled selected>Select Offense Type</option>
-                  <option value="major">Major</option>
-                  <option value="minor">Minor</option>
-                </select>
-              </div>
-              <div class="col-md-6">
-                <label for="">CASE ID</label>
-                <input type="text" name="case_id" placeholder="Enter Case" class="form-control" required>
-              </div>
-              <div class="col-md-12 mt-2">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="submit" class="btn btn-primary" name="add_categoryy_btn">Save</button>
-              </div>
-            </div>
-          </form>
-          <div id="responseMessage" class="mt-3"></div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
 
 <?php include('includes/footer.php');?>

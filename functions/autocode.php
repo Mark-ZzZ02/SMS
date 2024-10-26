@@ -26,7 +26,7 @@ if (isset($_POST['register_btn'])) {
 
             if ($insert_query_run) {
                 $_SESSION['message'] = "Registered Successfully";
-                header('Location: ../login.php');
+                header('Location: ../index.php');
             } else {
                 $_SESSION['message'] = "Something went wrong";
                 header('Location: ../create_account.php');
@@ -66,22 +66,27 @@ else if(isset($_POST['login_btn']))
             $_SESSION['role_as'] = $role_as;
 
             $_SESSION['message'] = "Welcome to Dashboard";
+
+            // Check user role and redirect accordingly
             if ($role_as == 1) {
                 header('Location: ../admin/index.php');
-            } else {
+            } elseif ($role_as == 2) {
                 header('Location: ../staff/index.php');
+            } else {
+                header('Location: ../validation/index.php'); 
             }
             exit();
         } else {
             $_SESSION['message'] = "Invalid email or password";
-            header('Location: ../login.php');
+            header('Location: ../index.php');
             exit();
         }
     } else {
         $_SESSION['message'] = "Invalid email or password";
-        header('Location: ../login.php');
+        header('Location: ../index.php');
         exit();
     }
 }
+
 
 ?>

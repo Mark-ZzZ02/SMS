@@ -76,11 +76,6 @@ if(isset($_SESSION['auth'])) {
                     <a class="nav-link" href="monthly_reports.php" style="color: #e0e0e0; padding: 5px 20px;">Monthly Reports</a>
                 </div>
             </li>
-            <li class="nav-item mb-1">
-                <a class="nav-link d-flex align-items-center rounded" href="users.php">
-                    <i class="fas fa-user-edit" style="margin-right: 12px;"></i> USER ACCOUNTS
-                </a>
-            </li>
         </ul>
     </div>
 </div>
