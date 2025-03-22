@@ -20,7 +20,7 @@ include('includes/header.php');
 
 
 .container {
-    max-width: 400px; /* Limit the max width */
+    max-width: 400px;
 }
 
 
