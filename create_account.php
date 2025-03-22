@@ -11,8 +11,6 @@ include('includes/header.php');
 .btn-success {
     background-color: #28a745;
     border-color: #28a745;
-	color: white;
-  font-size: 1.5rem;
 }
 
 .btn-success:hover {

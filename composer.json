@@ -1,0 +1,6 @@
+{
+    "require": {
+        "guzzlehttp/guzzle": "^7.9"
+        "geminiapi/client": "latest_version"
+    }
+}
