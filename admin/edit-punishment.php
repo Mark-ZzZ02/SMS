@@ -8,7 +8,7 @@ include('../middleware/adminMiddleware.php');
     <div class="row">
         <div class="col-md-12 p-4 shadow" style="background-image: linear-gradient( #ccffff, #e6ffe6, #ffffcc);">
             <?php
-            if (isset($_GET['id'])) {
+            if (isset($_GET['idaaa'])) {
                 $id = $_GET['id'];
                 $category = getByID("categories", $id);
                 if (mysqli_num_rows($category) > 0) {
@@ -21,7 +21,7 @@ include('../middleware/adminMiddleware.php');
                                     <table class="table table-bordered">
                                         <tr>
                                             <td>
-                                                <input type="hidden" name="category_id" value="<?= $data['id'] ?>">
+                                                <input type="hidden" name="category_idaa" value="<?= $data['id'] ?>">
                                                 <label for="student_id">STUDENT ID</label>
                                                 <input type="text" name="student_id" value="<?= $data['student_id'] ?>" class="form-control" readonly required>
                                             </td>

@@ -210,7 +210,7 @@ if ($conferenceResult) {
 
             <div class="box">
                 <div class="right-side">
-                    <div class="box-topic">Total Casesssssssssssss</div>
+                    <div class="box-topic">Total Cases</div>
                     <?php
                         $dash_category_query = "SELECT * from categories";
                         $dash_category_query_run = mysqli_query($con, $dash_category_query);
