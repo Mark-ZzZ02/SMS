@@ -157,53 +157,84 @@ else if (isset($_POST['update_punishment_btn'])) {
 }
 
 
-
-else if(isset($_POST['delete_category_btn']))
-{
+else if (isset($_POST['delete_category_btn']) || isset($_POST['delete_punishment_btn'])) {
     $category_id = mysqli_real_escape_string($con, $_POST['category_id']);
+    $deletion_reason = mysqli_real_escape_string($con, $_POST['deletion_reason']);  
+
     $category_query = "SELECT * FROM categories WHERE id='$category_id'";
     $category_query_run = mysqli_query($con, $category_query);
     $category_data = mysqli_fetch_array($category_query_run);
     $image = $category_data['image'];
 
-    $delete_query = "DELETE FROM categories WHERE id='$category_id' ";
-    $delete_query_run = mysqli_query($con, $delete_query);
+    $insert_trash = "INSERT INTO trash_bin (student_id, surname, first_name, case_id, offense_type, statement, image, deletion_reason)
+                     VALUES ('{$category_data['student_id']}', '{$category_data['surname']}', '{$category_data['first_name']}', 
+                             '{$category_data['case_id']}', '{$category_data['offense_type']}', '{$category_data['statement']}', 
+                             '$image', '$deletion_reason')";
+    $insert_trash_run = mysqli_query($con, $insert_trash);
 
-    if($delete_query_run)
-    {
-        if(file_exists("../uploads/".$image))
-        {
-            unlink("../uploads/".$image);
+    if ($insert_trash_run) {
+        $delete_query = "DELETE FROM categories WHERE id='$category_id'";
+        $delete_query_run = mysqli_query($con, $delete_query);
+
+        if ($delete_query_run) {
+            if (file_exists("../uploads/".$image)) {
+                unlink("../uploads/".$image);
+            }
+            redirect("category.php", "Category Deleted Successfully and Moved to Trash");
+        } else {
+            redirect("category.php", "Something Went Wrong During Deletion");
         }
-        redirect("category.php", "Category Deleted Successfully");
-    }
-    else
-    {
-        redirect("category.php", "Something Went Wrong");
+    } else {
+        redirect("category.php", "Failed to Move to Trash Bin");
     }
 }
-else if(isset($_POST['delete_punishment_btn']))
-{
+else if (isset($_POST['restore_category_btn'])) {
     $category_id = mysqli_real_escape_string($con, $_POST['category_id']);
-    $category_query = "SELECT * FROM categories WHERE id='$category_id'";
-    $category_query_run = mysqli_query($con, $category_query);
-    $category_data = mysqli_fetch_array($category_query_run);
-    $image = $category_data['image'];
 
-    $delete_query = "DELETE FROM categories WHERE id='$category_id' ";
-    $delete_query_run = mysqli_query($con, $delete_query);
+    $trash_query = "SELECT * FROM trash_bin WHERE id='$category_id'";
+    $trash_query_run = mysqli_query($con, $trash_query);
+    $trash_data = mysqli_fetch_array($trash_query_run);
 
-    if($delete_query_run)
-    {
-        if(file_exists("../uploads/".$image))
-        {
-            unlink("../uploads/".$image);
+    $restore_query = "INSERT INTO categories (student_id, surname, first_name, case_id, offense_type, statement, image)
+                      VALUES ('{$trash_data['student_id']}', '{$trash_data['surname']}', '{$trash_data['first_name']}', 
+                              '{$trash_data['case_id']}', '{$trash_data['offense_type']}', '{$trash_data['statement']}', 
+                              '{$trash_data['image']}')";
+    $restore_query_run = mysqli_query($con, $restore_query);
+
+    if ($restore_query_run) {
+        $delete_from_trash = "DELETE FROM trash_bin WHERE id='$category_id'";
+        $delete_from_trash_run = mysqli_query($con, $delete_from_trash);
+
+        if ($delete_from_trash_run) {
+            redirect("trash_bin.php", "Record Restored Successfully");
+        } else {
+            redirect("trash_bin.php", "Failed to remove from Trash Bin");
         }
-        redirect("punishment.php", "Punishment Deleted Successfully");
-    }
-    else
-    {
-        redirect("punishment.php", "Something Went Wrong");
+    } else {
+        redirect("trash_bin.php", "Failed to restore the record");
     }
 }
+else if (isset($_POST['permanent_delete_btn'])) {
+    $category_id = mysqli_real_escape_string($con, $_POST['category_id']);
+
+    $trash_query = "SELECT * FROM trash_bin WHERE id='$category_id'";
+    $trash_query_run = mysqli_query($con, $trash_query);
+    $trash_data = mysqli_fetch_array($trash_query_run);
+    $image = $trash_data['image'];
+
+    $permanent_delete_query = "DELETE FROM trash_bin WHERE id='$category_id'";
+    $permanent_delete_query_run = mysqli_query($con, $permanent_delete_query);
+
+    if ($permanent_delete_query_run) {
+        if (file_exists("../uploads/" . $image)) {
+            unlink("../uploads/" . $image);
+        }
+        redirect("trash_bin.php", "Record Permanently Deleted");
+    } else {
+        redirect("trash_bin.php", "Failed to Permanently Delete Record");
+    }
+}
+
+
+
 ?>

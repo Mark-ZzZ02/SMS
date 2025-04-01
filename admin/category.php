@@ -1,8 +1,6 @@
 <?php 
-
 include('includes/header.php');
 include('../middleware/adminMiddleware.php');
-
 ?>
 <div class="container mt-5">
     <div class="row">
@@ -23,7 +21,6 @@ include('../middleware/adminMiddleware.php');
                             <th class="text-center">COMPLETION DATE</th>
                             <th class="text-center">WARNING STAGE</th>
                             <th class="text-center">ACTION</th>
-
                         </tr>
                     </thead>
                     <tbody id="offenseTableBody">
@@ -76,10 +73,7 @@ include('../middleware/adminMiddleware.php');
                                                     <a class="dropdown-item text-primary" href="edit-category.php?id=<?= $item['id']; ?>">Update</a>
                                                 </li>
                                                 <li>
-                                                    <form action="code.php" method="POST" class="d-inline">
-                                                        <input type="hidden" name="category_id" value="<?= $item['id']; ?>">
-                                                        <button type="submit" class="dropdown-item text-danger" name="delete_category_btn" onclick="return confirm('Are you sure you want to delete this case?');">Delete</button>
-                                                    </form>
+                                                    <a class="dropdown-item text-danger" href="#" data-bs-toggle="modal" data-bs-target="#deletionModal" onclick="setCategoryId(<?= $item['id']; ?>)">Delete</a>
                                                 </li>
                                             </ul>
                                         </div>
@@ -98,75 +92,35 @@ include('../middleware/adminMiddleware.php');
     </div>
 </div>
 
-
-
-
-<!-- INSERT -->
-
-<div class="modal" id="myModal">
-  <div class="modal-dialog">
-    <div class="modal-content">
-
-      <!-- Modal Header -->
-      <div class="modal-header">
-        <h4 class="modal-title">ADD CASE</h4>
-        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-      </div>
-
-      <!-- Modal body -->
-      <div class="modal-body">
-        <div class="container mt-2">
-          <form action="code.php" method="POST" enctype="multipart/form-data">
-            <div class="row">
-              <div class="col-md-6">
-                <label for="">STUDENT NUMBER</label>
-                <input type="number" name="student_id" placeholder="Enter Student Number" class="form-control" required>
-              </div>
-              <div class="col-md-6">
-                <label for="">NAME</label>
-                <input type="text" name="name" placeholder="Enter Name" class="form-control" required>
-              </div>
-              <div class="col-md-6">
-                <label for="">PROGRAM</label>
-                <input type="text" name="program" placeholder="Enter Program" class="form-control" required>
-              </div>
-              <div class="col-md-6">
-                <label for="">SECTION</label>
-                <input type="text" name="section" placeholder="Enter Section" class="form-control" required>
-              </div>
-              <div class="col-md-6">
-                <label for="">MAJOR</label>
-                <input type="text" name="major" placeholder="Enter Major" class="form-control" required>
-              </div>
-              <div class="col-md-6">
-                <label for="">EMAIL</label>
-                <input type="email" name="sms_email" placeholder="Enter Email" class="form-control" required>
-              </div>
-              <div class="col-md-6">
-                <label for="">YEAR</label>
-                <input type="text" name="year_level" placeholder="Enter Year Level" class="form-control" required>
-              </div>
-              <div class="col-md-12">
-                <label for="">STATEMENT</label>
-                <textarea name="statement" placeholder="Enter Statement" class="form-control" required></textarea>
-              </div>
-              <div class="col-md-6">
-                <label for="">CASE ID</label>
-                <input type="text" name="case_id" placeholder="Enter Case ID" class="form-control" required>
-              </div>
-              <div class="col-md-12 mt-2">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="submit" class="btn btn-primary" name="add_category_btn">Save</button>
-              </div>
+<!-- Deletion Confirmation Modal -->
+<div class="modal fade" id="deletionModal" tabindex="-1" aria-labelledby="deletionModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="deletionModalLabel">Provide Reason for Deletion</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-          </form>
-          <div id="responseMessage" class="mt-3"></div>
+            <div class="modal-body">
+                <form id="deleteReasonForm" action="code.php" method="POST">
+                    <input type="hidden" name="category_id" id="category_id">
+                    <div class="mb-3">
+                        <label for="deletion_reason" class="form-label">Reason for deletion</label>
+                        <textarea class="form-control" id="deletion_reason" name="deletion_reason" rows="3" required></textarea>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                        <button type="submit" class="btn btn-danger" name="delete_category_btn">Delete</button>
+                    </div>
+                </form>
+            </div>
         </div>
-      </div>
     </div>
-  </div>
 </div>
 
+<?php include('includes/footer.php'); ?>
 
-
-<?php include('includes/footer.php');?>
+<script>
+    function setCategoryId(id) {
+        document.getElementById('category_id').value = id;
+    }
+</script>

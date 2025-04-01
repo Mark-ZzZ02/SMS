@@ -110,6 +110,11 @@ if(isset($_SESSION['auth'])) {
                 </a>
             </li>
             <li class="nav-item mb-1">
+                    <a class="nav-link d-flex align-items-center rounded" href="registrar.php">
+                        <i class="fas fa-user-check" style="margin-right: 12px;"></i> ADD CASE
+                    </a>
+                </li>
+            <li class="nav-item mb-1">
                 <a class="nav-link d-flex align-items-center rounded" href="category.php">
                     <i class="fas fa-clipboard-list" style="margin-right: 12px;"></i> STUDENT TRACKING
                 </a>
@@ -129,12 +134,12 @@ if(isset($_SESSION['auth'])) {
                     <i class="fas fa-file-alt" style="margin-right: 12px;"></i> REPORTS
                 </a>
             </li>
+            <li class="nav-item mb-1">
+                <a class="nav-link d-flex align-items-center rounded" href="trash_bin.php">
+                    <i class="fas fa-trash-alt" style="margin-right: 12px;"></i> TRASH BIN
+                </a>
+            </li>
             <li class="nav-item mb-1 nav-header">INTEGRATIONS</li>
-                <li class="nav-item mb-1">
-                    <a class="nav-link d-flex align-items-center rounded" href="registrar.php">
-                        <i class="fas fa-user-check" style="margin-right: 12px;"></i> REGISTRAR
-                    </a>
-                </li>
                 <li class="nav-item mb-1">
                     <a class="nav-link d-flex align-items-center rounded" href="guidance.php">
                         <i class="fas fa-comments" style="margin-right: 12px;"></i> GUIDANCE

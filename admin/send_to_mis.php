@@ -7,18 +7,17 @@ $data = json_decode(file_get_contents('php://input'), true);
 
 if ($data) {
     $host = '157.173.111.118';
-    $db = '	mis_db2'; //receiver's database
-    $username = 'mis_root2';//receiver's username
-    $password = 'root';//receiver's password
+    $db = '	mis_db2'; 
+    $username = 'mis_root2';
+    $password = 'root';
 
-    // Create connection to MIS DB
     $conn = new mysqli($host, $username, $password, $db);
 
     if ($conn->connect_error) {
         die("Connection failed: " . $conn->connect_error);
     }
 
-    // Prepare and bind
+
     $stmt = $conn->prepare("INSERT INTO students (first_name, last_name, email, course) VALUES (?, ?, ?, ?)");
     $stmt->bind_param("ssss", $data['first_name'], $data['last_name'], $data['email'], $data['course']);
 

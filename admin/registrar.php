@@ -2,19 +2,17 @@
 include('includes/header.php');
 include('../middleware/adminMiddleware.php');
 
-// Fetch data from API (instead of DB)
-$apiUrl = 'https://mis.schoolmanagementsystem2.com/mis_api.php'; // MIS API URL
+$apiUrl = 'https://mis.schoolmanagementsystem2.com/mis_api.php'; 
 $response = file_get_contents($apiUrl);
-$students = json_decode($response, true); // Decode JSON response to array
+$students = json_decode($response, true); 
 
-// Function to send data to the MIS system
 function sendDataToMis($data) {
-    $url = 'https://prefect.schoolmanagementsystem2.com/send_to_mis.php'; // MIS API URL
+    $url = 'https://prefect.schoolmanagementsystem2.com/send_to_mis.php'; 
 
     $ch = curl_init($url);
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
     curl_setopt($ch, CURLOPT_POST, true);
-    curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($data)); // Send data as JSON
+    curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($data)); 
     curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json'));
 
     $response = curl_exec($ch);
@@ -32,7 +30,7 @@ function sendDataToMis($data) {
     <div class="row">
         <div class="col-md-12 p-4 shadow rounded bg-light" style="background-image: linear-gradient( #ccffff, #e6ffe6, #ffffcc);">
             <div class="d-flex justify-content-between align-items-center mb-3">
-                <h4>REGISTRAR</h4>
+                <h4>ADD CASE</h4>
             </div>
             <div class="table-responsive">
                 <table id="example" class="table table-striped table-hover mt-3">
