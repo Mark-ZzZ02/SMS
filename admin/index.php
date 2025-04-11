@@ -67,6 +67,21 @@ if ($conferenceResult) {
     echo "Error fetching conference schedules: " . mysqli_error($con);
     $conferences = [];
 }
+
+// Upcoming conference schedules
+$conferenceQuery = "SELECT student_id, surname, first_name, parent_name, date_meeting, case_status 
+                    FROM categories 
+                    WHERE date_meeting >= CURDATE() 
+                    ORDER BY date_meeting ASC";
+$conferenceResult = mysqli_query($con, $conferenceQuery);
+$conferences = [];
+if ($conferenceResult) {
+    while ($row = mysqli_fetch_assoc($conferenceResult)) {
+        $conferences[] = $row;
+    }
+} else {
+    echo "Error fetching conference schedules: " . mysqli_error($con);
+}
 ?>
 
 <!DOCTYPE html>
@@ -107,12 +122,6 @@ if ($conferenceResult) {
         .indicator .bx {
             margin-right: 5px;
         }
-        .chart-container {
-        display: flex;
-        justify-content: space-between; 
-        gap: 20px;
-        margin-top: 30px;
-    }
 
     .pie-charts {
         display: flex;
@@ -128,7 +137,6 @@ if ($conferenceResult) {
 
     .conference-schedules-box {
         background-color: #fff;
-        display: flex;
         padding: 20px;
         border-radius: 8px;
         box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
@@ -136,6 +144,11 @@ if ($conferenceResult) {
         height: 820px; 
         overflow-y: auto;
         flex: 0 0 48%; 
+    }
+
+    .conference-schedules-box ul li:hover {
+        transform: scale(1.05);
+        cursor: pointer;
     }
 
     .conference-schedules-box .box-topic {
@@ -159,6 +172,10 @@ if ($conferenceResult) {
         .chart-full {
             width: 100%;
             margin-top: 30px;
+            background-color: #fff;
+            border-radius: 12px;
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+            padding: 15px;
         }
 
         .minor-major-grave {
@@ -200,12 +217,39 @@ if ($conferenceResult) {
         .indicator .bx {
             margin-right: 5px;
         }
+        
+        .status-badge {
+            display: inline-block;
+            padding: 3px 6px;
+            border-radius: 5px;
+            font-size: 0.9rem;
+            font-weight: bold;
+            color: #fff;
+        }
+
+        .status-pending {
+            background-color: #ff6666; /* orange */
+        }
+
+        .status-ongoing {
+            background-color: #ffd540; /* blue */
+            color: #333;
+        }
+
+        .status-closed {
+            background-color: #0d6cf6; /* green */
+        }
+
+        .status-default {
+            background-color: #777; /* fallback gray */
+        }
+
     </style>
 </head>
 <body>
 
 
-    <div class="home-content p-3" style="background-image: linear-gradient( #ccffff, #e6ffe6, #ffffcc); " >
+    <div class="home-content p-5" style="background-image: linear-gradient( #ccffff, #e6ffe6, #ffffcc); " >
         <div class="overview-boxes">
 
             <div class="box">
@@ -295,20 +339,41 @@ if ($conferenceResult) {
                 </div>
             </div>
 
-             <div class="conference-schedules-box">
-                <div class="box-topic">Conference Schedules</div>
-                <ul class="schedule-list">
-                    <?php
-                    if (!empty($conferences)) {
-                        foreach ($conferences as $conference) {
-                            echo '<li>' . htmlspecialchars($conference['date_meeting']) . ': ' . date('F j, Y', strtotime($conference['date_meeting'])) . '</li>';
+            <div class="conference-schedules-box">
+            <div class="box-topic">Conference Schedules</div>
+            <ul class="schedule-list">
+                <?php
+                if (!empty($conferences)) {
+                    foreach ($conferences as $conf) {
+                        // Define CSS class based on case status
+                        $statusClass = '';
+                        switch (strtolower($conf['case_status'])) {
+                            case 'pending':
+                                $statusClass = 'status-pending';
+                                break;
+                            case 'ongoing':
+                                $statusClass = 'status-ongoing';
+                                break;
+                            case 'closed':
+                                $statusClass = 'status-closed';
+                                break;
+                            default:
+                                $statusClass = 'status-default';
                         }
-                    } else {
-                        echo '<li>No upcoming conferences scheduled.</li>';
+
+                        echo '<li>';
+                        echo '<strong>' . date('F j, Y', strtotime($conf['date_meeting'])) . '</strong><br>';
+                        echo 'Student: <strong>' . htmlspecialchars($conf['surname']) . ', ' . htmlspecialchars($conf['first_name']) . '</strong><br>';
+                        echo 'Parent: ' . htmlspecialchars($conf['parent_name']) . '<br>';
+                        echo 'Status: <span class="status-badge ' . $statusClass . '">' . htmlspecialchars($conf['case_status']) . '</span>';
+                        echo '</li>';
                     }
-                    ?>
-                </ul>
-            </div>
+                } else {
+                    echo '<li>No upcoming conferences scheduled.</li>';
+                }
+                ?>
+            </ul>
+        </div>
         </div>
 
         <div class="chart-full">

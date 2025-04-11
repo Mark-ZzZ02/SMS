@@ -185,7 +185,7 @@ else if (isset($_POST['delete_category_btn']) || isset($_POST['delete_punishment
             redirect("category.php", "Something Went Wrong During Deletion");
         }
     } else {
-        redirect("category.php", "Failed to Move to Trash Bin");
+        redirect("category.php", "Failed to Move to Archive");
     }
 }
 else if (isset($_POST['restore_category_btn'])) {
@@ -208,7 +208,7 @@ else if (isset($_POST['restore_category_btn'])) {
         if ($delete_from_trash_run) {
             redirect("trash_bin.php", "Record Restored Successfully");
         } else {
-            redirect("trash_bin.php", "Failed to remove from Trash Bin");
+            redirect("trash_bin.php", "Failed to remove from Archive");
         }
     } else {
         redirect("trash_bin.php", "Failed to restore the record");

@@ -111,7 +111,7 @@ if(isset($_SESSION['auth'])) {
             </li>
             <li class="nav-item mb-1">
                     <a class="nav-link d-flex align-items-center rounded" href="registrar.php">
-                        <i class="fas fa-user-check" style="margin-right: 12px;"></i> ADD CASE
+                        <i class="fas fa-user-check" style="margin-right: 12px;"></i> REGISTER OFFENSE
                     </a>
                 </li>
             <li class="nav-item mb-1">
@@ -134,11 +134,6 @@ if(isset($_SESSION['auth'])) {
                     <i class="fas fa-file-alt" style="margin-right: 12px;"></i> REPORTS
                 </a>
             </li>
-            <li class="nav-item mb-1">
-                <a class="nav-link d-flex align-items-center rounded" href="trash_bin.php">
-                    <i class="fas fa-trash-alt" style="margin-right: 12px;"></i> TRASH BIN
-                </a>
-            </li>
             <li class="nav-item mb-1 nav-header">INTEGRATIONS</li>
                 <li class="nav-item mb-1">
                     <a class="nav-link d-flex align-items-center rounded" href="guidance.php">
@@ -155,6 +150,11 @@ if(isset($_SESSION['auth'])) {
             <li class="nav-item mb-1">
                 <a class="nav-link d-flex align-items-center rounded" href="users.php">
                     <i class="fas fa-user-edit" style="margin-right: 12px;"></i> USER ACCOUNTS
+                </a>
+            </li>
+            <li class="nav-item mb-1">
+                <a class="nav-link d-flex align-items-center rounded" href="trash_bin.php">
+                    <i class="fas fa-trash-alt" style="margin-right: 12px;"></i> ARCHIVE
                 </a>
             </li>
         </ul>

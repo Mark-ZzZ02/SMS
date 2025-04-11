@@ -1,7 +1,18 @@
 <?php 
 include('includes/header.php');
 include('../middleware/adminMiddleware.php');
+
+$statusFilter = isset($_GET['status']) ? mysqli_real_escape_string($con, $_GET['status']) : '';
+
+if (!empty($statusFilter)) {
+    $query = "SELECT * FROM categories WHERE case_status='$statusFilter' ORDER BY id DESC";
+} else {
+    $query = "SELECT * FROM categories ORDER BY id DESC";
+}
+
+$category = mysqli_query($con, $query);
 ?>
+
 <div class="container mt-5">
     <div class="row">
         <div class="col-md-12 p-4 shadow rounded" style="background-image: linear-gradient( #ccffff, #e6ffe6, #ffffcc);">

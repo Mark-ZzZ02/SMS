@@ -1,4 +1,6 @@
 <?php
+echo password_hash("123", PASSWORD_DEFAULT);
+<?php
 header("Access-Control-Allow-Origin: *");
 header("Access-Control-Allow-Methods: POST");
 header("Content-Type: application/json");

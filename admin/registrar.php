@@ -30,7 +30,7 @@ function sendDataToMis($data) {
     <div class="row">
         <div class="col-md-12 p-4 shadow rounded bg-light" style="background-image: linear-gradient( #ccffff, #e6ffe6, #ffffcc);">
             <div class="d-flex justify-content-between align-items-center mb-3">
-                <h4>ADD CASE</h4>
+                <h4>REGISTER OFFENSE</h4>
             </div>
             <div class="table-responsive">
                 <table id="example" class="table table-striped table-hover mt-3">
@@ -80,13 +80,13 @@ function sendDataToMis($data) {
     </div>
 </div>
 
-<!-- Add Case Modal -->
+<!-- REGISTER OFFENSE Modal -->
 <div class="modal" id="addCaseModal">
     <div class="modal-dialog">
         <div class="modal-content">
             <!-- Modal Header -->
             <div class="modal-header">
-                <h4 class="modal-title">ADD CASE</h4>
+                <h4 class="modal-title">REGISTER OFFENSE</h4>
                 <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
             </div>
 

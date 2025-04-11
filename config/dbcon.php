@@ -3,7 +3,7 @@
 $host = "localhost";
 $username = "root";
 $password = "";
-$database = "prefect"; 
+$database = "pref_prefect"; 
 
 $con = mysqli_connect($host, $username, $password, $database);
 
