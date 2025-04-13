@@ -4,10 +4,7 @@ include('includes/header.php');
 include('../middleware/adminMiddleware.php');
 
 ?>
-<div class="container-fluid p-4 bg-light text-dark text-center">
-    <h1>Edit Parent List</h1>
-</div>
-<div class="container mt-5">
+<div class="container mt-5 px-5 py-3">
     <div class="row">
         <div class="col-md-12 p-4 shadow" style="background-image: linear-gradient( #ccffff, #e6ffe6, #ffffcc);">
             <?php
