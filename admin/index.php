@@ -242,7 +242,7 @@ if ($conferenceResult) {
 
         .status-default {
             background-color: #777; /* fallback gray */
-        }
+        }   
 
     </style>
 </head>

@@ -38,7 +38,7 @@
     }
 
     .topnav a:hover {
-        background-color: #ddd;
+        background-color: rgba(85, 89, 207, 0.2);
         color: black;
     }
 
@@ -87,3 +87,7 @@
     max-width: none;          /* Remove maximum width constraint */
     background-image: linear-gradient( #ccffff, #e6ffe6, #ffffcc);
     }       
+
+    .table-responsive .dt-length label {
+        margin-left: 0.5rem;
+    }
