@@ -5,7 +5,7 @@ include('../middleware/adminMiddleware.php');
 
 ?>
 
-<div class="container-fluid p-4 bg-white text-black text-center" class="navbar-brand" >
+<div class="container-fluid p-4 bg-white text-black text-center" casaslass="navbar-brand" >
 </div>
 <div class="container mt-5 ">
   <div class="row">
