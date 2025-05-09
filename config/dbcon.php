@@ -3,7 +3,7 @@
 $host = "157.173.111.118";  // or use 'localhost' if MySQL is on the same server
 $username = "pref_roott";
 $password = "Prefect@14";
-$database = "pref_prefectsss";
+$database = "pref_prefect";
 
 $con = mysqli_connect($host, $username, $password, $database);
 
