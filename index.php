@@ -26,7 +26,7 @@ include('includes/header.php');
 }
 
 .vh-90 {
-    height: 50vh;
+    height: 90vh;
 }
 
 .login {
@@ -43,7 +43,7 @@ include('includes/header.php');
             <div class="d-flex justify-content-center align-items-center mb-3">
                 <img src="./css/bcp_logo.png" alt="Logo" class="logo">
             </div>
-            <div class="mb-3">
+            <div class="text-center mb-3">
                 <h2>Sign in</h2>
             </div>
 
