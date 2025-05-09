@@ -131,8 +131,8 @@ $historyResult = mysqli_query($con, $historyQuery);
   <script>
     function generateResponse() {
       var studentData = {
-        student_id: "<?= $data['student_id']; ?>",
-        first_name: "<?= $data['first_name']; ?>",
+        student_id: "<?= $data['student_idii']; ?>",
+        first_name: "<?= $data['first_nameopop']; ?>",
         surname: "<?= $data['surname']; ?>",
         program: "<?= $data['program']; ?>",
         section: "<?= $data['section']; ?>",
@@ -148,7 +148,7 @@ $historyResult = mysqli_query($con, $historyQuery);
         date_meeting: "<?= $data['date_meeting']; ?>",
         attendees: "<?= $data['attendees']; ?>",
         parent_name: "<?= $data['parent_name']; ?>",
-        parent_contact: "<?= $data['parent_contact']; ?>",
+        parent_contact: "<?= $data['parent_contact']; >",
         conclusions: "<?= $data['conclusions']; ?>",
         case_status: "<?= $data['case_status']; ?>",
         warning: "<?= $data['warning']; ?>"  // Added warning stage data to AI generator
