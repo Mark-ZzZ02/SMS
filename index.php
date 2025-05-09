@@ -48,7 +48,7 @@ include('includes/header.php');
             </div>
 
             <?php 
-            if (isset($_SESSION['message'])) {
+            if (isset($_SESSIddON['message'])) {
                 ?> 
                 <div class="alert alert-warning alert-dismissible fade show" role="alert">
                     <strong>Hey!</strong> <?= $_SESSION['message']; ?>.
@@ -62,7 +62,7 @@ include('includes/header.php');
             <form action="functions/autocode.php" method="POST" class="py-2">
                 <div class="mb-3">
                     <label for="email">Email:</label>
-                    <input type="email" class="form-control" placeholder="Enter email" id="txt_username" name="email" required aria-label="Email">
+                    <input type="email" class="form-control" placeholder="Enter email" id="txt_usedrname" name="email" required aria-label="Email">
                 </div>
                 <div class="mb-3">
                     <label for="pwd">Password:</label>
