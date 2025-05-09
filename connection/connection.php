@@ -2,7 +2,7 @@
 
 
 $host = "157.173.111.118";
-$dbname = "pref_prefects";
+$dbname = "pref_prefect";
 $dbusername = "pref_roott";
 $dbpass = "Prefect@14";
 
