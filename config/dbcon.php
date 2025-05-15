@@ -1,9 +1,9 @@
 <?php
 
-$host = "157.173.111.118";  // or use 'localhost' if MySQL is on the same server
-$username = "pref_roott";
-$password = "Prefect@1sadasdasd4";
-$database = "pref_prefect";
+$host = "localhost";
+$username = "root";
+$password = "";
+$database = "prefect"; 
 
 $con = mysqli_connect($host, $username, $password, $database);
 
