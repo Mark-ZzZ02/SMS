@@ -117,18 +117,6 @@ if ($conferenceResult) {
     <link href="./css/stylesec.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
-        /* Styling for printing */
-        @media print {
-            .chart-full {
-                width: 100%;
-                height: 400px;
-                page-break-before: always;
-            }
-
-            canvas {
-                max-width: 100%;
-            }
-        }
         .overview-boxes {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
@@ -569,6 +557,7 @@ if ($conferenceResult) {
                     }
                 }
             }
+
     });
 
     function filterMonth(monthIndex) {
