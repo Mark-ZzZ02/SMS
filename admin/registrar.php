@@ -1,36 +1,12 @@
 <?php 
 include('includes/header.php');
 include('../middleware/adminMiddleware.php');
-
-$apiUrl = 'https://mis.schoolmanagementsystem2.com/mis_api.php'; 
-$response = file_get_contents($apiUrl);
-$students = json_decode($response, true); 
-
-function sendDataToMis($data) {
-    $url = 'https://prefect.schoolmanagementsystem2.com/send_to_mis.php'; 
-
-    $ch = curl_init($url);
-    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-    curl_setopt($ch, CURLOPT_POST, true);
-    curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($data)); 
-    curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json'));
-
-    $response = curl_exec($ch);
-    if (curl_errno($ch)) {
-        echo 'Error:' . curl_error($ch);
-    } else {
-        echo 'Response from MIS: ' . $response;
-    }
-
-    curl_close($ch);
-}
-
 ?>
 <div class="container mt-5">
     <div class="row">
         <div class="col-md-12 p-4 shadow rounded bg-light" style="background-image: linear-gradient( #ccffff, #e6ffe6, #ffffcc);">
             <div class="d-flex justify-content-between align-items-center mb-3">
-                <h4>REGISTER OFFENSE</h4>
+                <h4>REGISTRAR</h4>
             </div>
             <div class="table-responsive">
                 <table id="example" class="table table-striped table-hover mt-3">
@@ -50,21 +26,24 @@ function sendDataToMis($data) {
                     </thead>
                     <tbody id="offenseTableBody">
                         <?php
-                        if (!empty($students)) {
-                            foreach ($students as $student) {
+                        // Ensure you have a valid database connection $con
+                        $category = mysqli_query($con, "SELECT * FROM registrar ORDER BY id DESC");
+
+                        if (mysqli_num_rows($category) > 0) {
+                            foreach ($category as $item) {
                                 ?>
                                 <tr>
-                                    <td class="text-center"><?= htmlspecialchars($student['student_id']); ?></td>
-                                    <td class="text-center"><?= htmlspecialchars($student['first_name']); ?></td>
-                                    <td class="text-center"><?= htmlspecialchars($student['middle_name']); ?></td>
-                                    <td class="text-center"><?= htmlspecialchars($student['surname']); ?></td>
-                                    <td class="text-center"><?= htmlspecialchars($student['program']); ?></td>
-                                    <td class="text-center"><?= htmlspecialchars($student['section']); ?></td>
-                                    <td class="text-center"><?= htmlspecialchars($student['major']); ?></td>
-                                    <td class="text-center"><?= htmlspecialchars($student['sms_email']); ?></td>
-                                    <td class="text-center"><?= htmlspecialchars($student['year_level']); ?></td>
+                                    <td class="text-center"><?= htmlspecialchars($item['student_id']); ?></td>
+                                    <td class="text-center"><?= htmlspecialchars($item['first_name']); ?></td>
+                                    <td class="text-center"><?= htmlspecialchars($item['middle_name']); ?></td>
+                                    <td class="text-center"><?= htmlspecialchars($item['surname']); ?></td>
+                                    <td class="text-center"><?= htmlspecialchars($item['program']); ?></td>
+                                    <td class="text-center"><?= htmlspecialchars($item['section']); ?></td>
+                                    <td class="text-center"><?= htmlspecialchars($item['major']); ?></td>
+                                    <td class="text-center"><?= htmlspecialchars($item['sms_email']); ?></td>
+                                    <td class="text-center"><?= htmlspecialchars($item['year_level']); ?></td>
                                     <td class="text-center">
-                                        <button class="btn btn-primary btn-sm" onclick="populateModal(<?= htmlspecialchars(json_encode($student)); ?>)">Add Case</button>
+                                        <button class="btn btn-primary btn-sm" onclick="populateModal(<?= htmlspecialchars(json_encode($item)); ?>)">Add Case</button>
                                     </td>
                                 </tr>
                                 <?php
@@ -80,13 +59,13 @@ function sendDataToMis($data) {
     </div>
 </div>
 
-<!-- REGISTER OFFENSE Modal -->
+<!-- Add Case Modal -->
 <div class="modal" id="addCaseModal">
     <div class="modal-dialog">
         <div class="modal-content">
             <!-- Modal Header -->
             <div class="modal-header">
-                <h4 class="modal-title">REGISTER OFFENSE</h4>
+                <h4 class="modal-title">ADD CASE</h4>
                 <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
             </div>
 

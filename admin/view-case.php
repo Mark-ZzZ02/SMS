@@ -21,8 +21,58 @@ if (isset($_GET['id'])) {
     exit;
 }
 
+// Offense ID to Description Map
+$offenseDescriptions = [
+    // Minor Offenses
+    "4.1.1.1" => "NOT WEARING OF SCHOOL ID CARD",
+    "4.1.1.2" => "EATING INSIDE THE CLASSROOM, CHEWING BUBBLE GUMS, ETC.",
+    "4.1.1.3" => "LOITERING NEAR THE GATE, STAYING OR SITTING NEAR FIRE ESCAPES, AND THE LIKE",
+    "4.1.1.4" => "PUBLIC DISPLAY OF AFFECTION",
+    "4.1.1.5" => "POSTING/ UNAUTHORIZED USED OF BANNERS",
+    "4.1.1.6" => "SPITTING ON THE FLOOR, CORRIDORS, STAIRWAYS",
+    "4.1.1.7" => "IMPROPER HAIRCUT, DYEING OF HAIR, WEARING OF EARRINGS",
+    "4.1.1.8" => "ENTERING THE FACULTY RESTROOM, LOUNGES WITHOUT CONSENT",
+    "4.1.1.9" => "MALE STUDENT ENTERING THE COMFORT ROOMS FOR FEMALES OR VICE VERSA",
+    "4.1.1.10" => "UNHYGIENIC AND IMPROPER USE OF COLLEGE FACILITIES",
+    "4.1.1.11" => "BRINGING IN OF POINTED OBJECTS",
+    "4.1.1.12" => "REFUSAL TO SUBMIT ONESELF AND BELONGINGS FOR INSPECTION",
+    "4.1.1.13" => "USING THE DIRTY FINGER SIGN OR VERY LEWD GESTURES",
+    "4.1.1.14" => "CHARGING OF CELLPHONES, LAPTOPS AND OTHER GADGETS INSIDE CLASSROOMS",
+
+    // Major Offenses
+    "4.1.2.1" => "UNAUTHORIZED BRINGING OUT OF SCHOOL FACILITIES",
+    "4.1.2.2" => "SMOKING WITHIN THE CAMPUS",
+    "4.1.2.3" => "EXCESSIVE PUBLIC DISPLAY OF AFFECTION",
+    "4.1.2.4" => "POSSESSION OF PORNOGRAPHIC MATERIALS",
+    "4.1.2.5" => "VANDALISM OR DESTRUCTION OF SCHOOL PROPERTY",
+    "4.1.2.6" => "ENTERING SCHOOL PREMISES UNDER THE INFLUENCE OF DRUGS",
+    "4.1.2.7" => "UNAUTHORIZED OPERATION OF SCHOOL EQUIPMENT",
+    "4.1.2.8" => "ACTS OF DISRESPECT TO ANY SCHOOL PERSONNEL",
+    "4.1.2.9" => "ILLEGAL INTRUSION IN CLASSROOM",
+    "4.1.2.10" => "USE OF SOCIAL MEDIA TO HARASS OR MALICIOUSLY ATTACK ANYONE",
+
+    // Grave Offenses
+    "4.1.3.1" => "POSSESSION, USE OR SALE OF PROHIBITED DRUGS",
+    "4.1.3.2" => "THEFT OR EXTORTION",
+    "4.1.3.3" => "POSSESSION OF DEADLY WEAPONS",
+    "4.1.3.4" => "FRAUD OR CHEATING IN EXAMINATIONS",
+    "4.1.3.5" => "SEXUAL HARASSMENT",
+    "4.1.3.6" => "ENGAGING IN ANY FORM OF GAMBLING",
+    "4.1.3.7" => "MALICIOUS AND UNAUTHORIZED DISCLOSURE OF STUDENT RECORDS",
+    "4.1.3.8" => "ENGAGING IN ACTS OF DISORDERLINESS",
+    "4.1.3.9" => "UNAUTHORIZED ENTRY INTO RESTRICTED AREAS",
+    "4.1.3.10" => "COMMITTING ACTS OF TERRORISM",
+    "4.1.3.11" => "ENGAGING IN PROSTITUTION",
+    "4.1.3.12" => "COMMITTING ACTS OF VANDALISM"
+];
+
 $historyQuery = "SELECT * FROM categories WHERE student_id = '" . mysqli_real_escape_string($con, $data['student_id']) . "' AND id != '$category_id'";
 $historyResult = mysqli_query($con, $historyQuery);
+
+// Helper function
+function formatOffense($id, $map) {
+    return isset($map[$id]) ? "$id - {$map[$id]}" : $id;
+}
 ?>
 
 <!DOCTYPE html>
@@ -59,10 +109,10 @@ $historyResult = mysqli_query($con, $historyQuery);
                 <tr><th>YEAR LEVEL</th><td><?= htmlspecialchars($data['year_level']); ?></td></tr>
                 <tr><th>CASE ID</th><td><?= htmlspecialchars($data['case_id']); ?></td></tr>
                 <tr><th>OFFENSE TYPE</th><td><?= htmlspecialchars($data['offense_type']); ?></td></tr>
-                <tr><th>OFFENSE ID</th><td><?= htmlspecialchars($data['offense_id']); ?></td></tr>
+                <tr><th>OFFENSE ID</th><td><?= htmlspecialchars(formatOffense($data['offense_id'], $offenseDescriptions)); ?></td></tr>
                 <tr><th>SANCTION</th><td><?= htmlspecialchars($data['sanction']); ?></td></tr>
                 <tr><th>COMPLETION DATE</th><td><?= htmlspecialchars($data['completion_date']); ?></td></tr>
-                <tr><th>WARNING STAGE</th><td><?= htmlspecialchars($data['warning']); ?></td></tr> <!-- Added the warning stage -->
+                <tr><th>WARNING STAGE</th><td><?= htmlspecialchars($data['warning']); ?></td></tr>
               </table>
             </div>
 
@@ -70,10 +120,8 @@ $historyResult = mysqli_query($con, $historyQuery);
             <hr>
             <h2>AI Case Generator</h2>
 
-            <!-- Button to trigger the AI response generation -->
             <button class="btn btn-primary mt-3" onclick="generateResponse()">Generate AI Response</button>
 
-            <!-- Loading Spinner -->
             <div id="loadingSpinner" class="text-center mt-4" style="display: none;">
               <div class="spinner-border text-primary" role="status">
                 <span class="visually-hidden">Loading...</span>
@@ -81,15 +129,13 @@ $historyResult = mysqli_query($con, $historyQuery);
               <p>Processing...</p>
             </div>
 
-            <!-- AI Case Analysis Output -->
             <div id="aiCaseAnalysis" class="alert alert-info mt-4" role="alert">
-              <!-- AI-generated content will appear here -->
               Your case analysis will appear here after generating a response.
             </div>
 
             <br>
             <a href="category.php" class="btn btn-secondary">Back to Cases</a>
-            
+
             <!-- Warning History Section -->
             <hr>
             <h3>Offense History</h3>
@@ -99,6 +145,7 @@ $historyResult = mysqli_query($con, $historyQuery);
                   <tr>
                     <th>Case ID</th>
                     <th>Offense Type</th>
+                    <th>Offense ID</th>
                     <th>Sanction</th>
                     <th>Completion Date</th>
                     <th>Warning Stage</th>
@@ -109,9 +156,10 @@ $historyResult = mysqli_query($con, $historyQuery);
                     <tr>
                       <td><?= htmlspecialchars($history['case_id']); ?></td>
                       <td><?= htmlspecialchars($history['offense_type']); ?></td>
+                      <td><?= htmlspecialchars(formatOffense($history['offense_id'], $offenseDescriptions)); ?></td>
                       <td><?= htmlspecialchars($history['sanction']); ?></td>
                       <td><?= htmlspecialchars($history['completion_date']); ?></td>
-                      <td><?= htmlspecialchars($history['warning']); ?></td> <!-- Added warning stage for past cases -->
+                      <td><?= htmlspecialchars($history['warning']); ?></td>
                     </tr>
                   <?php endwhile; ?>
                 </tbody>
@@ -151,14 +199,12 @@ $historyResult = mysqli_query($con, $historyQuery);
         parent_contact: "<?= $data['parent_contact']; ?>",
         conclusions: "<?= $data['conclusions']; ?>",
         case_status: "<?= $data['case_status']; ?>",
-        warning: "<?= $data['warning']; ?>"  // Added warning stage data to AI generator
+        warning: "<?= $data['warning']; ?>"
       };
 
-      // Show loading spinner
       document.getElementById("loadingSpinner").style.display = "block";
       document.getElementById("aiCaseAnalysis").style.display = "none";
 
-      // Send request to response.php
       fetch("response.php", {
         method: "POST",
         body: JSON.stringify({ studentData: studentData }),
@@ -166,9 +212,9 @@ $historyResult = mysqli_query($con, $historyQuery);
       })
       .then(response => response.text())
       .then(data => {
-        document.getElementById("loadingSpinner").style.display = "none"; // Hide the loading spinner
-        document.getElementById("aiCaseAnalysis").style.display = "block"; // Show the analysis
-        document.getElementById("aiCaseAnalysis").innerHTML = data; // Display the result
+        document.getElementById("loadingSpinner").style.display = "none";
+        document.getElementById("aiCaseAnalysis").style.display = "block";
+        document.getElementById("aiCaseAnalysis").innerHTML = data;
       })
       .catch(error => {
         document.getElementById("loadingSpinner").style.display = "none";

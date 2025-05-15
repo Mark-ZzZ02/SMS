@@ -53,7 +53,6 @@ include('../middleware/adminMiddleware.php');
                                                     <option value="" disabled>Select Case Status</option>
                                                     <option value="Pending" <?= $data['case_status'] === 'Pending' ? 'selected' : '' ?>>Pending</option>
                                                     <option value="Ongoing" <?= $data['case_status'] === 'Ongoing' ? 'selected' : '' ?>>Ongoing</option>
-                                                    <option value="Closed" <?= $data['case_status'] === 'Closed' ? 'selected' : '' ?>>Closed</option>
                                                 </select>
                                     </div>
                                     <div class="col-md-12 mb-3">
