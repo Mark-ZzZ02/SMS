@@ -55,6 +55,30 @@ if ($monthlyCaseResult) {
     exit;
 }
 
+$dailyCountsByMonth = [];
+
+for ($m = 1; $m <= 12; $m++) {
+    $query = "SELECT 
+                DAY(date_added) as day,
+                COUNT(*) as count 
+              FROM categories
+              WHERE MONTH(date_added) = $m AND YEAR(date_added) = YEAR(CURDATE())
+              GROUP BY day
+              ORDER BY day";
+
+    $result = mysqli_query($con, $query);
+    $dailyCounts = array_fill(1, 31, 0); // default values
+
+    if ($result) {
+        while ($row = mysqli_fetch_assoc($result)) {
+            $day = (int)$row['day'];
+            $dailyCounts[$day] = (int)$row['count'];
+        }
+    }
+
+    $dailyCountsByMonth[$m - 1 ] = $dailyCounts;
+}
+
 $conferenceQuery = "SELECT date_meeting FROM categories WHERE date_meeting >= CURDATE() ORDER BY date_meeting ASC";
 $conferenceResult = mysqli_query($con, $conferenceQuery);
 
@@ -93,6 +117,18 @@ if ($conferenceResult) {
     <link href="./css/stylesec.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
+        /* Styling for printing */
+        @media print {
+            .chart-full {
+                width: 100%;
+                height: 400px;
+                page-break-before: always;
+            }
+
+            canvas {
+                max-width: 100%;
+            }
+        }
         .overview-boxes {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
@@ -376,114 +412,142 @@ if ($conferenceResult) {
         </div>
         </div>
 
-        <div class="chart-full">
+        <!-- <div class="chart-full">
             <canvas id="monthlyCasesChart"></canvas>
-        </div>
+        </div> -->
+
+        <!-- Filter Buttons -->
+<div class="chart-full">
+     <div class="btn-group mb-3" role="group" style="display: flex; flex-wrap: wrap; gap: 10px;">
+        <button class="btn btn-outline-primary" onclick="filterMonth(null)">All</button>
+        <?php
+        $months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+        foreach ($months as $i => $monthName) {
+            echo '<button class="btn btn-outline-primary" onclick="filterMonth('.$i.')">'.$monthName.'</button>';
+        }
+        ?>
+    </div>
+    <canvas id="monthlyCasesChart"></canvas>
+</div>
+
     </div>
 
-    <script>
-        const caseStatusData = {
-            labels: ['Pending', 'Ongoing', 'Closed'],
-            datasets: [{
-                data: [<?php echo $pendingCount; ?>, <?php echo $ongoingCount; ?>, <?php echo $closedCount; ?>],
-                backgroundColor: ['#ff6666', '#ffd540', '#0d6cf6'],
-                borderWidth: 1
-            }]
-        };
-        const caseStatusConfig = {
-            type: 'pie',
-            data: caseStatusData,
-            options: {
-                responsive: true,
-                plugins: {
-                    tooltip: {
-                        enabled: true,
-                        mode: 'nearest',
-                        intersect: false,
-                        callbacks: {
-                            label: function (context) {
-                                let label = context.label || '';
-                                let value = context.raw || 0;
-                                label += ': ' + value + ' cases';
-                                return label;
-                            }
+  <script>
+    const caseStatusData = {
+        labels: ['Pending', 'Ongoing', 'Closed'],
+        datasets: [{
+            data: [<?php echo $pendingCount; ?>, <?php echo $ongoingCount; ?>, <?php echo $closedCount; ?>],
+            backgroundColor: ['#ff6666', '#ffd540', '#0d6cf6'],
+            borderWidth: 1
+        }]
+    };
+    const caseStatusConfig = {
+        type: 'pie',
+        data: caseStatusData,
+        options: {
+            responsive: true,
+            plugins: {
+                tooltip: {
+                    enabled: true,
+                    mode: 'nearest',
+                    intersect: false,
+                    callbacks: {
+                        label: function (context) {
+                            let label = context.label || '';
+                            let value = context.raw || 0;
+                            label += ': ' + value + ' cases';
+                            return label;
                         }
                     }
-                },
-                interaction: {
-                    mode: 'index',
-                    intersect: false
                 }
+            },
+            interaction: {
+                mode: 'index',
+                intersect: false
             }
-        };
-        const caseStatusPieChart = new Chart(
-            document.getElementById('caseStatusPieChart'),
-            caseStatusConfig
-        );
+        }
+    };
+    const caseStatusPieChart = new Chart(
+        document.getElementById('caseStatusPieChart'),
+        caseStatusConfig
+    );
 
-        const offenseTypeData = {
-            labels: ['Minor', 'Major', 'Grave'],
-            datasets: [{
-                data: [<?php echo $minorCount; ?>, <?php echo $majorCount; ?>, <?php echo $graveCount; ?>],
-                backgroundColor: ['#ff6666', '#ffd540', '#0d6cf6'],
-                borderWidth: 1
-            }]
-        };
-        const offenseTypeConfig = {
-            type: 'pie',
-            data: offenseTypeData,
-            options: {
-                responsive: true,
-                plugins: {
-                    tooltip: {
-                        enabled: true,
-                        mode: 'nearest',
-                        intersect: false,
-                        callbacks: {
-                            label: function (context) {
-                                let label = context.label || '';
-                                let value = context.raw || 0;
-                                label += ': ' + value + ' cases';
-                                return label;
-                            }
+    const offenseTypeData = {
+        labels: ['Minor', 'Major', 'Grave'],
+        datasets: [{
+            data: [<?php echo $minorCount; ?>, <?php echo $majorCount; ?>, <?php echo $graveCount; ?>],
+            backgroundColor: ['#ff6666', '#ffd540', '#0d6cf6'],
+            borderWidth: 1
+        }]
+    };
+    const offenseTypeConfig = {
+        type: 'pie',
+        data: offenseTypeData,
+        options: {
+            responsive: true,
+            plugins: {
+                tooltip: {
+                    enabled: true,
+                    mode: 'nearest',
+                    intersect: false,
+                    callbacks: {
+                        label: function (context) {
+                            let label = context.label || '';
+                            let value = context.raw || 0;
+                            label += ': ' + value + ' cases';
+                            return label;
                         }
                     }
-                },
-                interaction: {
-                    mode: 'index',
-                    intersect: false
                 }
+            },
+            interaction: {
+                mode: 'index',
+                intersect: false
             }
-        };
-        const offenseTypePieChart = new Chart(
-            document.getElementById('offenseTypePieChart'),
-            offenseTypeConfig
-        );
+        }
+    };
+    const offenseTypePieChart = new Chart(
+        document.getElementById('offenseTypePieChart'),
+        offenseTypeConfig
+    );
 
-        const monthlyCasesData = {
-            labels: [
-                'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
-                'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'
-            ],
+    const monthNames = [
+        'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
+        'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'
+    ];
+
+    const allMonthlyData = <?php echo json_encode($monthlyCounts); ?>;
+    const dailyDataByMonth = <?php echo json_encode($dailyCountsByMonth); ?>;
+
+    const ctx = document.getElementById('monthlyCasesChart').getContext('2d');
+
+    const monthlyCasesChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: monthNames,
             datasets: [{
                 label: 'Cases',
-                data: <?php echo json_encode($monthlyCounts); ?>,
+                data: allMonthlyData,
                 backgroundColor: '#17a2b8',
                 borderColor: '#17a2b8',
                 borderWidth: 1
             }]
-        };
-        const monthlyCasesConfig = {
-            type: 'bar',
-            data: monthlyCasesData,
-            options: {
-                responsive: true,
-                plugins: {
-                    tooltip: {
-                        enabled: true,
-                        mode: 'index',
-                        intersect: false
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                title: {
+                    display: true,
+                    text: 'Monthly Cases for <?php echo date("Y"); ?>',
+                    font: {
+                        size: 18
                     }
+                },
+                tooltip: {
+                    enabled: true,
+                    mode: 'index',
+                    intersect: false
+                }
                 },
                 interaction: {
                     mode: 'index',
@@ -497,6 +561,7 @@ if ($conferenceResult) {
                         }
                     },
                     y: {
+                        beginAtZero: true,
                         title: {
                             display: true,
                             text: 'Number of Cases'
@@ -504,11 +569,33 @@ if ($conferenceResult) {
                     }
                 }
             }
-        };
-        const monthlyCasesChart = new Chart(
-            document.getElementById('monthlyCasesChart'),
-            monthlyCasesConfig
-        );
+    });
+
+    function filterMonth(monthIndex) {
+        if (monthIndex === null) {
+            // Reset to monthly view
+            monthlyCasesChart.data.labels = monthNames;
+            monthlyCasesChart.data.datasets[0].label = 'Monthly Cases';
+            monthlyCasesChart.data.datasets[0].data = allMonthlyData;
+            monthlyCasesChart.options.plugins.title.text = 'Monthly Cases for <?php echo date("Y"); ?>';
+            monthlyCasesChart.options.scales.x.title.text = 'Month';
+        } else {
+            // Show daily view for selected month
+            const dailyData = dailyDataByMonth[monthIndex];
+            const days = Object.keys(dailyData).map(d => parseInt(d));
+            const values = Object.values(dailyData);
+
+            monthlyCasesChart.data.labels = days;
+            monthlyCasesChart.data.datasets[0].label = `${monthNames[monthIndex]} Daily Cases`;
+            monthlyCasesChart.data.datasets[0].data = values;
+            monthlyCasesChart.options.plugins.title.text = `Daily Cases for ${monthNames[monthIndex]} <?php echo date("Y"); ?>`;
+            monthlyCasesChart.options.scales.x.title.text = 'Day';
+        }
+
+        monthlyCasesChart.update();
+    }
+
     </script>
+
 </body>
 </html>
