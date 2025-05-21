@@ -25,14 +25,14 @@
     left: 0;
     height: 100%;
     width: 100%;
-    background-color: rgba(87, 149, 242, 0.25); /* Adjust alpha here */
+    background-color: rgba(11, 53, 117, 0.5); /* Adjust alpha here */
     z-index: 1;
     pointer-events: none; /* So it doesn’t block clicks */
   }
 
   .about * {
     position: relative;
-    z-index: 2; /* Ensure your text/content appears above the overlay */
+    z-index: 2; 
   }
   
   .nav__item:nth-child(6) .nav__link{
@@ -60,8 +60,25 @@
   }
 
   .about h2 {
+    color: #fff;
     font-size: 10rem !important;
+    text-align: center;
+    padding: 0 50px;
+    font-family: 'Roboto Condensed';
   }
+
+  #code {
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+  }
+
+  ul li {
+    list-style: none;
+  }
+
 </style>
 <body>
     <!--===== HEADER =====-->
@@ -91,8 +108,7 @@
     <main class="l-main">
         <!--===== ABOUT =====-->
         <section class="about section" id="about">
-            <h2 class="about-title">Prefect Of 
-              <br>Discipline
+            <h2 class="about-title">Prefect Of Discipline
             </h2>
             <!-- <div class="about__container bd-grid">
                 <div class="about__img">
@@ -131,36 +147,93 @@
         </section>
 
         <!--===== STUDENT CODE OF CONDUCT =====-->
-        <section class="section" id="code">
-            <h2 class="section-title">Student Code of Conduct</h2>
-            <div class="about__container bd-grid">
-                <div>
-                    <p class="about__text">
-                        The Code of Conduct outlines the values, expectations, and disciplinary procedures that all students of BCP 
-                        must follow. This includes punctuality, wearing the prescribed uniform, maintaining academic honesty, 
-                        respecting others, and avoiding prohibited behaviors.
-                    </p>
-                </div>
-                <div class="about__img">
-                    <img src="login-assets/img/prefil.gif" alt="">
+        <section class="section" id="code" style="padding: 5rem 2rem; color: white; background-color: rgb(30 24 66); font-family: 'Roboto Condensed', sans-serif;">
+            <h2 class="section-title" style="text-align: center; font-size: 2.5rem; margin-bottom: 2rem;">Student Code of Conduct</h2>
+
+            <div style="display: flex; flex-wrap: wrap; gap: 2rem; justify-content: space-between;">
+                <div style="flex: 1 1 60%; min-width: 300px;">
+                <p style="font-size: 1.2rem; line-height: 1.8;">
+                    The Code of Conduct outlines the values, expectations, and disciplinary procedures that all students of BCP must follow. This includes punctuality, wearing the prescribed uniform, maintaining academic honesty, respecting others, and avoiding prohibited behaviors.
+                </p>
                 </div>
             </div>
-        </section>
 
-        <!--===== SANCTIONS =====-->
-        <section class="skills section" id="sanctions">
-            <h2 class="section-title">Sanctions</h2>
-            <div class="skills__container bd-grid">
-                <div>
-                    <p class="skills__text">
-                        Sanctions for violating the code of conduct range from warnings and counseling to community service, 
-                        suspension, or expulsion, depending on the severity of the offense. Our goal is to provide corrective 
-                        actions that guide students toward better behavior.
-                    </p>
-                </div>
-                <div>
-                    <img src="login-assets/img/viz1.png" alt="" class="skills__img">
-                </div>
+            <div style="margin-top: 3rem;">
+                <h3 style="font-size: 2.5rem; margin-bottom: 1rem; color: aqua;">Types of Offenses & Corresponding Sanctions</h3>
+
+                <h4 style="font-size: 1.8rem; color: #ffcc00;">4.1.1 Minor Offenses</h4>
+                <p>Penalties: Reprimand, Probation, Fines. Repeat offenses escalate.</p>
+                <ul style="list-style: square; padding-left: 1.5rem; margin-bottom: 2rem;">
+                <li>Not wearing of school ID card</li>
+                <li>Eating in class, chewing gum</li>
+                <li>Loitering in restricted areas</li>
+                <li>Public display of affection</li>
+                <li>Unauthorized postings</li>
+                <li>Spitting or unsanitary acts</li>
+                <li>Improper attire or accessories</li>
+                <li>Unauthorized use of facilities</li>
+                <li>Entering incorrect restrooms</li>
+                <li>Improper use of college equipment</li>
+                <li>Possession of pointed objects</li>
+                <li>Refusal of inspection</li>
+                <li>Lewd gestures</li>
+                <li>Charging gadgets in classrooms/hallways</li>
+                </ul>
+
+                <h4 style="font-size: 1.8rem; color: #ff6600;">4.1.2 Major Offenses</h4>
+                <p>Penalties: Suspension (3–15 days), Probation, Semester/year suspension.</p>
+                <ul style="list-style: square; padding-left: 1.5rem; margin-bottom: 2rem;">
+                <li>Unauthorized removal of property</li>
+                <li>Smoking on campus</li>
+                <li>Excessive public affection</li>
+                <li>Pornographic content possession/distribution</li>
+                <li>Vandalism</li>
+                <li>Influence of liquor/drugs</li>
+                <li>Unauthorized equipment operation</li>
+                <li>Disrespect to staff or students</li>
+                <li>Illegal classroom or office intrusion</li>
+                <li>Bullying, malicious gossip, slander</li>
+                <li>Misuse of funds or cheating</li>
+                <li>Unauthorized social media groups</li>
+                </ul>
+
+                <h4 style="font-size: 1.8rem; color: #ff0033;">4.1.3 Grave Offenses</h4>
+                <p>Penalties: Dismissal, Expulsion.</p>
+                <ul style="list-style: square; padding-left: 1.5rem; margin-bottom: 2rem;">
+                <li>Drug use or possession</li>
+                <li>Theft, robbery, dishonesty</li>
+                <li>Forgery, tampering documents</li>
+                <li>Disrespect to authority or assault</li>
+                <li>Criminal conviction or CHED law violation</li>
+                <li>ID misuse or impersonation</li>
+                <li>Defaming the school online/media</li>
+                <li>Cybercrime or social media abuse</li>
+                <li>Posting school grievances online</li>
+                <li>Weapon possession or explosive use</li>
+                <li>Unauthorized digital or facility access</li>
+                <li>Fraternity recruitment or hazing</li>
+                <li>Inciting violence or disruptions</li>
+                <li>Unauthorized fundraising or ticket selling</li>
+                </ul>
+
+                <h3 style="font-size: 2.5rem; color: aqua; margin-top: 3rem;">Student Code of Conduct Agreement</h3>
+                <p style="font-size: 1.2rem; margin-bottom: 1rem;">As a student/scholar of BCP, I commit to:</p>
+                <ul style="list-style: circle; padding-left: 1.5rem;">
+                <li>Uphold the school’s values and mission</li>
+                <li>Behave appropriately on/off campus</li>
+                <li>Respect all members of the school community</li>
+                <li>Avoid foul or inappropriate language</li>
+                <li>Speak positively and report concerns properly</li>
+                <li>Be responsible online:
+                    <ul>
+                    <li>No inappropriate or malicious content</li>
+                    <li>Avoid dishonesty and disrespect online</li>
+                    <li>Do not upload or share offensive content</li>
+                    <li>Don’t use social media to attack school members</li>
+                    </ul>
+                </li>
+                </ul>
+                <p style="margin-top: 1rem;"><strong>Note:</strong> Any online post is considered public. Violations may lead to scholarship cancellation and required fee reimbursement.</p>
             </div>
         </section>
 
