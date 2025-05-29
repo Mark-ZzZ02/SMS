@@ -3,38 +3,109 @@ session_start();
 include('../config/dbcon.php');
 include('../functions/myfunctions.php');
 
-if (isset($_POST['add_category_btn'])) {  
+// if (isset($_POST['add_category_btn'])) {  
     
-    $surname = mysqli_real_escape_string($con, $_POST['surname']);
-    $first_name = mysqli_real_escape_string($con, $_POST['first_name']);
-    $case_id = mysqli_real_escape_string($con, $_POST['case_id']);
+//     $surname = mysqli_real_escape_string($con, $_POST['surname']);
+//     $first_name = mysqli_real_escape_string($con, $_POST['first_name']);
+//     $case_id = mysqli_real_escape_string($con, $_POST['case_id']);
+//     $student_id = mysqli_real_escape_string($con, $_POST['student_id']);
+//     $program = mysqli_real_escape_string($con, $_POST['program']);
+//     $section = mysqli_real_escape_string($con, $_POST['section']);
+//     $major = mysqli_real_escape_string($con, $_POST['major']);
+//     $sms_email = mysqli_real_escape_string($con, $_POST['sms_email']);
+//     $year_level = mysqli_real_escape_string($con, $_POST['year_level']);
+//     $statement = mysqli_real_escape_string($con, $_POST['statement']);
+//     $offense_type = mysqli_real_escape_string($con, $_POST['offense_type']);  
+
+    
+//     $insert_query = "INSERT INTO categories (surname, first_name, case_id, student_id, program, section, major, sms_email, year_level, statement, offense_type) 
+//                      VALUES ('$surname', '$first_name', '$case_id', '$student_id', '$program', '$section', '$major', '$sms_email', '$year_level', '$statement', '$offense_type')";
+//     $insert_query_run = mysqli_query($con, $insert_query);
+
+//     if ($insert_query_run) {
+        
+//         if ($offense_type == 'Minor') {
+//             header('Location: punishment.php');
+//             exit();
+//         } else if ($offense_type == 'Major' || $offense_type == 'Grave') {
+//             header('Location: parent.php');
+//             exit();
+//         }
+//     } else {
+//         redirect("category.php", "Something Went Wrong");
+//     }
+// }
+
+if (isset($_POST['add_category_btn'])) {
+    include('../config/dbcon.php');
+
+    // Sanitize inputs
     $student_id = mysqli_real_escape_string($con, $_POST['student_id']);
+    $first_name = mysqli_real_escape_string($con, $_POST['first_name']);
+    $middle_name = mysqli_real_escape_string($con, $_POST['middle_name']);
+    $surname = mysqli_real_escape_string($con, $_POST['surname']);
     $program = mysqli_real_escape_string($con, $_POST['program']);
     $section = mysqli_real_escape_string($con, $_POST['section']);
     $major = mysqli_real_escape_string($con, $_POST['major']);
     $sms_email = mysqli_real_escape_string($con, $_POST['sms_email']);
     $year_level = mysqli_real_escape_string($con, $_POST['year_level']);
+    $offense_type = mysqli_real_escape_string($con, $_POST['offense_type']);
+    $case_id = mysqli_real_escape_string($con, $_POST['case_id']);
     $statement = mysqli_real_escape_string($con, $_POST['statement']);
-    $offense_type = mysqli_real_escape_string($con, $_POST['offense_type']);  
 
-    
-    $insert_query = "INSERT INTO categories (surname, first_name, case_id, student_id, program, section, major, sms_email, year_level, statement, offense_type) 
-                     VALUES ('$surname', '$first_name', '$case_id', '$student_id', '$program', '$section', '$major', '$sms_email', '$year_level', '$statement', '$offense_type')";
-    $insert_query_run = mysqli_query($con, $insert_query);
+    // Define folder structure
+    $folders = [
+        'statement_image' => '../uploads/statement_img/',
+        'medical_proof'   => '../uploads/medical_img/',
+        'evidence_image'  => '../uploads/evidence_img/',
+    ];
 
-    if ($insert_query_run) {
-        
-        if ($offense_type == 'Minor') {
-            header('Location: punishment.php');
-            exit();
-        } else if ($offense_type == 'Major' || $offense_type == 'Grave') {
-            header('Location: parent.php');
-            exit();
+    // Create folders if they don't exist
+    foreach ($folders as $folder) {
+        if (!file_exists($folder)) {
+            mkdir($folder, 0777, true);
         }
+    }
+
+    // File upload helper function
+    function uploadFile($inputName, $caseId, $surname, $label, $folderPath) {
+        if (isset($_FILES[$inputName]) && $_FILES[$inputName]['error'] === 0) {
+            $ext = pathinfo($_FILES[$inputName]['name'], PATHINFO_EXTENSION);
+            $fileName = $caseId . "_" . $surname . "_" . $label . "." . $ext;
+            $targetPath = $folderPath . $fileName;
+
+            if (move_uploaded_file($_FILES[$inputName]['tmp_name'], $targetPath)) {
+                return $targetPath; // Store this in the database
+            }
+        }
+        return null;
+    }
+
+    // Upload files
+    $statement_image = uploadFile('statement_image', $case_id, $surname, 'statement', $folders['statement_image']);
+    $medical_proof   = uploadFile('medical_proof',   $case_id, $surname, 'medical',   $folders['medical_proof']);
+    $evidence_image  = uploadFile('evidence_image',  $case_id, $surname, 'evidence',  $folders['evidence_image']);
+
+    // Prepare SQL INSERT
+    $query = "INSERT INTO categories (
+        student_id, first_name, middle_name, surname, program, section, major, sms_email, year_level,
+        offense_type, case_id, statement, statement_image, medical_proof, evidence_image
+    ) VALUES (
+        '$student_id', '$first_name', '$middle_name', '$surname', '$program', '$section', '$major', '$sms_email', '$year_level',
+        '$offense_type', '$case_id', '$statement', 
+        " . ($statement_image ? "'$statement_image'" : "NULL") . ", 
+        " . ($medical_proof   ? "'$medical_proof'"   : "NULL") . ", 
+        " . ($evidence_image  ? "'$evidence_image'"  : "NULL") . "
+    )";
+
+    if (mysqli_query($con, $query)) {
+        header("Location: registrar.php?message=Case added successfully");
+        exit();
     } else {
-        redirect("category.php", "Something Went Wrong");
+        echo "SQL Error: " . mysqli_error($con);
     }
 }
+
 
 else if (isset($_POST['update_category_btn'])) {
     $category_id = $_POST['category_id'];

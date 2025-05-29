@@ -85,15 +85,11 @@ function formatOffense($id, $map) {
 </head>
 <body>
 
-  <div class="container-fluid p-4 bg-light text-dark text-center">
-    <h1>View Case Details</h1>
-  </div>
-
   <div class="container mt-5">
     <div class="row">
       <div class="col-md-12 p-4 shadow">
         <div class="card">
-          <div class="card-header bg-primary text-white">
+          <div class="card-header text-align-center bg-primary text-white">
             <h4>Case Details</h4>
           </div>
           <div class="card-body">
@@ -114,6 +110,35 @@ function formatOffense($id, $map) {
                 <tr><th>COMPLETION DATE</th><td><?= htmlspecialchars($data['completion_date']); ?></td></tr>
                 <tr><th>WARNING STAGE</th><td><?= htmlspecialchars($data['warning']); ?></td></tr>
               </table>
+              <!-- Uploaded Evidence Files Section -->
+              <hr>
+              <h5>Uploaded Files</h5>
+              <div class="row">
+                <?php if (!empty($data['statement_image'])): ?>
+                  <div class="col-md-4 text-center mb-3">
+                    <p><strong>Statement Image</strong></p>
+                    <img src="../uploads/<?= htmlspecialchars($data['statement_image']); ?>" alt="Statement Image" class="img-fluid img-thumbnail">
+                    <p><a href="../uploads/<?= htmlspecialchars($data['statement_image']); ?>" target="_blank">View Full</a></p>
+                  </div>
+                <?php endif; ?>
+
+                <?php if (!empty($data['medical_proof'])): ?>
+                  <div class="col-md-4 text-center mb-3">
+                    <p><strong>Medical Proof</strong></p>
+                    <img src="../uploads/<?= htmlspecialchars($data['medical_proof']); ?>" alt="Medical Proof" class="img-fluid img-thumbnail">
+                    <p><a href="../uploads/<?= htmlspecialchars($data['medical_proof']); ?>" target="_blank">View Full</a></p>
+                  </div>
+                <?php endif; ?>
+
+                <?php if (!empty($data['evidence_image'])): ?>
+                  <div class="col-md-4 text-center mb-3">
+                    <p><strong>Other Evidence</strong></p>
+                    <img src="../uploads/<?= htmlspecialchars($data['evidence_image']); ?>" alt="Other Evidence" class="img-fluid img-thumbnail">
+                    <p><a href="../uploads/<?= htmlspecialchars($data['evidence_image']); ?>" target="_blank">View Full</a></p>
+                  </div>
+                <?php endif; ?>
+              </div>
+
             </div>
 
             <!-- AI Case Generator Section -->

@@ -70,6 +70,7 @@ include('../middleware/adminMiddleware.php');
             </div>
 
             <!-- Modal Body -->
+            <!-- Modal Body -->
             <div class="modal-body" style="background-image: linear-gradient( #ccffff, #e6ffe6, #ffffcc);">
                 <form action="code.php" method="POST" enctype="multipart/form-data">
                     <div class="row">
@@ -114,24 +115,43 @@ include('../middleware/adminMiddleware.php');
                         <!-- Offense Type -->
                         <div class="col-md-6">
                             <label for="offense_type">OFFENSE TYPE</label>
-                            <select name="offense_type" id="offense_type" class="form-control" required onchange="updateOffenseOptions()">
+                            <select name="offense_type" id="offense_type" class="form-control" required>
                                 <option value="" disabled selected>Select Offense Type</option>
                                 <option value="Minor">Minor</option>
                                 <option value="Major">Major</option>
                                 <option value="Grave">Grave</option>
                             </select>
                         </div>
-                        
-                        <!-- Case Details -->
-                        <div class="col-md-12">
-                            <label for="statement">STATEMENT</label>
-                            <textarea name="statement" class="form-control" placeholder="Enter Statement" required></textarea>
-                        </div>
+
+                        <!-- Case ID -->
                         <div class="col-md-6">
                             <label for="case_id">CASE ID</label>
                             <input type="text" name="case_id" id="case_id" class="form-control" required>
                         </div>
-                        <div class="col-md-12 mt-2">
+
+                        <!-- Statement Options -->
+                        <div class="col-md-12">
+                            <label for="statement">Typed Statement (optional if uploading an image)</label>
+                            <textarea name="statement" class="form-control" placeholder="Enter statement if applicable"></textarea>
+                        </div>
+
+                        <div class="col-md-12">
+                            <label for="statement_image">Upload Written Statement (Image)</label>
+                            <input type="file" name="statement_image" id="statement_image" class="form-control" accept="image/*">
+                        </div>
+
+                        <div class="col-md-12">
+                            <label for="medical_proof">Upload Medical Proof</label>
+                            <input type="file" name="medical_proof" id="medical_proof" class="form-control" accept="image/*,application/pdf">
+                        </div>
+
+                        <div class="col-md-12">
+                            <label for="evidence_image">Upload Other Evidence</label>
+                            <input type="file" name="evidence_image" id="evidence_image" class="form-control" accept="image/*,application/pdf">
+                        </div>
+
+                        <!-- Submit -->
+                        <div class="col-md-12 mt-3">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                             <button type="submit" class="btn btn-primary" name="add_category_btn">Save</button>
                         </div>
