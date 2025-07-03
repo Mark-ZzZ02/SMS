@@ -1,0 +1,188 @@
+<?php 
+include('includes/header.php');
+include('../middleware/adminMiddleware.php');
+?>
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-12 p-4 shadow rounded bg-light" style="background-image: linear-gradient( #ccffff, #e6ffe6, #ffffcc);">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <h4>REGISTRAR</h4>
+            </div>
+            <div class="table-responsive">
+                <table id="example" class="table table-striped table-hover mt-3">
+                    <thead>
+                        <tr>
+                            <th class="text-center">STUDENT NUMBER</th>
+                            <th class="text-center">FIRST NAME</th>
+                            <th class="text-center">MIDDLE NAME</th>
+                            <th class="text-center">SURNAME</th>
+                            <th class="text-center">PROGRAM</th>
+                            <th class="text-center">SECTION</th>
+                            <th class="text-center">MAJOR</th>
+                            <th class="text-center">EMAIL</th>
+                            <th class="text-center">YEAR</th>
+                            <th class="text-center">ACTION</th>
+                        </tr>
+                    </thead>
+                    <tbody id="offenseTableBody">
+                        <?php
+                        // Ensure you have a valid database connection $con
+                        $category = mysqli_query($con, "SELECT * FROM categories ORDER BY id DESC");
+
+                        if (mysqli_num_rows($category) > 0) {
+                            foreach ($category as $item) {
+                                ?>
+                                <tr>
+                                    <td class="text-center"><?= htmlspecialchars($item['student_id']); ?></td>
+                                    <td class="text-center"><?= htmlspecialchars($item['first_name']); ?></td>
+                                    <td class="text-center"><?= htmlspecialchars($item['middle_name']); ?></td>
+                                    <td class="text-center"><?= htmlspecialchars($item['surname']); ?></td>
+                                    <td class="text-center"><?= htmlspecialchars($item['program']); ?></td>
+                                    <td class="text-center"><?= htmlspecialchars($item['section']); ?></td>
+                                    <td class="text-center"><?= htmlspecialchars($item['major']); ?></td>
+                                    <td class="text-center"><?= htmlspecialchars($item['sms_email']); ?></td>
+                                    <td class="text-center"><?= htmlspecialchars($item['year_level']); ?></td>
+                                    <td class="text-center">
+                                        <button class="btn btn-primary btn-sm" onclick="populateModal(<?= htmlspecialchars(json_encode($item)); ?>)">Add Case</button>
+                                    </td>
+                                </tr>
+                                <?php
+                            }
+                        } else {
+                            echo "<tr><td colspan='10' class='text-center'>No records found</td></tr>";
+                        }
+                        ?>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Add Case Modal -->
+<div class="modal" id="addCaseModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title">ADD CASE</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+
+            <!-- Modal Body -->
+            <!-- Modal Body -->
+            <div class="modal-body" style="background-image: linear-gradient( #ccffff, #e6ffe6, #ffffcc);">
+                <form action="code.php" method="POST" enctype="multipart/form-data">
+                    <div class="row">
+                        <!-- Student Details -->
+                        <div class="col-md-6">
+                            <label for="student_id">STUDENT NUMBER</label>
+                            <input type="number" name="student_id" id="student_id" class="form-control" required readonly>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="first_name">FIRST NAME</label>
+                            <input type="text" name="first_name" id="first_name" class="form-control" required readonly>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="middle_name">MIDDLE NAME</label>
+                            <input type="text" name="middle_name" id="middle_name" class="form-control" required readonly>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="surname">SURNAME</label>
+                            <input type="text" name="surname" id="surname" class="form-control" required readonly>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="program">PROGRAM</label>
+                            <input type="text" name="program" id="program" class="form-control" required readonly>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="section">SECTION</label>
+                            <input type="text" name="section" id="section" class="form-control" required readonly>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="major">MAJOR</label>
+                            <input type="text" name="major" id="major" class="form-control" required readonly>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="sms_email">EMAIL</label>
+                            <input type="email" name="sms_email" id="sms_email" class="form-control" required readonly>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="year_level">YEAR</label>
+                            <input type="text" name="year_level" id="year_level" class="form-control" required readonly>
+                        </div>
+                        
+                        <!-- Offense Type -->
+                        <div class="col-md-6">
+                            <label for="offense_type">OFFENSE TYPE</label>
+                            <select name="offense_type" id="offense_type" class="form-control" required>
+                                <option value="" disabled selected>Select Offense Type</option>
+                                <option value="Minor">Minor</option>
+                                <option value="Major">Major</option>
+                                <option value="Grave">Grave</option>
+                            </select>
+                        </div>
+
+                        <!-- Case ID -->
+                        <div class="col-md-6">
+                            <label for="case_id">CASE ID</label>
+                            <input type="text" name="case_id" id="case_id" class="form-control" required>
+                        </div>
+
+                        <!-- Statement Options -->
+                        <div class="col-md-12">
+                            <label for="statement">Typed Statement (optional if uploading an image)</label>
+                            <textarea name="statement" class="form-control" placeholder="Enter statement if applicable"></textarea>
+                        </div>
+
+                        <div class="col-md-12">
+                            <label for="statement_image">Upload Written Statement (Image)</label>
+                            <input type="file" name="statement_image" id="statement_image" class="form-control" accept="image/*">
+                        </div>
+
+                        <div class="col-md-12">
+                            <label for="medical_proof">Upload Medical Proof</label>
+                            <input type="file" name="medical_proof" id="medical_proof" class="form-control" accept="image/*,application/pdf">
+                        </div>
+
+                        <div class="col-md-12">
+                            <label for="evidence_image">Upload Other Evidence</label>
+                            <input type="file" name="evidence_image" id="evidence_image" class="form-control" accept="image/*,application/pdf">
+                        </div>
+
+                        <!-- Submit -->
+                        <div class="col-md-12 mt-3">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary" name="add_category_btn">Save</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<?php include('includes/footer.php');?>
+
+<script>
+function populateModal(data) {
+    // Pre-fill the student information
+    document.getElementById('student_id').value = data.student_id;
+    document.getElementById('first_name').value = data.first_name;
+    document.getElementById('middle_name').value = data.middle_name;
+    document.getElementById('surname').value = data.surname;
+    document.getElementById('program').value = data.program;
+    document.getElementById('section').value = data.section;
+    document.getElementById('major').value = data.major;
+    document.getElementById('sms_email').value = data.sms_email;
+    document.getElementById('year_level').value = data.year_level;
+
+    // Generate case ID with 4 random digits
+    var case_id = 'CASE-' + Math.floor(Math.random() * 9000) + 1000; // Generates something like CASE-1234
+    document.getElementById('case_id').value = case_id;
+
+    // Show the modal
+    new bootstrap.Modal(document.getElementById('addCaseModal')).show();
+}
+</script>

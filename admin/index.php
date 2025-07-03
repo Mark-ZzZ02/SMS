@@ -405,18 +405,18 @@ if ($conferenceResult) {
         </div> -->
 
         <!-- Filter Buttons -->
-<div class="chart-full">
-     <div class="btn-group mb-3" role="group" style="display: flex; flex-wrap: wrap; gap: 10px;">
-        <button class="btn btn-outline-primary" onclick="filterMonth(null)">All</button>
-        <?php
-        $months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-        foreach ($months as $i => $monthName) {
-            echo '<button class="btn btn-outline-primary" onclick="filterMonth('.$i.')">'.$monthName.'</button>';
-        }
-        ?>
-    </div>
-    <canvas id="monthlyCasesChart"></canvas>
-</div>
+        <div class="chart-full">
+            <div class="btn-group mb-3" role="group" style="display: flex; flex-wrap: wrap; gap: 10px;">
+                <button class="btn btn-outline-primary" onclick="filterMonth(null)">All</button>
+                <?php
+                $months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+                foreach ($months as $i => $monthName) {
+                    echo '<button class="btn btn-outline-primary" onclick="filterMonth('.$i.')">'.$monthName.'</button>';
+                }
+                ?>
+            </div>
+            <canvas id="monthlyCasesChart"></canvas>
+        </div>
 
     </div>
 

@@ -4,7 +4,6 @@ require '../vendor/autoload.php';  // Load Gemini SDK
 use GeminiAPI\Client;
 use GeminiAPI\Requests\GenerateContentRequest;
 use GeminiAPI\Resources\Content;
-use GeminiAPI\Resources\Parts\TextPart;
 
 header('Content-Type: text/plain');
 
@@ -29,15 +28,18 @@ $prompt .= "Statement: {$student['statement']}\n\n";
 $prompt .= "Please analyze the student's offense, contextualize based on academic conduct, and recommend actions.";
 
 // Initialize Gemini Client
-$apiKey = getenv('GEMINI_API_KEY'); // Set this in your server environment
+$apiKey = 'AIzaSyALtzKm41Oi46bOHwsyjpWv41KxPCD7oH8';
 $client = new Client($apiKey);
-$model = 'models/gemini-1.5-pro-001';
+$model = 'gemini-1.5-pro';
 
 try {
-    $textPart = new TextPart($prompt);
-    $content = new Content("user", [$textPart]);
+    // Use the helper method to construct the content with default "user" role
+    $content = Content::text($prompt);
+
+    // Create the request with model and content
     $request = new GenerateContentRequest($model, [$content]);
 
+    // Generate the AI response
     $response = $client->generateContent($request);
     echo $response->text();  // Output the generated text
 } catch (Exception $e) {

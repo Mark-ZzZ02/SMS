@@ -1,7 +1,8 @@
 {
     "require": {
         "guzzlehttp/guzzle": "^7.9",
-        "gemini-api-php/client": "^1.7"
+        "gemini-api-php/client": "^1.7",
+        "phpoffice/phpspreadsheet": "^1.17"
     },
     "config": {
         "allow-plugins": {

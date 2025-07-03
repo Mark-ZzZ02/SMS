@@ -84,6 +84,7 @@ function formatOffense($id, $map) {
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
+  
 
   <div class="container mt-5">
     <div class="row">
@@ -114,31 +115,60 @@ function formatOffense($id, $map) {
               <hr>
               <h5>Uploaded Files</h5>
               <div class="row">
-                <?php if (!empty($data['statement_image'])): ?>
-                  <div class="col-md-4 text-center mb-3">
+                <!-- Statement Image -->
+                <div class="col-md-4 text-center mb-3">
+                  <form action="update_image.php" method="POST" enctype="multipart/form-data">
+                    <input type="hidden" name="case_id" value="<?= $data['id']; ?>">
+                    <input type="hidden" name="image_type" value="statement_image">
                     <p><strong>Statement Image</strong></p>
-                    <img src="../uploads/<?= htmlspecialchars($data['statement_image']); ?>" alt="Statement Image" class="img-fluid img-thumbnail">
-                    <p><a href="../uploads/<?= htmlspecialchars($data['statement_image']); ?>" target="_blank">View Full</a></p>
-                  </div>
-                <?php endif; ?>
 
-                <?php if (!empty($data['medical_proof'])): ?>
-                  <div class="col-md-4 text-center mb-3">
+                    <?php if (!empty($data['statement_image'])): ?>
+                      <img src="../uploads/<?= htmlspecialchars($data['statement_image']); ?>" class="img-fluid img-thumbnail">
+                      <p><a href="../uploads/<?= htmlspecialchars($data['statement_image']); ?>" target="_blank">View Full</a></p>
+                      <button type="submit" name="delete_image" class="btn btn-danger btn-sm">Delete</button>
+                    <?php endif; ?>
+
+                    <input type="file" name="image_file" class="form-control mt-2" accept="image/*">
+                    <button type="submit" name="upload_image" class="btn btn-primary btn-sm mt-2">Upload</button>
+                  </form>
+                </div>
+
+                <!-- Medical Proof -->
+                <div class="col-md-4 text-center mb-3">
+                  <form action="update_image.php" method="POST" enctype="multipart/form-data">
+                    <input type="hidden" name="case_id" value="<?= $data['id']; ?>">
+                    <input type="hidden" name="image_type" value="medical_proof">
                     <p><strong>Medical Proof</strong></p>
-                    <img src="../uploads/<?= htmlspecialchars($data['medical_proof']); ?>" alt="Medical Proof" class="img-fluid img-thumbnail">
-                    <p><a href="../uploads/<?= htmlspecialchars($data['medical_proof']); ?>" target="_blank">View Full</a></p>
-                  </div>
-                <?php endif; ?>
 
-                <?php if (!empty($data['evidence_image'])): ?>
-                  <div class="col-md-4 text-center mb-3">
+                    <?php if (!empty($data['medical_proof'])): ?>
+                      <img src="../uploads/<?= htmlspecialchars($data['medical_proof']); ?>" class="img-fluid img-thumbnail">
+                      <p><a href="../uploads/<?= htmlspecialchars($data['medical_proof']); ?>" target="_blank">View Full</a></p>
+                      <button type="submit" name="delete_image" class="btn btn-danger btn-sm">Delete</button>
+                    <?php endif; ?>
+
+                    <input type="file" name="image_file" class="form-control mt-2" accept="image/*">
+                    <button type="submit" name="upload_image" class="btn btn-primary btn-sm mt-2">Upload</button>
+                  </form>
+                </div>
+
+                <!-- Other Evidence -->
+                <div class="col-md-4 text-center mb-3">
+                  <form action="update_image.php" method="POST" enctype="multipart/form-data">
+                    <input type="hidden" name="case_id" value="<?= $data['id']; ?>">
+                    <input type="hidden" name="image_type" value="evidence_image">
                     <p><strong>Other Evidence</strong></p>
-                    <img src="../uploads/<?= htmlspecialchars($data['evidence_image']); ?>" alt="Other Evidence" class="img-fluid img-thumbnail">
-                    <p><a href="../uploads/<?= htmlspecialchars($data['evidence_image']); ?>" target="_blank">View Full</a></p>
-                  </div>
-                <?php endif; ?>
-              </div>
 
+                    <?php if (!empty($data['evidence_image'])): ?>
+                      <img src="../uploads/<?= htmlspecialchars($data['evidence_image']); ?>" class="img-fluid img-thumbnail">
+                      <p><a href="../uploads/<?= htmlspecialchars($data['evidence_image']); ?>" target="_blank">View Full</a></p>
+                      <button type="submit" name="delete_image" class="btn btn-danger btn-sm">Delete</button>
+                    <?php endif; ?>
+
+                    <input type="file" name="image_file" class="form-control mt-2" accept="image/*">
+                    <button type="submit" name="upload_image" class="btn btn-primary btn-sm mt-2">Upload</button>
+                  </form>
+                </div>
+              </div>
             </div>
 
             <!-- AI Case Generator Section -->
@@ -163,35 +193,40 @@ function formatOffense($id, $map) {
 
             <!-- Warning History Section -->
             <hr>
-            <h3>Offense History</h3>
-            <?php if (mysqli_num_rows($historyResult) > 0): ?>
-              <table class="table table-bordered">
-                <thead>
-                  <tr>
-                    <th>Case ID</th>
-                    <th>Offense Type</th>
-                    <th>Offense ID</th>
-                    <th>Sanction</th>
-                    <th>Completion Date</th>
-                    <th>Warning Stage</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <?php while ($history = mysqli_fetch_array($historyResult)): ?>
+            <div>
+              <h3>Offense History</h3>
+              <?php if (mysqli_num_rows($historyResult) > 0): ?>
+                <table class="table table-bordered">
+                  <thead>
                     <tr>
-                      <td><?= htmlspecialchars($history['case_id']); ?></td>
-                      <td><?= htmlspecialchars($history['offense_type']); ?></td>
-                      <td><?= htmlspecialchars(formatOffense($history['offense_id'], $offenseDescriptions)); ?></td>
-                      <td><?= htmlspecialchars($history['sanction']); ?></td>
-                      <td><?= htmlspecialchars($history['completion_date']); ?></td>
-                      <td><?= htmlspecialchars($history['warning']); ?></td>
+                      <th>Case ID</th>
+                      <th>Offense Type</th>
+                      <th>Offense ID</th>
+                      <th>Sanction</th>
+                      <th>Completion Date</th>
+                      <th>Warning Stage</th>
                     </tr>
-                  <?php endwhile; ?>
-                </tbody>
-              </table>
-            <?php else: ?>
-              <p>No previous warning history found for this student.</p>
-            <?php endif; ?>
+                  </thead>
+                  <tbody>
+                    <?php while ($history = mysqli_fetch_array($historyResult)): ?>
+                      <tr>
+                        <td><?= htmlspecialchars($history['case_id']); ?></td>
+                        <td><?= htmlspecialchars($history['offense_type']); ?></td>
+                        <td><?= htmlspecialchars(formatOffense($history['offense_id'], $offenseDescriptions)); ?></td>
+                        <td><?= htmlspecialchars($history['sanction']); ?></td>
+                        <td><?= htmlspecialchars($history['completion_date']); ?></td>
+                        <td><?= htmlspecialchars($history['warning']); ?></td>
+                      </tr>
+                    <?php endwhile; ?>
+                  </tbody>
+                </table>
+              <?php else: ?>
+                <p>No previous warning history found for this student.</p>
+              <?php endif; ?>
+              <a href="print_case.php?id=<?= $data['id']; ?>" class="btn btn-success float-end" target="_blank">
+                <i class="bi bi-printer"></i> Print Case
+              </a>
+            </div>
           </div>
         </div>
       </div>
